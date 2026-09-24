@@ -1,0 +1,8 @@
+fmul (u128 limbs)              122.01 G ops/s    0.0082 ns/op (whole GPU)
+fsqr                           144.16 G ops/s    0.0069 ns/op (whole GPU)
+VanitySearch _ModMult          121.92 G ops/s    0.0082 ns/op (whole GPU)
+SHA-256 compress (fast)         24.64 G ops/s    0.0406 ns/op (whole GPU)
+SHA-256 compress (GPUHash)      24.50 G ops/s    0.0408 ns/op (whole GPU)
+RIPEMD-160 compress (fast)      48.32 G ops/s    0.0207 ns/op (whole GPU)
+ModInv (_ModInv)                 1.95 G ops/s    0.5125 ns/op (whole GPU)
+err: no error

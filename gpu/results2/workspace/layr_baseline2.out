@@ -1,0 +1,55 @@
+== pinning
+--------------------------------------------------------
+  SCORE (throughput) : 794.3264 M/s        ← primary (from verified hits)
+  SCORE (hit-rate)   : 94.691134 hits/s
+  RESULT: PASS ✅ (scored)
+========================================================
+{
+  "score": 794326392.0,
+  "metrics": {
+    "bench": "pinning",
+    "unit": "verified candidates per second",
+    "direction": "higher is better",
+    "throughput_Mps": 794.326392,
+    "hits_per_s": 94.691134,
+    "leading_zero_bits": 24,
+    "mode": "fixed_time",
+    "candidates": 71672266752,
+    "candidates_self_reported": 77292782092,
+    "elapsed_s": 90.2302,
+    "verified_hits": 8544,
+    "hit_relative_variance": 0.010819,
+    "problem_seed": 0,
+    "gpu": "RTX_4090",
+    "verified": true
+  }
+}
+
+== subset
+--------------------------------------------------------
+  SCORE (throughput) : 681.6529 M/s        ← primary (from verified hits)
+  SCORE (hit-rate)   : 81.259382 hits/s
+  RESULT: PASS ✅ (scored)
+========================================================
+{
+  "score": 681652878.0,
+  "metrics": {
+    "bench": "subset",
+    "unit": "verified candidates per second",
+    "direction": "higher is better",
+    "throughput_Mps": 681.652878,
+    "hits_per_s": 81.259382,
+    "leading_zero_bits": 24,
+    "mode": "fixed_time",
+    "candidates": 61530439680,
+    "candidates_self_reported": 64433828848,
+    "elapsed_s": 90.2665,
+    "verified_hits": 7335,
+    "hit_relative_variance": 0.011676,
+    "problem_seed": 0,
+    "gpu": "RTX_4090",
+    "verified": true
+  }
+}
+
+CHAIN_DONE

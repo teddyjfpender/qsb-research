@@ -1,0 +1,77 @@
+ptxas info    : 0 bytes gmem, 9288 bytes cmem[3]
+ptxas info    : Compiling entry function '_Z12pool2_kernelILi1ELi1ELi3EEvjjiiiPKhS1_PjS2_jPm' for 'sm_89'
+ptxas info    : Function properties for _Z12pool2_kernelILi1ELi1ELi3EEvjjiiiPKhS1_PjS2_jPm
+    10512 bytes stack frame, 20 bytes spill stores, 28 bytes spill loads
+ptxas info    : Used 128 registers, used 0 barriers, 10512 bytes cumulative stack size, 424 bytes cmem[0]
+ptxas info    : Compile time = 1147.235 ms
+ptxas info    : Function properties for _Z7_ModInvPm
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z12pool2_kernelILi1ELi1ELi1EEvjjiiiPKhS1_PjS2_jPm' for 'sm_89'
+ptxas info    : Function properties for _Z12pool2_kernelILi1ELi1ELi1EEvjjiiiPKhS1_PjS2_jPm
+    10448 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 96 registers, used 0 barriers, 10448 bytes cumulative stack size, 424 bytes cmem[0], 8 bytes cmem[2]
+ptxas info    : Compile time = 809.444 ms
+ptxas info    : Function properties for _Z7_ModInvPm
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z12pool2_kernelILi1ELi0ELi3EEvjjiiiPKhS1_PjS2_jPm' for 'sm_89'
+ptxas info    : Function properties for _Z12pool2_kernelILi1ELi0ELi3EEvjjiiiPKhS1_PjS2_jPm
+    10464 bytes stack frame, 8 bytes spill stores, 16 bytes spill loads
+ptxas info    : Used 128 registers, used 0 barriers, 10464 bytes cumulative stack size, 424 bytes cmem[0]
+ptxas info    : Compile time = 1283.366 ms
+ptxas info    : Function properties for _Z7_ModInvPm
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z12pool2_kernelILi1ELi0ELi1EEvjjiiiPKhS1_PjS2_jPm' for 'sm_89'
+ptxas info    : Function properties for _Z12pool2_kernelILi1ELi0ELi1EEvjjiiiPKhS1_PjS2_jPm
+    10448 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 96 registers, used 0 barriers, 10448 bytes cumulative stack size, 424 bytes cmem[0], 8 bytes cmem[2]
+ptxas info    : Compile time = 806.326 ms
+ptxas info    : Function properties for _Z7_ModInvPm
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z12pool2_kernelILi0ELi1ELi3EEvjjiiiPKhS1_PjS2_jPm' for 'sm_89'
+ptxas info    : Function properties for _Z12pool2_kernelILi0ELi1ELi3EEvjjiiiPKhS1_PjS2_jPm
+    10480 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 183 registers, used 0 barriers, 10480 bytes cumulative stack size, 424 bytes cmem[0]
+ptxas info    : Compile time = 1531.958 ms
+ptxas info    : Function properties for _Z7_ModInvPm
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z12pool2_kernelILi0ELi1ELi1EEvjjiiiPKhS1_PjS2_jPm' for 'sm_89'
+ptxas info    : Function properties for _Z12pool2_kernelILi0ELi1ELi1EEvjjiiiPKhS1_PjS2_jPm
+    10464 bytes stack frame, 8 bytes spill stores, 8 bytes spill loads
+ptxas info    : Used 128 registers, used 0 barriers, 10464 bytes cumulative stack size, 424 bytes cmem[0], 8 bytes cmem[2]
+ptxas info    : Compile time = 950.943 ms
+ptxas info    : Function properties for _Z7_ModInvPm
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z12pool2_kernelILi0ELi0ELi3EEvjjiiiPKhS1_PjS2_jPm' for 'sm_89'
+ptxas info    : Function properties for _Z12pool2_kernelILi0ELi0ELi3EEvjjiiiPKhS1_PjS2_jPm
+    10448 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 168 registers, used 0 barriers, 10448 bytes cumulative stack size, 424 bytes cmem[0]
+ptxas info    : Compile time = 1855.978 ms
+ptxas info    : Function properties for _Z7_ModInvPm
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Compiling entry function '_Z12pool2_kernelILi0ELi0ELi1EEvjjiiiPKhS1_PjS2_jPm' for 'sm_89'
+ptxas info    : Function properties for _Z12pool2_kernelILi0ELi0ELi1EEvjjiiiPKhS1_PjS2_jPm
+    10464 bytes stack frame, 8 bytes spill stores, 20 bytes spill loads
+ptxas info    : Used 128 registers, used 0 barriers, 10464 bytes cumulative stack size, 424 bytes cmem[0], 8 bytes cmem[2]
+ptxas info    : Compile time = 849.104 ms
+ptxas info    : Function properties for _Z7_ModInvPm
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+pool2.cu: In function 'void compute_gtable(uint8_t*, uint8_t*)':
+pool2.cu:453:36: warning: 'int EC_POINT_get_affine_coordinates_GFp(const EC_GROUP*, const EC_POINT*, BIGNUM*, BIGNUM*, BN_CTX*)' is deprecated: Since OpenSSL 3.0 [-Wdeprecated-declarations]
+  453 |             EC_POINT_get_affine_coordinates_GFp(grp, pt, x, y, ctx);
+      |             ~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~
+/usr/include/openssl/ec.h:659:52: note: declared here
+  659 | OSSL_DEPRECATEDIN_3_0 int EC_POINT_get_affine_coordinates_GFp
+      |                                                    ^~~~~~~~~~                         
+pool2.cu: In function 'void compute_jA(int)':
+pool2.cu:471:46: warning: 'int EC_POINT_set_compressed_coordinates_GFp(const EC_GROUP*, EC_POINT*, const BIGNUM*, int, BN_CTX*)' is deprecated: Since OpenSSL 3.0 [-Wdeprecated-declarations]
+  471 |     if (!EC_POINT_set_compressed_coordinates_GFp(grp, A, one, 0, ctx)) { fprintf(stderr, "x=1 not on curve?\n"); exit(1); }
+      |       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+/usr/include/openssl/ec.h:686:52: note: declared here
+  686 | OSSL_DEPRECATEDIN_3_0 int EC_POINT_set_compressed_coordinates_GFp
+      |                                                    ^~~~~~~~~~~~~~                         
+pool2.cu:476:36: warning: 'int EC_POINT_get_affine_coordinates_GFp(const EC_GROUP*, const EC_POINT*, BIGNUM*, BIGNUM*, BN_CTX*)' is deprecated: Since OpenSSL 3.0 [-Wdeprecated-declarations]
+  476 |         EC_POINT_get_affine_coordinates_GFp(grp, P, x, y, ctx);
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+/usr/include/openssl/ec.h:659:52: note: declared here
+  659 | OSSL_DEPRECATEDIN_3_0 int EC_POINT_get_affine_coordinates_GFp
+      |                                                    ^~~~~~~~~~                         

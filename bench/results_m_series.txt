@@ -1,0 +1,79 @@
+# Apple M4 Max, clang -O3 -mcpu=native, WBITS=16
+## shape extra_blocks=0 run 1
+pool points cross-checked against libsecp256k1 group addition: 574
+sighash shape: 3 SHA-256 compressions per z
+SHA256(33B) alone          :   123.4 ns
+CURRENT  per shot          :  1691.3 ns   (per candidate 3382.7 ns, 2 shots)
+POOL k=4   per shot        :   652.6 ns   speedup x2.59   (hash share 19%)
+POOL k=8   per shot        :   414.5 ns   speedup x4.08   (hash share 30%)
+POOL k=12  per shot        :   332.7 ns   speedup x5.08   (hash share 37%)
+POOL k=16  per shot        :   289.0 ns   speedup x5.85   (hash share 43%)
+POOL k=24  per shot        :   249.8 ns   speedup x6.77   (hash share 49%)
+POOL k=32  per shot        :   227.7 ns   speedup x7.43   (hash share 54%)
+POOL k=64  per shot        :   197.6 ns   speedup x8.56   (hash share 62%)
+POOL k=127 per shot        :   181.8 ns   speedup x9.30   (hash share 68%)
+## shape extra_blocks=0 run 2
+pool points cross-checked against libsecp256k1 group addition: 574
+sighash shape: 3 SHA-256 compressions per z
+SHA256(33B) alone          :   123.0 ns
+CURRENT  per shot          :  1699.4 ns   (per candidate 3398.7 ns, 2 shots)
+POOL k=4   per shot        :   670.4 ns   speedup x2.53   (hash share 18%)
+POOL k=8   per shot        :   416.4 ns   speedup x4.08   (hash share 30%)
+POOL k=12  per shot        :   331.2 ns   speedup x5.13   (hash share 37%)
+POOL k=16  per shot        :   293.5 ns   speedup x5.79   (hash share 42%)
+POOL k=24  per shot        :   249.2 ns   speedup x6.82   (hash share 49%)
+POOL k=32  per shot        :   226.0 ns   speedup x7.52   (hash share 54%)
+POOL k=64  per shot        :   196.3 ns   speedup x8.65   (hash share 63%)
+POOL k=127 per shot        :   181.2 ns   speedup x9.38   (hash share 68%)
+## shape extra_blocks=0 run 3
+pool points cross-checked against libsecp256k1 group addition: 574
+sighash shape: 3 SHA-256 compressions per z
+SHA256(33B) alone          :   121.8 ns
+CURRENT  per shot          :  1685.8 ns   (per candidate 3371.6 ns, 2 shots)
+POOL k=4   per shot        :   650.1 ns   speedup x2.59   (hash share 19%)
+POOL k=8   per shot        :   405.1 ns   speedup x4.16   (hash share 30%)
+POOL k=12  per shot        :   327.3 ns   speedup x5.15   (hash share 37%)
+POOL k=16  per shot        :   291.9 ns   speedup x5.78   (hash share 42%)
+POOL k=24  per shot        :   245.3 ns   speedup x6.87   (hash share 50%)
+POOL k=32  per shot        :   225.7 ns   speedup x7.47   (hash share 54%)
+POOL k=64  per shot        :   196.9 ns   speedup x8.56   (hash share 62%)
+POOL k=127 per shot        :   180.2 ns   speedup x9.35   (hash share 68%)
+## shape extra_blocks=24 run 1
+pool points cross-checked against libsecp256k1 group addition: 574
+sighash shape: 27 SHA-256 compressions per z
+SHA256(33B) alone          :   122.0 ns
+CURRENT  per shot          :  3126.6 ns   (per candidate 6253.2 ns, 2 shots)
+POOL k=4   per shot        :  1002.7 ns   speedup x3.12   (hash share 12%)
+POOL k=8   per shot        :   598.8 ns   speedup x5.22   (hash share 20%)
+POOL k=12  per shot        :   450.6 ns   speedup x6.94   (hash share 27%)
+POOL k=16  per shot        :   377.8 ns   speedup x8.28   (hash share 32%)
+POOL k=24  per shot        :   307.5 ns   speedup x10.17   (hash share 40%)
+POOL k=32  per shot        :   267.9 ns   speedup x11.67   (hash share 46%)
+POOL k=64  per shot        :   220.3 ns   speedup x14.19   (hash share 55%)
+POOL k=127 per shot        :   193.1 ns   speedup x16.19   (hash share 63%)
+## shape extra_blocks=24 run 2
+pool points cross-checked against libsecp256k1 group addition: 574
+sighash shape: 27 SHA-256 compressions per z
+SHA256(33B) alone          :   121.6 ns
+CURRENT  per shot          :  3019.9 ns   (per candidate 6039.7 ns, 2 shots)
+POOL k=4   per shot        :   960.1 ns   speedup x3.15   (hash share 13%)
+POOL k=8   per shot        :   563.5 ns   speedup x5.36   (hash share 22%)
+POOL k=12  per shot        :   427.3 ns   speedup x7.07   (hash share 28%)
+POOL k=16  per shot        :   363.7 ns   speedup x8.30   (hash share 33%)
+POOL k=24  per shot        :   296.8 ns   speedup x10.17   (hash share 41%)
+POOL k=32  per shot        :   263.7 ns   speedup x11.45   (hash share 46%)
+POOL k=64  per shot        :   214.5 ns   speedup x14.08   (hash share 57%)
+POOL k=127 per shot        :   189.9 ns   speedup x15.90   (hash share 64%)
+## shape extra_blocks=24 run 3
+pool points cross-checked against libsecp256k1 group addition: 574
+sighash shape: 27 SHA-256 compressions per z
+SHA256(33B) alone          :   120.3 ns
+CURRENT  per shot          :  3100.1 ns   (per candidate 6200.3 ns, 2 shots)
+POOL k=4   per shot        :  1015.5 ns   speedup x3.05   (hash share 12%)
+POOL k=8   per shot        :   592.7 ns   speedup x5.23   (hash share 20%)
+POOL k=12  per shot        :   452.4 ns   speedup x6.85   (hash share 27%)
+POOL k=16  per shot        :   379.9 ns   speedup x8.16   (hash share 32%)
+POOL k=24  per shot        :   311.7 ns   speedup x9.94   (hash share 39%)
+POOL k=32  per shot        :   273.2 ns   speedup x11.35   (hash share 44%)
+POOL k=64  per shot        :   221.5 ns   speedup x14.00   (hash share 54%)
+POOL k=127 per shot        :   192.2 ns   speedup x16.13   (hash share 63%)

@@ -1,0 +1,9 @@
+# RTX 4090, pool2.cu (KMAX 512), 12 s per point, shots/s (ns per shot, whole GPU)
+pool2        K=64  sha x0  enc1 6.146G (0.1627)
+pool2        K=300 sha x0  enc1 6.843G (0.1461)   [20 s hit-verified run: 6.612G, 500/500 verified]
+pool2        K=512 sha x0  enc1 6.972G (0.1434)
+pool2_nohash K=512 sha x0  enc1 12.503G (0.0800)  ablation: EC + loop + setup only
+pool2_noec   K=512 sha x0  enc1 10.548G (0.0948)  ablation: SHA + loop + setup only
+pool2        K=64  sha x24 enc1 5.583G (0.1791)   [20 s hit-verified run: 5.609G, 500/500 verified]
+pool2        K=32  sha x24 enc1 4.484G (0.2230)
+exact dumps: K=300 (1800 values) and K=512 (3072 values) match CPU

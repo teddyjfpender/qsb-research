@@ -1,0 +1,19 @@
+K=1 sha: 2 dumped, 0 mismatches
+K=1 rmd: 2 dumped, 0 mismatches
+K=4 sha: 8 dumped, 0 mismatches
+K=4 rmd: 8 dumped, 0 mismatches
+K=8 sha: 16 dumped, 0 mismatches
+K=8 rmd: 16 dumped, 0 mismatches
+K=12 sha: 24 dumped, 0 mismatches
+K=12 rmd: 24 dumped, 0 mismatches
+K=16 sha: 32 dumped, 0 mismatches
+K=16 rmd: 32 dumped, 0 mismatches
+K=24 sha: 48 dumped, 0 mismatches
+K=24 rmd: 48 dumped, 0 mismatches
+K=32 sha: 64 dumped, 0 mismatches
+K=32 rmd: 64 dumped, 0 mismatches
+K=64 sha: 128 dumped, 0 mismatches
+K=64 rmd: 128 dumped, 128 mismatches
+K=127 sha: 254 dumped, 0 mismatches
+K=127 rmd: 254 dumped, 0 mismatches
+DONE

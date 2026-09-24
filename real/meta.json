@@ -1,0 +1,17 @@
+{
+ "script_len": 8574,
+ "ops": 198,
+ "total_preimage": 8766,
+ "midstate_bytes": 8704,
+ "cfg": {
+  "n": 150,
+  "t1": 16,
+  "k": 300,
+  "k1": 64,
+  "force_comp": true,
+  "pool_deep": true,
+  "hash": "sha256",
+  "seed": 2026
+ },
+ "script_sha256": "efde1ae88e2916c98e7ad49047228d4721c8ce8a45c139270f720b08f39bde02"
+}

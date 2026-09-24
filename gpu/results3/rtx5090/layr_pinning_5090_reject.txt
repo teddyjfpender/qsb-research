@@ -1,0 +1,12 @@
+  BENCH   : pinning   GPU: RTX_4090
+  N (zeros): 24   mode: fixed_time
+  candidates (self-reported): 0  in 90.4s (harness clock)
+  candidates (from N verified hits): 0
+  grinder self-reported: 90.4s, 0.0 M/s (not scored)
+  verified hits: 0 / 0
+    ✗ too few verified hits: K=0 gives relative variance inf > max 0.1 (need K ≥ 100)
+--------------------------------------------------------
+  SCORE (throughput) : 0.0000 M/s        ← primary (from verified hits)
+  SCORE (hit-rate)   : 0.000000 hits/s
+  RESULT: REJECT ❌ (not scored)
+========================================================

@@ -1,0 +1,17 @@
+{"K": 127, "hash": "sha", "extra": 0, "N": 26, "reported": 2389, "unique": 2389, "duplicates": 0, "verified": 800, "failed": 0, "expected": 2383.2, "poisson_z": 0.12, "control_false_pass": 0, "ok": true}
+{"K": 12, "hash": "sha", "extra": 0, "N": 26, "reported": 1452, "unique": 1452, "duplicates": 0, "verified": 800, "failed": 0, "expected": 1460.6, "poisson_z": -0.23, "control_false_pass": 0, "ok": true}
+{"K": 12, "hash": "sha", "extra": 24, "N": 26, "reported": 1166, "unique": 1166, "duplicates": 0, "verified": 800, "failed": 0, "expected": 1180.3, "poisson_z": -0.42, "control_false_pass": 0, "ok": true}
+{"K": 16, "hash": "sha", "extra": 0, "N": 26, "reported": 1597, "unique": 1597, "duplicates": 0, "verified": 800, "failed": 0, "expected": 1631.0, "poisson_z": -0.84, "control_false_pass": 0, "ok": true}
+{"K": 1, "hash": "sha", "extra": 0, "N": 26, "reported": 238, "unique": 238, "duplicates": 0, "verified": 238, "failed": 0, "expected": 262.5, "poisson_z": -1.51, "control_false_pass": 0, "ok": true}
+{"K": 1, "hash": "sha", "extra": 24, "N": 26, "reported": 180, "unique": 180, "duplicates": 0, "verified": 180, "failed": 0, "expected": 175.0, "poisson_z": 0.38, "control_false_pass": 0, "ok": true}
+{"K": 24, "hash": "sha", "extra": 0, "N": 26, "reported": 1864, "unique": 1864, "duplicates": 0, "verified": 800, "failed": 0, "expected": 1871.2, "poisson_z": -0.17, "control_false_pass": 0, "ok": true}
+{"K": 24, "hash": "sha", "extra": 24, "N": 26, "reported": 1614, "unique": 1614, "duplicates": 0, "verified": 800, "failed": 0, "expected": 1670.2, "poisson_z": -1.38, "control_false_pass": 0, "ok": true}
+{"K": 32, "hash": "sha", "extra": 0, "N": 26, "reported": 2002, "unique": 2002, "duplicates": 0, "verified": 800, "failed": 0, "expected": 1968.0, "poisson_z": 0.77, "control_false_pass": 0, "ok": true}
+{"K": 4, "hash": "sha", "extra": 0, "N": 26, "reported": 723, "unique": 723, "duplicates": 0, "verified": 723, "failed": 0, "expected": 723.0, "poisson_z": 0.0, "control_false_pass": 0, "ok": true}
+{"K": 64, "hash": "sha", "extra": 0, "N": 26, "reported": 2357, "unique": 2357, "duplicates": 0, "verified": 800, "failed": 0, "expected": 2326.0, "poisson_z": 0.64, "control_false_pass": 0, "ok": true}
+{"K": 64, "hash": "sha", "extra": 24, "N": 26, "reported": 2105, "unique": 2105, "duplicates": 0, "verified": 800, "failed": 0, "expected": 2208.0, "poisson_z": -2.19, "control_false_pass": 0, "ok": true}
+{"K": 8, "hash": "sha", "extra": 0, "N": 26, "reported": 1125, "unique": 1125, "duplicates": 0, "verified": 800, "failed": 0, "expected": 1111.0, "poisson_z": 0.42, "control_false_pass": 0, "ok": true}
+{"K": 12, "hash": "rmd", "extra": 0, "N": 26, "reported": 1603, "unique": 1603, "duplicates": 0, "verified": 800, "failed": 0, "expected": 1614.4, "poisson_z": -0.28, "control_false_pass": 0, "ok": true}
+{"K": 1, "hash": "rmd", "extra": 0, "N": 26, "reported": 293, "unique": 293, "duplicates": 0, "verified": 293, "failed": 0, "expected": 262.5, "poisson_z": 1.88, "control_false_pass": 0, "ok": true}
+{"K": 24, "hash": "rmd", "extra": 0, "N": 26, "reported": 2079, "unique": 2079, "duplicates": 0, "verified": 800, "failed": 0, "expected": 2064.0, "poisson_z": 0.33, "control_false_pass": 0, "ok": true}
+{"K": 64, "hash": "rmd", "extra": 0, "N": 26, "reported": 1271, "unique": 1271, "duplicates": 0, "verified": 0, "failed": 800, "expected": 2584.0, "poisson_z": -25.83, "control_false_pass": 0, "ok": false}

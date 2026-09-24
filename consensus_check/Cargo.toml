@@ -1,0 +1,7 @@
+[package]
+name = "cchk"
+version = "0.1.0"
+edition = "2021"
+[dependencies]
+bitcoinconsensus = "0.106.0"
+hex = "0.4"

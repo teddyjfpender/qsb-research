@@ -159,3 +159,43 @@ audit reports are submitted through the repository's mechanism track. This is
 a new selection construction, still within the three-DER-hit family and its
 conditional time bound. The user's request for a fundamentally faster puzzle
 remains the active objective; do not redefine it as these smaller gains.
+
+## Alternative-predicate investigation
+
+Previous turn classified as progress: the spacer-selector implementation,
+proof, byte artifacts and audits are committed at e5477f3. The active work now
+targets a fundamentally cheaper transaction-binding predicate. Rechecked the
+original QSB/Binohash papers, Heilman's original Lamport/size discussion and
+Core 26's interpreter: no new qualifying construction was found in those
+sources. Hypothesis to test: another enabled legacy byte-inspection operation
+may provide a tunable, cheaper predicate on transaction-bound hash outputs.
+Build consensus probes and local lemmas for the numeric, boolean, equality,
+size and signature paths, including lazy CHECKMULTISIG. Scope is deliberately
+limited to those paths; do not turn failure to find a predicate into a universal
+impossibility claim.
+
+Outcome: 2,146 Core probes pass, including arithmetic/size/boolean/equality,
+pubkey parsing, strict-DER errors, lazy multisig and disabled-opcode controls.
+The 695 cases supported by the frozen Lean opcode subset all agree with Core;
+1,451 cases are explicitly Core-only. Seven local Lean lemmas check with only
+propext/Quot.sound. A concrete weak alternative (comparing the recovered key's
+hash against an unconstrained witness digest) permits two script-valid spends
+paying different recipients with the same revealed hashlock secret. No cheaper
+secure predicate was found in these tested families. Artifacts are under
+`mechanisms/predicate_catalog/`.
+
+## Research closeout at the user's request
+
+The user asked to close the work if no further useful construction could be
+found. We are stopping this research pass because there is no credible
+identified route to the requested time target under the current constraints.
+This is a judgment about the available research paths, **not** a proof that the
+global frontier has been reached. Do not mark the original objective achieved.
+
+Best new mechanism estimates remain 4.253431 GPU-h (D) and 4.759079 GPU-h (E),
+with the stated local proofs and audits under `mechanisms/spacer_selection/`.
+They are unranked proposals without new exact-layout GPU measurements. The
+existing deep-accepted candidates estimate at 5.566873/5.845655 GPU-h after the
+DER probability correction. No verified sub-two-hour or sub-thirty-minute
+upper-tier construction was produced. All generated work is local; no new GPU
+resources were rented, and no transactions or external submissions were sent.

@@ -1,0 +1,79 @@
+{
+  "scope": "Finite predicate probes and local lemmas, not exhaustive synthesis or an impossibility proof.",
+  "core_vectors": 2146,
+  "core_summary": "unexpected results: 0",
+  "lean_vectors": 695,
+  "core_only_vectors": 1451,
+  "lean_summary": "replay /Users/theodorepender/code/cryptography/qsb-research/challenge/mechanisms/predicate_catalog/lean_vectors/judge_vectors.txt: 695 vectors, 0 disagree with Core, 0 outside the model",
+  "by_group": {
+    "numeric_unary": 252,
+    "numeric_binary": 1008,
+    "numeric_within": 42,
+    "numeric_index": 84,
+    "numeric_timelock": 84,
+    "size": 42,
+    "depth": 42,
+    "boolean_false": 42,
+    "boolean_true": 42,
+    "equal_fixed_zero": 42,
+    "equal_self": 42,
+    "hash_as_pubkey": 42,
+    "der_gate": 42,
+    "der_not_catch": 42,
+    "cms_skips_hash": 42,
+    "cms_checks_hash": 42,
+    "equal_witness": 42,
+    "numeric_controls": 126,
+    "timelock_controls": 14,
+    "disabled": 15,
+    "disabled_skipped": 15,
+    "free_target_forgery": 2
+  },
+  "samples_per_hash_length": {
+    "20": 21,
+    "32": 21
+  },
+  "probability_classes": [
+    {
+      "length": 20,
+      "numeric_acceptance": 0,
+      "size_entropy_bits": 0,
+      "fixed_equality_probability": "1/1461501637330902918203684832716283019655932542976",
+      "boolean_false_probability": "2/1461501637330902918203684832716283019655932542976",
+      "der_probability": "390405/36893488147419103232"
+    },
+    {
+      "length": 32,
+      "numeric_acceptance": 0,
+      "size_entropy_bits": 0,
+      "fixed_equality_probability": "1/115792089237316195423570985008687907853269984665640564039457584007913129639936",
+      "boolean_false_probability": "2/115792089237316195423570985008687907853269984665640564039457584007913129639936",
+      "der_probability": "780555/36893488147419103232"
+    }
+  ],
+  "concrete_free_target_counterexample": [
+    {
+      "recipient": "owner",
+      "transaction": "01000000017a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a0000000058203cc09c109e05e1e5ca308bc8e6cb5b04eee96ae52a4215e50e19b7e24eb994e82103e9bbf36473bc6f90381f102617696c3359625a40ef86ee548d33cc6495a4dcf6143d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3dffffffff01e8030000000000001976a914751e76e8199196d454941c45d1b3a323f1433bd688ac00000000",
+      "output_script": "76a914751e76e8199196d454941c45d1b3a323f1433bd688ac",
+      "pubkey": "03e9bbf36473bc6f90381f102617696c3359625a40ef86ee548d33cc6495a4dcf6",
+      "digest": "3cc09c109e05e1e5ca308bc8e6cb5b04eee96ae52a4215e50e19b7e24eb994e8",
+      "sighash": "18671043641729360930386304750609874937181835221388734182070186064600185601365"
+    },
+    {
+      "recipient": "different_recipient",
+      "transaction": "01000000017a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a00000000582070b958ca0f7f3e4bd69cfbf48db9e52ca6ee29d5a22cd8f81dd6e6faa1ae1cca21023b1c54b3cbd492000c54b296b040482330233e66ef38137c1d82e7a022ef1cb9143d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3dffffffff01e8030000000000001976a91406afd46bcdfd22ef94ac122aa11f241244a37ecc88ac00000000",
+      "output_script": "76a91406afd46bcdfd22ef94ac122aa11f241244a37ecc88ac",
+      "pubkey": "023b1c54b3cbd492000c54b296b040482330233e66ef38137c1d82e7a022ef1cb9",
+      "digest": "70b958ca0f7f3e4bd69cfbf48db9e52ca6ee29d5a22cd8f81dd6e6faa1ae1cca",
+      "sighash": "92644505175413195070333703008486793008132685649185408689177008507830840789326"
+    }
+  ],
+  "sources": [
+    "https://raw.githubusercontent.com/bitcoin/bitcoin/v26.0/src/script/interpreter.cpp",
+    "https://raw.githubusercontent.com/bitcoin/bitcoin/v26.0/src/script/script.h",
+    "https://robinlinus.com/binohash.pdf",
+    "https://raw.githubusercontent.com/avihu28/Quantum-Safe-Bitcoin-Transactions/main/paper/QSB.pdf",
+    "https://mirror.b10c.me/lists/bitcoindev/ZjzFtus_aBchwKz2@camus/t/"
+  ]
+}

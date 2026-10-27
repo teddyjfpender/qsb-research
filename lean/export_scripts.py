@@ -27,6 +27,10 @@ DESIGNS = [(f"TIER{tag}", cfg) for tag, _desc, cfg, _e in final_menu.TIERS] + [
     ("TS4", dict(n=120, t1=8, k=300, k1=64, force_comp=True, pool_deep=True, hash="sha256",
                  chain_pin=16, chain_r=16, sign_j=True, sign_lvl=True, seed=10)),
     ("REAL_TS2", dict(n=150, t1=16, k=300, k1=64, force_comp=True, pool_deep=True, hash="sha256", seed=2026)),
+    ("SPACER_D", dict(n=129, k=96, t1=7, t2=7, k1=96, k2=96, chain_pin=2, chain1=4, chain2=5,
+                      pool_deep=True, force_comp=False, hash="sha256", spacer_selection=True, destructive_chain=True)),
+    ("SPACER_E", dict(n=135, k=64, t1=7, t2=7, k1=64, k2=64, chain_pin=2, chain1=4, chain2=5,
+                      pool_deep=True, force_comp=False, hash="sha1", spacer_selection=True, destructive_chain=True)),
 ]
 VARIANTS = [dict(), dict(test_mode=True), dict(test_mode=True, real_round_puzzle=True),
             dict(test_mode=True, pad_ops=3), dict(test_mode=True, pad_bytes=77)]
@@ -40,7 +44,8 @@ def params(cfg, b):
         kbound=[cfg.get("k_pin", k)] + [cfg.get(f"k{i + 1}", k) for i in range(R)],
         chain_pin=b["chain_pin"], chains=b["chains"], hash_op=HASH_OP[cfg.get("hash", "rmd")],
         pool_deep=bool(cfg.get("pool_deep")), force_comp=bool(cfg.get("force_comp")),
-        sign_j=bool(cfg.get("sign_j")), sign_lvl=bool(cfg.get("sign_lvl")))
+        sign_j=bool(cfg.get("sign_j")), sign_lvl=bool(cfg.get("sign_lvl")),
+        spacer_selection=bool(cfg.get("spacer_selection")), destructive_chain=bool(cfg.get("destructive_chain")))
 
 
 def main():

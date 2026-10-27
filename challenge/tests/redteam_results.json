@@ -2,17 +2,17 @@
  {
   "case": "baseline A_TS4 is accepted",
   "ok": true,
-  "detail": "accepted, score {'sats': 50696, 'preimage_bits': 89.73, 'quantum_bits': 35.96, 'collision_bits': 65.21, 'bits_confidence': 'audited'}"
+  "detail": "accepted, score {'sats': 50749, 'preimage_bits': 89.85, 'quantum_bits': 36.02, 'collision_bits': 65.27, 'bits_confidence': 'audited'}"
  },
  {
   "case": "baseline L_lean is accepted",
   "ok": true,
-  "detail": "accepted, score {'sats': 21014, 'preimage_bits': 89.73, 'quantum_bits': 38.57, 'collision_bits': 65.39, 'bits_confidence': 'audited'}"
+  "detail": "accepted, score {'sats': 21087, 'preimage_bits': 89.85, 'quantum_bits': 38.63, 'collision_bits': 65.46, 'bits_confidence': 'audited'}"
  },
  {
   "case": "baseline E_116 is accepted",
   "ok": true,
-  "detail": "accepted, score {'sats': 57258, 'preimage_bits': 116.18, 'quantum_bits': 52.0, 'collision_bits': 82.63, 'bits_confidence': 'audited'}"
+  "detail": "accepted, score {'sats': 57483, 'preimage_bits': 116.35, 'quantum_bits': 52.09, 'collision_bits': 82.71, 'bits_confidence': 'audited'}"
  },
  {
   "case": "claimed metric in design.json",
@@ -47,7 +47,7 @@
  {
   "case": "wrong schema version",
   "ok": true,
-  "detail": "rejected at schema: schema must be 'qsb-design-v2'"
+  "detail": "rejected at schema: schema must be 'qsb-design-v2' or 'qsb-design-v3'"
  },
  {
   "case": "oversized file (> 4 KiB)",
@@ -80,14 +80,14 @@
   "detail": "rejected at schema: not JSON: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)"
  },
  {
-  "case": "real TS2 (83.7 bits) is admissible and scored as a vector",
+  "case": "real TS2 (83.85 corrected bits) is admissible and scored as a vector",
   "ok": true,
-  "detail": "accepted, score {'sats': 51239, 'preimage_bits': 83.73, 'quantum_bits': 34.96, 'collision_bits': 65.05, 'bits_confidence': 'proven'}"
+  "detail": "accepted, score {'sats': 51366, 'preimage_bits': 83.85, 'quantum_bits': 35.02, 'collision_bits': 65.14, 'bits_confidence': 'proven'}"
  },
  {
   "case": "design below the admissibility floor (78.5 bits)",
   "ok": true,
-  "detail": "rejected at security: 2nd-preimage 78.56 < admissibility floor 80.0"
+  "detail": "rejected at security: 2nd-preimage 78.68 < admissibility floor 80.0"
  },
  {
   "case": "honest spender has < 1 expected solution",
@@ -162,17 +162,17 @@
  {
   "case": "editing a judge constant (fee = 0) is detected by the manifest",
   "ok": true,
-  "detail": "['challenge/judge/constants.json']"
+  "detail": "['challenge/judge/__main__.py', 'challenge/judge/consensus.py', 'challenge/judge/constants.json', 'challenge/judge/cost.py', 'challenge/judge/design.py', 'lean/FROZEN.sha256', 'lean/export_scripts.py', 'qsb_pool.py']"
  },
  {
   "case": "score does not depend on the judge seed",
   "ok": true,
-  "detail": "[{\"sats\": 21014, \"preimage_bits\": 89.73, \"quantum_bits\": 38.57, \"collision_bits\": 65.39, \"bits_confidence\": \"audited\"}, {\"sats\": 21014, \"preimage_bits\": 89.73, \"quantum_bits\": 38.57, \"collision_bits\": 65.39, \"bits_confidence\": \"audited\"}, \"accepted\", \"accepted\"]"
+  "detail": "[{\"sats\": 21087, \"preimage_bits\": 89.85, \"quantum_bits\": 38.63, \"collision_bits\": 65.46, \"bits_confidence\": \"audited\"}, {\"sats\": 21087, \"preimage_bits\": 89.85, \"quantum_bits\": 38.63, \"collision_bits\": 65.46, \"bits_confidence\": \"audited\"}, \"accepted\", \"accepted\"]"
  },
  {
   "case": "screen mode gives the ranked score (and is marked unranked)",
   "ok": true,
-  "detail": "[\"screened\", {\"sats\": 21014, \"preimage_bits\": 89.73, \"quantum_bits\": 38.57, \"collision_bits\": 65.39, \"bits_confidence\": \"audited\"}, \"accepted\", {\"sats\": 21014, \"preimage_bits\": 89.73, \"quantum_bits\": 38.57, \"collision_bits\": 65.39, \"bits_confidence\": \"audited\"}]"
+  "detail": "[\"screened\", {\"sats\": 21087, \"preimage_bits\": 89.85, \"quantum_bits\": 38.63, \"collision_bits\": 65.46, \"bits_confidence\": \"audited\"}, \"accepted\", {\"sats\": 21087, \"preimage_bits\": 89.85, \"quantum_bits\": 38.63, \"collision_bits\": 65.46, \"bits_confidence\": \"audited\"}]"
  },
  {
   "case": "leaderboard: Pareto frontier over (sats, bits); dominated and later exact ties excluded; non-dominated standard runs pending",

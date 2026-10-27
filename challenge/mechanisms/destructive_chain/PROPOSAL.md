@@ -1,8 +1,10 @@
 # Destructive selection of a hash-chain level
 
-Status: implemented prototype, local Lean lemma checked, 1,032 vectors agree
-with Bitcoin Core and the frozen Lean interpreter. Not promoted into the DSL.
-This is a small opcode improvement, not an under-two-hour solution.
+Status: promoted into qsb-design-v3 and used by the deep-accepted `spacer_d`
+and `spacer_e` submissions. See the [judge-3 release](../../judge/releases/qsb-judge-3.md).
+The original prototype evidence below includes a local Lean lemma and 1,032
+vectors agreeing with Bitcoin Core and Lean. This is a small opcode improvement;
+the under-two-hour target remains unmet.
 
 ## Fragment and stack effect
 
@@ -40,8 +42,9 @@ be recomputed; identical stack behavior does not imply identical transactions.
 For the same parameters, the intended S_i and E_i are unchanged: all levels,
 nonce signatures, recovered-key parities, encodings, and authorized dummy sets
 are the same. The prototype uses the existing analyser on that basis. Its
-numbers remain proposal estimates until the mechanism is independently audited
-and promoted. No claim of full-family proof is made.
+standalone example numbers below remain historical proposal estimates. The
+promoted spacer combinations have exact-layout measured rates and fresh deep
+audits. No claim of full-family proof is made.
 
 ## Implementation and reproduction
 
@@ -66,7 +69,7 @@ expectations and the Lean replay has zero disagreements and zero unsupported
 cases. Production and test-mode twins pass the unchanged parser; the two
 upper-tier examples pass `design_check()` and static limits.
 
-## Cost and current result
+## Historical standalone cost estimates
 
 | Candidate | Classical bits | Quantum bits | Collision bits | Ops | Production bytes | Model GPU-h |
 |---|---:|---:|---:|---:|---:|---:|

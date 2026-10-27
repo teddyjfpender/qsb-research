@@ -20,6 +20,7 @@ import hashlib
 import json
 import math
 import random
+import statistics
 import subprocess
 import sys
 import tempfile
@@ -63,7 +64,10 @@ def lean_builder_check(cfg, prod, test):
     with tempfile.TemporaryDirectory() as td:
         f = Path(td) / "s.json"
         f.write_text(json.dumps(ents))
-        out = subprocess.run([str(consensus.LEAN), "--scripts", str(f)], capture_output=True, text=True).stdout
+        result = subprocess.run([str(consensus.LEAN), "--scripts", str(f)], capture_output=True, text=True)
+        out = result.stdout
+    if result.returncode or "2 builds, 0 differ between Lean and Python" not in out:
+        return False, "Lean builder check failed: " + (out + result.stderr)[-1000:]
     fails = [l for l in out.splitlines() if l.startswith("FAIL")]
     return (not fails), (fails[0] if fails else "Lean builder rebuilt identical bytes")
 
@@ -71,8 +75,12 @@ def lean_builder_check(cfg, prod, test):
 def proof_family(cfg):
     """Confidence label for the security bits: 'proven' when a frozen Lean soundness theorem covers the
     design's family, else 'audited' (freedom audit + Core replay: strong evidence, not proof)."""
+    if cfg.get("spacer_selection"):
+        return dict(label="audited", theorem=None,
+                    target="QSB.SpacerSoundness.SelectionSoundWithPinChain",
+                    note="spacer pairing and chain cleanup lemmas proved; full-family target unproved")
     R = sum(1 for k in cfg if k.startswith("t") and k[1:].isdigit())
-    if R == 1 and cfg["chain_pin"] == 1 and cfg["chain1"] == 1 and not cfg["sign_j"] and not cfg["sign_lvl"] \
+    if not cfg.get("spacer_selection") and not cfg.get("destructive_chain") and R == 1 and cfg["chain_pin"] == 1 and cfg["chain1"] == 1 and not cfg["sign_j"] and not cfg["sign_lvl"] \
             and cfg["force_comp"] and cfg["pool_deep"] and cfg.get("b1", 0) == 0:
         return dict(label="proven", theorem="QSB.TS2.ts2_family_sound",
                     note="family theorem; the instance side condition SideTS2 is checked by native_decide")
@@ -231,6 +239,15 @@ def judge(sub, seed, strict_manifest=True, log=print, mode="standard"):
     sats = vbytes * C["fee_sat_per_vbyte"] + hours * C["gpu_sats_per_hour"]
     rep["gates"]["cost"] = dict(ok=True, gpu_hours_rtx4090=round(hours, 3), stage_rates=[round(r / 1e9, 3) for r in rates],
                                 script_bytes=len(prod["script"]), scriptsig_bytes=ss, total_vbytes=vbytes)
+    profile = cost.measured_profile(cfg, prod)
+    if profile is not None:
+        measured = [statistics.median(s["der_rates"]) for s in profile["stages"]]
+        rep["gates"]["cost"].update(
+            measurement_profile=profile["id"],
+            gpu_hours_measured_projection=round(cost.hours_at_rates(measured, an, P), 3),
+            measured_stage_rates=[round(r / 1e9, 3) for r in measured],
+            pricing_policy="slowest real-DER repeat per stage, times 0.95 rate margin",
+            measurement_source=profile["source"])
     # the result is a vector: cost and security are separate objectives (compare designs by Pareto dominance)
     rep["proof"] = proof_family(cfg)
     rep["score"] = dict(sats=round(sats), preimage_bits=round(an["preimage_bits"], 2),

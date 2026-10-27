@@ -81,9 +81,13 @@ def to_line(tag, script, items, tx, expect):
 def run_cchk(lines):
     if not CCHK.exists():
         return None, "consensus_check not built"
-    out = subprocess.run([str(CCHK)], input="\n".join(lines) + "\n", capture_output=True, text=True).stdout
+    result = subprocess.run([str(CCHK)], input="\n".join(lines) + "\n", capture_output=True, text=True)
+    out = result.stdout
     bad = [l for l in out.splitlines() if "unexpected" in l and "<--" in l]
     tail = out.strip().splitlines()[-1] if out.strip() else ""
+    count = sum(l.startswith(("PASS", "FAIL")) for l in out.splitlines())
+    if result.returncode or count != len(lines) or not tail.startswith("unexpected results: "):
+        return None, "Core replay failed or incomplete: " + (out + result.stderr)[-1000:]
     return bad, tail
 
 
@@ -92,8 +96,12 @@ def run_lean(lines, tmpdir):
         return None, "lean/qsbcheck not built"
     f = Path(tmpdir) / "judge_vectors.txt"
     f.write_text("\n".join(lines) + "\n")
-    out = subprocess.run([str(LEAN), str(f)], capture_output=True, text=True).stdout
+    result = subprocess.run([str(LEAN), str(f)], capture_output=True, text=True)
+    out = result.stdout
     bad = [l for l in out.splitlines() if l.startswith(("FAIL", "GAP"))]
+    expected = f"{len(lines)} vectors, 0 disagree with Core, 0 outside the model"
+    if (result.returncode or expected not in out) and not bad:
+        bad = ["Lean replay failed or incomplete: " + (out + result.stderr)[-1000:]]
     return bad, (out.strip().splitlines() or [""])[-1]
 
 

@@ -1,5 +1,5 @@
 {
- "version": "qsb-judge-2",
+ "version": "qsb-judge-3",
  "min_expected_solutions_per_round": 1.0,
  "fee_sat_per_vbyte": 5,
  "gpu_sats_per_hour": 690,

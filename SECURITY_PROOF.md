@@ -353,3 +353,67 @@ interpreter (e.g., in Isabelle or Lean) plus a proof that the generated script m
   away;
 - miner behavior;
 - denial-of-service.
+
+## Judge 3 extension: spacer selection with destructive round chains
+
+The owner-authorized promotion adds `selection_layout="spacer"` and
+`destructive_chain=true` to the data-only design language. The promoted spacer
+family requires pool-first layout, no bonus selections, and unsigned pool and
+level indices. Its security confidence is **audited**, not proven.
+
+Each independent round has bottom-first layout
+`Z D[n-1] 0 C[n-1] ... D[0] 0 C[0]`. `Z` is a permanent zero sentinel.
+After moving the witness index x to the top, MIN clamps it to one less than
+the depth of Z. DUP/ROLL selects a commitment, the HORS check consumes it,
+and ROLL with the retained x selects its paired dummy. The spacer offsets
+the two intervening removals. The local Lean theorem
+`QSB.SpacerSelection.selects_paired_dummy` proves the exact list transformation
+for arbitrary prefix/suffix and values. Selecting a previously removed
+commitment fails; remaining pairs retain their relative spacing in any order.
+
+The sentinel prevents a selector from reaching another round or witness-held
+fake pairs below its region. Dummies and zeros cannot equal a 20-byte HORS
+commitment. Matching an unrevealed commitment or another unexpected 20-byte
+value is charged to the existing BadHashEvent. Commitments from an earlier
+round that have not been opened remain unknown; each round has independent
+secrets. The adversarial tests remove the bound and the HORS check separately;
+the former admits a concrete fake-pair attack, and the freedom audit detects
+both mutated whole scripts.
+
+For round hash chains, ROLL presents the same selected bytes as PICK and
+removes that level. Clearing the other m-1 values leaves exactly the previous
+suffix. `QSB.DestructiveChain.same_selected_value_and_suffix` proves this local
+equivalence for any acceptance predicate. Pinning is unchanged and its leftover
+chain values remain available to the attacker as potential nonce signatures.
+Thus, for the promoted unsigned, all-encoding, no-bonus family:
+
+```
+S_pin = 2 * k * 3 * chain_pin
+S_i   = 2 * (k_i + extra_pin) * 3 * chain_i
+extra_pin = chain_pin if chain_pin > 1 else 0
+E_i   = C(n,t_i) * 2 * k_i * 3 * chain_i * p_DER
+```
+
+FindAndDelete depends only on the selected dummy set. The interleaved zero and
+commitment pushes neither create another deletion nor another authorized
+sighash. Hence the existing reduction and these freedom counts apply under
+the gadget argument, designer checks, and the existing random-oracle and
+ECDSA abstractions. Deep adaptive audits and independent Core/Lean replay
+provide evidence for the full script; the local lemmas alone are insufficient.
+
+The existing frozen `SelectionSound` theorem covers TS2, whose pinning has no
+chain. Its `NonceOk` does not include leftover pin-chain hashes. Rather than
+weaken that proved statement, judge 3 adds the explicit, **unproved** target
+`QSB.SpacerSoundness.SelectionSoundWithPinChain`: the nonce must satisfy the
+original condition or be one of the bounded hashes of the actual pinning
+witness key. The definition is pinned in the new manifest, is not an axiom,
+and does not confer a `proven` label. The original TS2 family is explicitly
+restricted to the original selection and cleanup flags, and its examples and
+proof still check.
+
+Judge 3 also fixes two pre-existing counts: both DER integers must be nonempty
+(20-byte probability 390405/2^65; 32-byte probability 780555/2^65), and a round
+with t signed plus b bonus selections has C(n,t+b) distinct honest deletion
+sets, not C(n,t)C(n-t,b). The collision calculation still accounts for which
+signed subsets a passing union can represent. Historical judge-2 scores are
+retained under their old manifest and are not silently reinterpreted.

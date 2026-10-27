@@ -25,6 +25,8 @@ structure Params where
   forceComp : Bool
   signJ : Bool
   signLvl : Bool
+  spacerSelection : Bool := false
+  destructiveChain : Bool := false
   deriving Repr, Inhabited
 
 structure Rand where
@@ -109,7 +111,8 @@ def H : BM Unit := do
   let s ← get
   if s.testMode then do opc 0x75; emit (pushMinE TEST_DER20) else opc s.hashOp
 
-def puzzle (m : Nat) (lvl : String) (cleanup : Bool) (signLvl : Option (String × String)) : BM Unit := do
+def puzzle (m : Nat) (lvl : String) (cleanup : Bool) (signLvl : Option (String × String))
+    (destructive : Bool := false) : BM Unit := do
   if m == 1 then
     H; emit (pushNum 1); opc 0xac; opc 0x75; pop
   else
@@ -127,10 +130,13 @@ def puzzle (m : Nat) (lvl : String) (cleanup : Bool) (signLvl : Option (String �
       roll preL
       opc 0xa9; opc 0x88
       pop; pop
-    opc 0x79; pop; append "hsel"
+    let consume := cleanup && destructive
+    opc (if consume then 0x7a else 0x79); pop
+    if consume then pop
+    append "hsel"
     emit (pushNum 1); opc 0xac; opc 0x75; pop
     if cleanup then
-      let mut left := m
+      let mut left := if consume then m - 1 else m
       while left ≥ 2 do
         opc 0x6d; dropTop 2; left := left - 2
       if left > 0 then do opc 0x75; pop
@@ -172,12 +178,20 @@ def body (p : Params) (rnd : Rand) (o : Opts) : BM Unit := do
           push s!"CL{rd}_{v}" (Hash.hash160 rnd.preL[rd]![v]!)
   for rd' in [0:R] do
     let rd := R - 1 - rd'
-    for q in [0:n] do
-      let i := n - 1 - q
-      push s!"C{rd}_{i}" comm[rd]![i]!
-    for q in [0:n] do
-      let i := n - 1 - q
-      push s!"D{rd}_{i}" rnd.dummies[rd]![i]!
+    if p.spacerSelection then
+      pushN s!"Z{rd}" 0
+      for q in [0:n] do
+        let i := n - 1 - q
+        push s!"D{rd}_{i}" rnd.dummies[rd]![i]!
+        pushN s!"F{rd}_{i}" 0
+        push s!"C{rd}_{i}" comm[rd]![i]!
+    else
+      for q in [0:n] do
+        let i := n - 1 - q
+        push s!"C{rd}_{i}" comm[rd]![i]!
+      for q in [0:n] do
+        let i := n - 1 - q
+        push s!"D{rd}_{i}" rnd.dummies[rd]![i]!
   if !p.poolDeep then
     for s' in [0:k] do
       let s := k - s'
@@ -216,10 +230,15 @@ def body (p : Params) (rnd : Rand) (o : Opts) : BM Unit := do
       let A := (← depth top) - 1
       let m := remaining.length
       modify fun s => { s with plan := s.plan.push (A, m) }
-      min_ (A + m - 1 : Nat)
-      opc 0x76
-      emit (pushNum (1 + m : Nat))
-      opc 0x93; opc 0x7a
+      if p.spacerSelection then
+        min_ ((← depth s!"Z{rd}") - 1 : Nat)
+        opc 0x76
+      else
+        min_ (A + m - 1 : Nat)
+        opc 0x76
+        emit (pushNum (1 + m : Nat))
+        opc 0x93
+      opc 0x7a
       let st := (← get).stack
       let cref := (st.reverse.find? (fun l => l.startsWith s!"C{rd}_")).getD ""
       removeL cref; append "csel"
@@ -245,6 +264,7 @@ def body (p : Params) (rnd : Rand) (o : Opts) : BM Unit := do
     opc 0x76; append s!"key{rd}_copy"
     puzzle p.chains[rd]! s!"l{rd}" true
       (if p.signLvl && p.chains[rd]! > 1 then some (s!"CL{rd}_0", s!"prel{rd}") else none)
+      p.destructiveChain
     pushN "m" (t + 1 : Nat)
     opc 0x7c; swapTop
     for i in [0:t] do roll s!"KD{rd}_{i}"

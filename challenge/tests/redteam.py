@@ -87,8 +87,8 @@ def format_cases():
 def gate_cases():
     ts2 = dict(schema="qsb-design-v2", hash="sha256", n=150, k=300, pool_deep=True, force_comp=True,
                chain_pin=1, sign_j=False, sign_lvl=False, rounds=[dict(t=16, b=0, k=64, chain=1)])
-    case("real TS2 (83.7 bits) is admissible and scored as a vector", lambda: judge_design(ts2),
-         lambda r: r.get("verdict") == "accepted" and abs(r["score"]["preimage_bits"] - 83.73) < 0.01)
+    case("real TS2 (83.85 corrected bits) is admissible and scored as a vector", lambda: judge_design(ts2),
+         lambda r: r.get("verdict") == "accepted" and abs(r["score"]["preimage_bits"] - 83.85) < 0.01)
     weak = dict(ts2, k=96, force_comp=False, rounds=[dict(t=8, b=0, k=96, chain=8)])   # S = 2*3*96*8
     case("design below the admissibility floor (78.5 bits)", lambda: judge_design(weak),
          lambda r: rejected_at("security")(r) and "2nd-preimage" in r["gates"]["security"]["error"]

@@ -1,0 +1,126 @@
+{
+  "version": 1,
+  "hardware": "NVIDIA GeForce RTX 4090",
+  "profiles": [
+    {
+      "id": "spacer_d_rtx4090_20261027",
+      "shape": {
+        "hash": "sha256",
+        "n": 129,
+        "k": 96,
+        "pool_deep": true,
+        "force_comp": false,
+        "chain_pin": 2,
+        "sign_j": false,
+        "sign_lvl": false,
+        "destructive_chain": true,
+        "spacer_selection": true,
+        "rounds": [
+          {
+            "t": 7,
+            "b": 0,
+            "k": 96,
+            "chain": 4
+          },
+          {
+            "t": 7,
+            "b": 0,
+            "k": 96,
+            "chain": 5
+          }
+        ]
+      },
+      "production_bytes": 9717,
+      "ops": 200,
+      "noise_margin": 0.95,
+      "source": "challenge/mechanisms/spacer_selection/gpu_validation/report.json",
+      "source_sha256": "ddbb61c07d534fec7b2486b114b4622dd53edddb31f35c865a8c52fd46f5285e",
+      "stages": [
+        {
+          "stage": "pin",
+          "der_rates": [
+            8326000000.0,
+            8299600000.0,
+            8313800000.0
+          ]
+        },
+        {
+          "stage": "round1",
+          "der_rates": [
+            9235700000.0,
+            9265600000.0,
+            9274400000.0
+          ]
+        },
+        {
+          "stage": "round2",
+          "der_rates": [
+            9370100000.0,
+            9395200000.0,
+            9426200000.0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "spacer_e_rtx4090_20261027",
+      "shape": {
+        "hash": "sha1",
+        "n": 135,
+        "k": 64,
+        "pool_deep": true,
+        "force_comp": false,
+        "chain_pin": 2,
+        "sign_j": false,
+        "sign_lvl": false,
+        "destructive_chain": true,
+        "spacer_selection": true,
+        "rounds": [
+          {
+            "t": 7,
+            "b": 0,
+            "k": 64,
+            "chain": 4
+          },
+          {
+            "t": 7,
+            "b": 0,
+            "k": 64,
+            "chain": 5
+          }
+        ]
+      },
+      "production_bytes": 9749,
+      "ops": 200,
+      "noise_margin": 0.95,
+      "source": "challenge/mechanisms/spacer_selection/gpu_validation/report.json",
+      "source_sha256": "ddbb61c07d534fec7b2486b114b4622dd53edddb31f35c865a8c52fd46f5285e",
+      "stages": [
+        {
+          "stage": "pin",
+          "der_rates": [
+            16281000000.0,
+            16284000000.0,
+            16267000000.0
+          ]
+        },
+        {
+          "stage": "round1",
+          "der_rates": [
+            20736000000.0,
+            20763000000.0,
+            20809000000.0
+          ]
+        },
+        {
+          "stage": "round2",
+          "der_rates": [
+            21234000000.0,
+            21244000000.0,
+            21262000000.0
+          ]
+        }
+      ]
+    }
+  ]
+}

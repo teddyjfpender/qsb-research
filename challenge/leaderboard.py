@@ -68,9 +68,14 @@ def row(r):
     d = r["design"]
     desc = (f"{d['hash']} n{d['n']} k{d['k']} pin-chain{d['chain_pin']} sign{int(d['sign_j'])}{int(d['sign_lvl'])} "
             f"comp{int(d['force_comp'])} " + " | ".join(f"t{x['t']}+{x['b']} k{x['k']} m{x['chain']}" for x in d["rounds"]))
+    if d.get("selection_layout") == "spacer":
+        desc += " | spacer" + (" destructive-chain" if d.get("destructive_chain") else "")
+    timing = f"{c['gpu_hours_rtx4090']:>6} h"
+    if "gpu_hours_measured_projection" in c:
+        timing += f" (measured projection {c['gpu_hours_measured_projection']:.3f} h)"
     return (f"{s['sats']:>8} sats  {s['preimage_bits']:>6} bits [{s.get('bits_confidence', '?'):<7}] "
             f"(q {s['quantum_bits']:>5}, coll {s['collision_bits']:>5})  "
-            f"{c['gpu_hours_rtx4090']:>6} h {c['total_vbytes']:>6} vB  {r['submission']:<14} {desc}")
+            f"{timing} {c['total_vbytes']:>6} vB  {r['submission']:<14} {desc}")
 
 
 def hypervolume(front):

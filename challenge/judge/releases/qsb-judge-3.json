@@ -1,0 +1,275 @@
+{
+  "version": "qsb-judge-3",
+  "released_utc": "2026-10-27T13:50:02.639409+00:00",
+  "manifest_sha256": "ffb31e8bd64490dd01d0b4ec732a0ddc7d59727b2415edd0d9e1390c52ba0d36",
+  "manifest_digest": "ffb31e8bd64490dd",
+  "manifest_files": 46,
+  "previous_manifest_sha256": "5b25b5dd953024277be8f68fa5e5900076dedfddd90ed27757c1022ce63808ee",
+  "scope": "Owner-requested trusted integration and deep registration of the measured spacer designs; previous two GPU candidates revalidated for comparison. Historical full parameter frontier not rerun.",
+  "rates": {
+    "path": "challenge/judge/exact_rates.json",
+    "sha256": "0ca1ff0299b6aa2b7889a016f84f893612426fb65784913b0c9acb06265ec395",
+    "policy": "Minimum real-DER repeat per stage times 0.95 rate allowance; medians displayed separately."
+  },
+  "ranked_runs": [
+    {
+      "submission": "spacer_d",
+      "path": "challenge/leaderboard/runs/20261027T134022Z_spacer_d_deep.json",
+      "sha256": "cfb1e1bacef47238a2b2214fe2b9c8fee7f30029473a8070ae8ee801c98bc8db",
+      "design_sha256": "09c53b2c9b0aaef9cfa22091b72aa7477e6cb645c6e8028abdbc792d4a0ee319",
+      "verdict": "accepted",
+      "mode": "deep",
+      "cost": {
+        "ok": true,
+        "gpu_hours_rtx4090": 4.657,
+        "stage_rates": [
+          7.885,
+          8.774,
+          8.902
+        ],
+        "script_bytes": 9717,
+        "scriptsig_bytes": 1009,
+        "total_vbytes": 10786,
+        "measurement_profile": "spacer_d_rtx4090_20261027",
+        "gpu_hours_measured_projection": 4.413,
+        "measured_stage_rates": [
+          8.314,
+          9.266,
+          9.395
+        ],
+        "pricing_policy": "slowest real-DER repeat per stage, times 0.95 rate margin",
+        "measurement_source": "challenge/mechanisms/spacer_selection/gpu_validation/report.json"
+      },
+      "score": {
+        "sats": 57143,
+        "preimage_bits": 113.56,
+        "quantum_bits": 50.19,
+        "collision_bits": 82.23,
+        "bits_confidence": "audited"
+      },
+      "proof": {
+        "label": "audited",
+        "theorem": null,
+        "target": "QSB.SpacerSoundness.SelectionSoundWithPinChain",
+        "note": "spacer pairing and chain cleanup lemmas proved; full-family target unproved"
+      },
+      "audit_seeds": 3,
+      "audit_runs": 101352,
+      "honest_samples": 1000,
+      "consensus_vectors": 264
+    },
+    {
+      "submission": "spacer_e",
+      "path": "challenge/leaderboard/runs/20261027T134022Z_spacer_e_deep.json",
+      "sha256": "6b61adc0dacc9faef275debf4646ac7d60b6f4647158dacb6de74dd23d1acdbd",
+      "design_sha256": "3481d7fcb8982d934a9660e4ddaca559a02cee7771e61eab8fae04b91d88e484",
+      "verdict": "accepted",
+      "mode": "deep",
+      "cost": {
+        "ok": true,
+        "gpu_hours_rtx4090": 4.739,
+        "stage_rates": [
+          15.454,
+          19.699,
+          20.172
+        ],
+        "script_bytes": 9749,
+        "scriptsig_bytes": 1009,
+        "total_vbytes": 10818,
+        "measurement_profile": "spacer_e_rtx4090_20261027",
+        "gpu_hours_measured_projection": 4.498,
+        "measured_stage_rates": [
+          16.281,
+          20.763,
+          21.244
+        ],
+        "pricing_policy": "slowest real-DER repeat per stage, times 0.95 rate margin",
+        "measurement_source": "challenge/mechanisms/spacer_selection/gpu_validation/report.json"
+      },
+      "score": {
+        "sats": 57360,
+        "preimage_bits": 117.7,
+        "quantum_bits": 52.56,
+        "collision_bits": 84.03,
+        "bits_confidence": "audited"
+      },
+      "proof": {
+        "label": "audited",
+        "theorem": null,
+        "target": "QSB.SpacerSoundness.SelectionSoundWithPinChain",
+        "note": "spacer pairing and chain cleanup lemmas proved; full-family target unproved"
+      },
+      "audit_seeds": 3,
+      "audit_runs": 101592,
+      "honest_samples": 1000,
+      "consensus_vectors": 264
+    },
+    {
+      "submission": "gpu_d_0",
+      "path": "challenge/leaderboard/runs/20261027T134022Z_gpu_d_0_deep.json",
+      "sha256": "0b947b0436f7b14a5e032457cfa53c6b67ab0da45a0c013f909d6f5cc78fdf53",
+      "design_sha256": "36a9573800e1b03ef46b94231875e29f34e62f432b1c3e224f627caf7b523535",
+      "verdict": "accepted",
+      "mode": "deep",
+      "cost": {
+        "ok": true,
+        "gpu_hours_rtx4090": 5.567,
+        "stage_rates": [
+          6.081,
+          8.006,
+          7.877
+        ],
+        "script_bytes": 9867,
+        "scriptsig_bytes": 1007,
+        "total_vbytes": 10934
+      },
+      "score": {
+        "sats": 58511,
+        "preimage_bits": 115.35,
+        "quantum_bits": 51.59,
+        "collision_bits": 82.77,
+        "bits_confidence": "audited"
+      },
+      "proof": {
+        "label": "audited",
+        "theorem": null,
+        "note": "no Lean soundness theorem covers this family yet (M4/M5)"
+      },
+      "audit_seeds": 3,
+      "audit_runs": 85038,
+      "honest_samples": 1000,
+      "consensus_vectors": 264
+    },
+    {
+      "submission": "gpu_e_0",
+      "path": "challenge/leaderboard/runs/20261027T134022Z_gpu_e_0_deep.json",
+      "sha256": "a2deb9105b9abc6549c1dde6cf041655da0db3d9fa442ab37f159a0488a15a2a",
+      "design_sha256": "da637996c7448a84d685a919efc3e2eb0b60f74b0e332d169d7e4597caee8a69",
+      "verdict": "accepted",
+      "mode": "deep",
+      "cost": {
+        "ok": true,
+        "gpu_hours_rtx4090": 5.846,
+        "stage_rates": [
+          8.145,
+          5.548,
+          9.614
+        ],
+        "script_bytes": 9826,
+        "scriptsig_bytes": 1007,
+        "total_vbytes": 10893
+      },
+      "score": {
+        "sats": 58499,
+        "preimage_bits": 117.02,
+        "quantum_bits": 52.22,
+        "collision_bits": 83.18,
+        "bits_confidence": "audited"
+      },
+      "proof": {
+        "label": "audited",
+        "theorem": null,
+        "note": "no Lean soundness theorem covers this family yet (M4/M5)"
+      },
+      "audit_seeds": 3,
+      "audit_runs": 84354,
+      "honest_samples": 1000,
+      "consensus_vectors": 259
+    }
+  ],
+  "tier_security": {
+    "D": {
+      "baseline_config": {
+        "hash": "sha256",
+        "n": 140,
+        "k": 32,
+        "chain_pin": 3,
+        "t1": 6,
+        "b1": 1,
+        "k1": 16,
+        "chain1": 2,
+        "t2": 7,
+        "b2": 0,
+        "k2": 32,
+        "chain2": 3,
+        "pool_deep": true,
+        "force_comp": false,
+        "sign_j": false,
+        "sign_lvl": false
+      },
+      "baseline": {
+        "preimage_bits": 111.97555466684811,
+        "quantum_query_bits": 49.9028148327029,
+        "collision_bits": 78.93389576961079
+      },
+      "candidate": {
+        "preimage_bits": 113.55630491628236,
+        "quantum_query_bits": 50.193189957420024,
+        "collision_bits": 82.2268483518034
+      },
+      "all_thresholds_met": true
+    },
+    "E": {
+      "baseline_config": {
+        "hash": "sha256",
+        "n": 130,
+        "k": 96,
+        "chain_pin": 1,
+        "t1": 7,
+        "b1": 0,
+        "k1": 48,
+        "chain1": 3,
+        "t2": 7,
+        "b2": 0,
+        "k2": 96,
+        "chain2": 2,
+        "pool_deep": true,
+        "force_comp": false,
+        "sign_j": false,
+        "sign_lvl": false
+      },
+      "baseline": {
+        "preimage_bits": 116.35276519723666,
+        "quantum_query_bits": 52.09142009789718,
+        "collision_bits": 82.71479374745886
+      },
+      "candidate": {
+        "preimage_bits": 117.69552265187747,
+        "quantum_query_bits": 52.55528007557815,
+        "collision_bits": 84.03372640873195
+      },
+      "all_thresholds_met": true
+    }
+  },
+  "validation": {
+    "redteam": {
+      "passed": 36,
+      "total": 36,
+      "path": "challenge/tests/redteam_results.json",
+      "sha256": "4551571ba92ee47df6bf496ad19f30a26390f7b29c4b63cdb149d21c9f2896c9",
+      "note": "Development regression run before final manifest publication; consensus failure handling separately verified below."
+    },
+    "spacer_promotion": {
+      "core_lean_vectors": 160,
+      "path": "challenge/tests/spacer_promotion_results.json",
+      "sha256": "63872fefb4a70b7423574c7d6f47dc265bdc22fa19a8819d3f31bae2db10fcfa"
+    },
+    "consensus_failure_controls": {
+      "passed": 7,
+      "total": 7,
+      "path": "challenge/tests/consensus_failures_results.json",
+      "sha256": "fd2a329bd32e061fe04a2fd6956eedfa385a818894f9040f5086f2920194e4bd"
+    },
+    "lean_full_check": {
+      "passed": true,
+      "identical_builds": 75,
+      "core_lean_vectors": 658,
+      "path": "challenge/judge/releases/qsb-judge-3-lean-check.log",
+      "sha256": "4db367fa574cde58ef7870c4d8b092b4ea461c5182517d82a4e69ed851895f5d"
+    }
+  },
+  "full_family_soundness_proved": false,
+  "full_production_spend_solved": false,
+  "under_two_gpu_hours": false,
+  "global_optimality_claimed": false
+}

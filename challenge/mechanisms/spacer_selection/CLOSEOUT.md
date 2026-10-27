@@ -1,10 +1,12 @@
-# Measured spacer proposal and research closure
+# Measured spacer construction and ranked promotion
 
-The requested timing validation is complete. Retain the spacer mechanism as a
-local mechanism-track submission and close this research pass. Its timing is
-supported by exact-layout GPU measurements, but its security status remains
-**audited, with a local pairing lemma; full-family soundness unproved**. It has
-not been promoted into the frozen ranked judge.
+Timing validation and the owner's subsequent request for ranked promotion are
+complete. `spacer_d` and `spacer_e` are deep-accepted under **qsb-judge-3** at
+**4.657 / 4.739 scored GPU-hours**. Their timing is supported by exact-layout
+GPU measurements; security remains **audited, with local pairing/cleanup
+lemmas and full-family soundness unproved**. The trusted Python/Lean builders,
+analyser and frozen rates are integrated. See the
+[release record](../../judge/releases/qsb-judge-3.json) for manifest and results.
 
 ## Decision on the two estimates
 
@@ -85,7 +87,8 @@ repeats cannot establish the performance of every card or a multi-hour run.
 - The original corrected D/E tier thresholds remain met by the unchanged
   security model. Classical / quantum / collision bits are D:
   113.556305 / 50.193190 / 82.226848; E:
-  117.695523 / 52.555280 / 84.033726. The frozen manifest remains unchanged.
+  117.695523 / 52.555280 / 84.033726. Judge-3 publishes a new manifest and retains
+  the original judge-2 manifest and results as historical evidence.
 
 ## Assessment of GPU unlock projects
 
@@ -143,6 +146,8 @@ python3 challenge/mechanisms/spacer_selection/summarize_gpu_validation.py
 report. Raw per-run measurements, hits, build logs, hardware snapshots and
 input/source hashes accompany it. `D_candidate.json` and `E_candidate.json`
 retain their original modeled estimates for provenance and link to the new
-timing validation. `PROPOSAL.md`, `Proof.lean`, `validation.json`, the byte
-vectors and these GPU artifacts comprise the completed local mechanism-track
-submission. No external publication or ranked promotion is claimed.
+timing validation and ranked results. `PROPOSAL.md`, `Proof.lean`,
+`validation.json`, the byte vectors and these GPU artifacts preserve the
+original mechanism evidence. The data-only ranked designs live in
+`challenge/submissions/spacer_d/` and `challenge/submissions/spacer_e/`; the
+judge-3 release records their fresh deep evaluations and integration checks.

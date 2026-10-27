@@ -78,7 +78,7 @@
     ],
     "confidence": "unranked mechanism estimate; full family soundness not proved"
   },
-  "status": "proposal; not accepted by frozen ranked judge",
+  "status": "promoted; deep-accepted under qsb-judge-3; full-family security audited",
   "timing_validation": {
     "original_estimate_hours": 4.253431076769947,
     "measured_rate_expected_hours": 4.412696662965164,
@@ -86,5 +86,8 @@
     "full_production_spend_solved": false,
     "report": "gpu_validation/report.json",
     "status": "exact-layout stage rates measured; original estimate superseded; projected mean, not full solve"
-  }
+  },
+  "judge_version": "qsb-judge-3",
+  "ranked_submission": "challenge/submissions/spacer_d/design.json",
+  "ranked_result": "challenge/leaderboard/runs/20261027T134022Z_spacer_d_deep.json"
 }

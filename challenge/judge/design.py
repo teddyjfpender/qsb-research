@@ -5,11 +5,12 @@ the judge never reads any claimed metric from a submission.
 """
 import json
 
-SCHEMA = "qsb-design-v2"
+SCHEMA = "qsb-design-v3"
 HASHES = ("sha256", "rmd", "sha1")
 TOP = {"schema", "hash", "n", "k", "pool_deep", "force_comp", "chain_pin", "sign_j", "sign_lvl",
        "rounds"}
 ROUND = {"t", "b", "k", "chain"}
+EXTENSIONS = {"selection_layout", "destructive_chain"}
 
 
 class Invalid(Exception):
@@ -40,20 +41,30 @@ def load(path):
         raise Invalid(f"not JSON: {e}")
     if not isinstance(d, dict):
         raise Invalid("top level must be an object")
-    extra = set(d) - TOP
+    schema = d.get("schema")
+    if schema not in ("qsb-design-v2", SCHEMA):
+        raise Invalid(f"schema must be 'qsb-design-v2' or {SCHEMA!r}")
+    fields = TOP | (EXTENSIONS if schema == SCHEMA else set())
+    extra = set(d) - fields
     if extra:
         raise Invalid(f"unknown keys {sorted(extra)} (claims and metrics are not accepted)")
-    missing = TOP - set(d)
+    missing = fields - set(d)
     if missing:
         raise Invalid(f"missing keys {sorted(missing)}")
-    if d["schema"] != SCHEMA:
-        raise Invalid(f"schema must be {SCHEMA!r}")
     if d["hash"] not in HASHES:
         raise Invalid(f"hash must be one of {HASHES}")
     n, k = _int(d, "n", 4, 300), _int(d, "k", 1, 300)
     pool_deep, force_comp = _bool(d, "pool_deep"), _bool(d, "force_comp")
     sign_j, sign_lvl = _bool(d, "sign_j"), _bool(d, "sign_lvl")
     chain_pin = _int(d, "chain_pin", 1, 16)
+    spacer, destructive = False, False
+    if schema == SCHEMA:
+        if d["selection_layout"] not in ("split", "spacer"):
+            raise Invalid("selection_layout must be 'split' or 'spacer'")
+        spacer = d["selection_layout"] == "spacer"
+        destructive = _bool(d, "destructive_chain")
+        if spacer and (not pool_deep or sign_j or sign_lvl):
+            raise Invalid("promoted spacer family requires pool-first layout and unsigned indices/levels")
     if (sign_j or sign_lvl) and not pool_deep:
         raise Invalid("sign_j / sign_lvl are implemented for the pool-first layout only")
     rounds = d["rounds"]
@@ -61,10 +72,14 @@ def load(path):
         raise Invalid("rounds must be a list of 1 or 2 round objects")
     cfg = dict(hash=d["hash"], n=n, k=k, pool_deep=pool_deep, force_comp=force_comp, chain_pin=chain_pin,
                sign_j=sign_j, sign_lvl=sign_lvl)
+    if schema == SCHEMA:
+        cfg.update(spacer_selection=spacer, destructive_chain=destructive)
     for i, r in enumerate(rounds, 1):
         if not isinstance(r, dict) or set(r) != ROUND:
             raise Invalid(f"round {i} must have exactly the keys {sorted(ROUND)}")
         t, b = _int(r, "t", 1, 40), _int(r, "b", 0, 2)
+        if spacer and b:
+            raise Invalid("spacer selection does not support bonus selections")
         if t + b > n // 2:
             raise Invalid(f"round {i}: t + b must be at most n/2 (layout condition of the soundness proof)")
         cfg[f"t{i}"], cfg[f"b{i}"] = t, b

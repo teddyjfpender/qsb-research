@@ -1,5 +1,22 @@
 # QSB research: cheaper quantum-safe Bitcoin spends
 
+**Latest upper-tier construction: spacer selection, judge `qsb-judge-3`.**
+The trusted Python/Lean builders and ranked judge now support the measured
+spacer designs. Full-family security remains **audited**, not proved.
+
+| Design | RTX 4090 measured-rate projection | Conservative judge cost |
+|---|---:|---:|
+| [Spacer D](challenge/submissions/spacer_d/design.json) | **4.413 h** | **4.657 h** |
+| [Spacer E](challenge/submissions/spacer_e/design.json) | **4.498 h** | **4.739 h** |
+
+The judge prices the slowest stage repeats with its 5% rate allowance and
+displays the measured projection alongside that score. These are expected
+grinding times, not observed full production solves. See the
+[release and validation notes](challenge/judge/releases/qsb-judge-3.md), or run
+`cd challenge && python3 leaderboard.py --dims split`. Historical results below
+use earlier models; judge 3 also corrects the DER probability and bonus-union
+counts.
+
 Start with **[QSB_IMPROVEMENTS.md](QSB_IMPROVEMENTS.md)**. It covers:
 - the nonce-signature pool and the DER-only puzzle check, which keep security equal or higher;
 - measured results against Layr's tuned kernels (101 RTX 4090-hours today):
@@ -13,7 +30,7 @@ Start with **[QSB_IMPROVEMENTS.md](QSB_IMPROVEMENTS.md)**. It covers:
   1.14 h on an RTX 5090 (both measured), plus a proof sketch that no DER-based stage can cost less than 2^P hash compressions;
 - **[challenge/CHALLENGE.md](challenge/CHALLENGE.md)**: an autoresearch challenge with a fixed, cheat-resistant judge.
   Submissions are data only. The judge builds the script, computes security, audits the attacker's real choices, checks
-  every verdict against Bitcoin Core and Lean, and costs the spend from 360 measured GPU shapes. Red-team: 35/35. Its automatic optimizer found designs 8.6% (90-bit) and
+  every verdict against Bitcoin Core and Lean, and costs the spend from 360 measured GPU shapes plus the new exact spacer profiles. Red-team: 36/36. Its automatic optimizer found designs 8.6% (90-bit) and
   2.9% (116-bit) cheaper than the hand-built ones; LLM agents work on new mechanisms (challenge/AGENT.md, MECHANISMS.md);
 - **[FORMAL_VERIFICATION.md](FORMAL_VERIFICATION.md)**: Lean 4 regression gate (`lean/check.sh`) with proven
   gadget and limit theorems, a byte-exact Lean port of the builder, and a replay of 658 test vectors that agrees with Core;

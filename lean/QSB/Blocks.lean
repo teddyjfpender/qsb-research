@@ -229,7 +229,8 @@ round key, pool-first layout. -/
 def isTS2 (p : Params) : Bool :=
   p.ts.length == 1 && p.bs == [0] && p.chainPin == 1 && p.chains == [1] && !p.signJ && !p.signLvl &&
   p.forceComp && p.poolDeep && p.kbound.length == 2 &&
-  (p.hashOp == 0xa6 || p.hashOp == 0xa7 || p.hashOp == 0xa8)
+  (p.hashOp == 0xa6 || p.hashOp == 0xa7 || p.hashOp == 0xa8) &&
+  !p.spacerSelection && !p.destructiveChain
 
 section
 variable (p : Params) (rnd : Rand)

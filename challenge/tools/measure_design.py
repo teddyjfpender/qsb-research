@@ -33,6 +33,11 @@ def shapes(cfg):
 
 def main():
     d, cfg = design.load(sys.argv[2])
+    if cfg.get("spacer_selection") or cfg.get("destructive_chain"):
+        raise SystemExit("This construction requires the exact-layout renderer, not real/round.bin. "
+                         "Use challenge/mechanisms/spacer_selection/gpu_validation.py and "
+                         "run_gpu_validation.py; freeze verified results with tools/build_exact_rates.py. "
+                         "See judge/releases/qsb-judge-3.md.")
     if sys.argv[1] == "plan":
         print("#!/bin/bash\ncd \"$(dirname \"$0\")\"; : > measured.jsonl")
         for st, k, m, e in shapes(cfg):

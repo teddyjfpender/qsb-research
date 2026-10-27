@@ -1,0 +1,171 @@
+{
+ "judge": "qsb-judge-3",
+ "seed": 4031847295,
+ "mode": "deep",
+ "ranked": true,
+ "gates": {
+  "integrity": {
+   "ok": true,
+   "changed": []
+  },
+  "schema": {
+   "ok": true
+  },
+  "build": {
+   "ok": true
+  },
+  "static": {
+   "ok": true,
+   "ops": 200,
+   "bytes": 9717,
+   "test_bytes": 9948,
+   "max_stack": 924,
+   "puzzle_substitutions": 11,
+   "design_check_findings": 0
+  },
+  "security": {
+   "ok": true,
+   "P": 45.426,
+   "preimage_bits": 113.56,
+   "quantum_bits": 50.19,
+   "collision_bits": 82.23,
+   "E": [
+    4.872,
+    6.09
+   ],
+   "S": [
+    2352,
+    2940
+   ]
+  },
+  "audit": {
+   "ok": true,
+   "seeds": 3,
+   "runs": 101352,
+   "stages": [
+    {
+     "stage": 0,
+     "z_views": 96,
+     "levels": 2,
+     "encodings": 3,
+     "measured": 1152,
+     "claimed": 1152,
+     "ok": true
+    },
+    {
+     "stage": 1,
+     "z_views": 97,
+     "levels": 4,
+     "encodings": 3,
+     "measured": 2328,
+     "claimed": 2352,
+     "ok": true
+    },
+    {
+     "stage": 2,
+     "z_views": 97,
+     "levels": 5,
+     "encodings": 3,
+     "measured": 2910,
+     "claimed": 2940,
+     "ok": true
+    }
+   ],
+   "honest_space": {
+    "ok": true,
+    "samples": 1000
+   }
+  },
+  "consensus": {
+   "ok": true,
+   "vectors": 264,
+   "core": "unexpected results: 0",
+   "lean_replay": "replay /var/folders/b6/t439mlp94rj6rzwbkbyrl5qc0000gn/T/tmpwqcqsr_0/judge_vectors.txt: 264 vectors, 0 disagree with Core, 0 outside the model",
+   "lean_builder": "Lean builder rebuilt identical bytes"
+  },
+  "cost": {
+   "ok": true,
+   "gpu_hours_rtx4090": 4.657,
+   "stage_rates": [
+    7.885,
+    8.774,
+    8.902
+   ],
+   "script_bytes": 9717,
+   "scriptsig_bytes": 1009,
+   "total_vbytes": 10786,
+   "measurement_profile": "spacer_d_rtx4090_20261027",
+   "gpu_hours_measured_projection": 4.413,
+   "measured_stage_rates": [
+    8.314,
+    9.266,
+    9.395
+   ],
+   "pricing_policy": "slowest real-DER repeat per stage, times 0.95 rate margin",
+   "measurement_source": "challenge/mechanisms/spacer_selection/gpu_validation/report.json"
+  }
+ },
+ "design": {
+  "hash": "sha256",
+  "n": 129,
+  "k": 96,
+  "pool_deep": true,
+  "force_comp": false,
+  "chain_pin": 2,
+  "sign_j": false,
+  "sign_lvl": false,
+  "destructive_chain": true,
+  "rounds": [
+   {
+    "t": 7,
+    "b": 0,
+    "k": 96,
+    "chain": 4
+   },
+   {
+    "t": 7,
+    "b": 0,
+    "k": 96,
+    "chain": 5
+   }
+  ],
+  "schema": "qsb-design-v3",
+  "selection_layout": "spacer"
+ },
+ "proof": {
+  "label": "audited",
+  "theorem": null,
+  "target": "QSB.SpacerSoundness.SelectionSoundWithPinChain",
+  "note": "spacer pairing and chain cleanup lemmas proved; full-family target unproved"
+ },
+ "score": {
+  "sats": 57143,
+  "preimage_bits": 113.56,
+  "quantum_bits": 50.19,
+  "collision_bits": 82.23,
+  "bits_confidence": "audited"
+ },
+ "diagnostics": {
+  "headroom": {
+   "ops": 1,
+   "script_bytes": 283,
+   "min_expected_solutions": 4.87
+  },
+  "cost_split": {
+   "fee_sats": 53930,
+   "gpu_sats": 3213,
+   "fee_share": 0.944
+  },
+  "sats_at_other_fee_rates": {
+   "1_sat_per_vB": 13999,
+   "5_sat_per_vB": 57143,
+   "20_sat_per_vB": 218933,
+   "50_sat_per_vB": 542513
+  }
+ },
+ "verdict": "accepted",
+ "seconds": 445.0,
+ "manifest_digest": "ffb31e8bd64490dd",
+ "submission": "spacer_d",
+ "design_sha256": "09c53b2c9b0aaef9cfa22091b72aa7477e6cb645c6e8028abdbc792d4a0ee319"
+}

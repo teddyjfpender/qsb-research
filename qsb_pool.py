@@ -43,6 +43,7 @@ class Builder:
         self.ops = 0
         self.max_stack = len(self.stack)
         self.hash_op, self.test_mode = hash_op, test_mode
+        self.destructive_chain = False
 
     def _op(self, name, count=1):
         self.script.append(OP[name])
@@ -123,15 +124,18 @@ class Builder:
             self._op("OP_EQUALVERIFY")
             self.stack.pop()
             self.stack.pop()
-        self._op("OP_PICK")                         # witness value v picks h_{m-v}
+        destructive = cleanup and self.destructive_chain
+        self._op("OP_ROLL" if destructive else "OP_PICK")
         self.stack.pop()
+        if destructive:
+            self.stack.pop()                         # reference level zero; all residual levels are cleared
         self.stack.append("hsel")
         self.script += push_num(1)
         self._op("OP_CHECKSIG")
         self._op("OP_DROP")
         self.stack.pop()
         if cleanup:
-            left = m
+            left = m - int(destructive)
             while left >= 2:
                 self._op("OP_2DROP")
                 del self.stack[-2:]
@@ -147,6 +151,9 @@ def build(cfg, hash_op=None, test_mode=False, pad_ops=0, pad_bytes=0, real_round
     ts = [cfg["t1"]] + ([cfg["t2"]] if "t2" in cfg else [])       # one or two digest rounds
     R = len(ts)
     bs = [cfg.get(f"b{i + 1}", 0) for i in range(R)]
+    spacer = cfg.get("spacer_selection", False)
+    if spacer and (not cfg.get("pool_deep") or any(bs)):
+        raise ValueError("spacer selection requires pool-first layout and no bonus selections")
     kbound = [cfg.get("k_pin", k)] + [cfg.get(f"k{i + 1}", k) for i in range(R)]
     chain_pin = cfg.get("chain_pin", 1)
     chains = [cfg.get(f"chain{i + 1}", cfg.get("chain_r", 1)) for i in range(R)]
@@ -180,6 +187,7 @@ def build(cfg, hash_op=None, test_mode=False, pad_ops=0, pad_bytes=0, real_round
     wit += ["keyp", "jp"] + (["lp"] if chain_pin > 1 else [])
 
     b = Builder(wit, hash_op, test_mode)
+    b.destructive_chain = cfg.get("destructive_chain", False)
     plan = {"pin": {}, "rounds": [{} for _ in range(R)]}
     if pad_bytes:
         b.push("pad", bytes(pad_bytes))
@@ -197,10 +205,17 @@ def build(cfg, hash_op=None, test_mode=False, pad_ops=0, pad_bytes=0, real_round
                 for v in range(chains[rd] - 1, -1, -1):
                     b.push(f"CL{rd}_{v}", hash160(pre_l[rd][v]))
     for rd in reversed(range(R)):
-        for i in reversed(range(n)):
-            b.push(f"C{rd}_{i}", comm[rd][i])
-        for i in reversed(range(n)):
-            b.push(f"D{rd}_{i}", dummies[rd][i])
+        if spacer:
+            b.push_n(f"Z{rd}", 0)                   # permanent boundary below this independent region
+            for i in reversed(range(n)):
+                b.push(f"D{rd}_{i}", dummies[rd][i])
+                b.push_n(f"F{rd}_{i}", 0)
+                b.push(f"C{rd}_{i}", comm[rd][i])
+        else:
+            for i in reversed(range(n)):
+                b.push(f"C{rd}_{i}", comm[rd][i])
+            for i in reversed(range(n)):
+                b.push(f"D{rd}_{i}", dummies[rd][i])
     if not pool_deep:
         for s in range(k, 0, -1):                                 # s=1 ends on top
             b.push(f"P{s}", pool[s - 1], nonmin=True)
@@ -232,6 +247,7 @@ def build(cfg, hash_op=None, test_mode=False, pad_ops=0, pad_bytes=0, real_round
         b.roll(f"j{rd}")
         d1 = b.depth("P1") - 1
         rp["P1"] = d1
+        rp["deepest_dummy"] = b.depth(f"D{rd}_{n-1}") - 1
         b.min_(d1 + kbound[rd + 1] - 1)
         if sign_j:                          # open CJ_s: commitment sits a constant offset above P_s
             b._op("OP_DUP")
@@ -253,15 +269,23 @@ def build(cfg, hash_op=None, test_mode=False, pad_ops=0, pad_bytes=0, real_round
         b.stack.append(f"nsig{rd}")
         remaining = [f"D{rd}_{i}" for i in range(n)]              # region order, rel 0 = topmost
         rp["A"], rp["m"] = [], []
+        if spacer:
+            rp["index_base"], rp["max_depth"] = [], []
         for i in range(t):
             b.roll(f"x{rd}_{i}")
             top_region = remaining[0]
             A = b.depth(top_region) - 1                           # items above region, excluding x'
             m = len(remaining)
-            b.min_(A + m - 1)
-            b._op("OP_DUP")
-            b.script += push_num(1 + m)
-            b._op("OP_ADD")
+            if spacer:
+                rp["index_base"].append(b.depth(f"C{rd}_{i}") - i)
+                rp["max_depth"].append(b.depth(f"Z{rd}") - 1)
+                b.min_(rp["max_depth"][-1])
+                b._op("OP_DUP")
+            else:
+                b.min_(A + m - 1)
+                b._op("OP_DUP")
+                b.script += push_num(1 + m)
+                b._op("OP_ADD")
             b._op("OP_ROLL")                                      # commitment -> top (reference: rel 0)
             cref = next(l for l in reversed(b.stack) if l.startswith(f"C{rd}_"))
             b.stack.remove(cref)
@@ -398,7 +422,10 @@ def spend(built, choice, tx=None, tamper=None):
         removed = []
         for i, a in enumerate(sub):
             rel = a - sum(1 for q in removed if q < a)
-            wit[f"x{rd}_{i}"] = tamper.get(f"x{rd}_{i}", built["plan"]["rounds"][rd]["A"][i] + rel)
+            rp = built["plan"]["rounds"][rd]
+            index = (rp["index_base"][i] + 3*a - 2*sum(q < a for q in removed)
+                     if built["cfg"].get("spacer_selection") else rp["A"][i] + rel)
+            wit[f"x{rd}_{i}"] = tamper.get(f"x{rd}_{i}", index)
             if i < built["ts"][rd]:
                 wit[f"pre{rd}_{i}"] = tamper.get(f"pre{rd}_{i}", built["pre"][rd][a])
             d = built["dummies"][rd][a]
@@ -417,8 +444,10 @@ def spend(built, choice, tx=None, tamper=None):
 # ---------------------------------------------------------------- analysis
 def p_der(L):
     """Exact probability that a uniform L-byte string passes IsValidSignatureEncoding."""
+    if not 9 <= L <= 73:
+        return 0.0
     f = lambda l: 0.5 if l == 1 else 0.5 - 1 / 512
-    return sum(2.0 ** -48 * f(lr) * f(L - 7 - lr) for lr in range(1, L - 6))
+    return sum(2.0 ** -48 * f(lr) * f(L - 7 - lr) for lr in range(1, L - 7))
 
 
 def analyse(cfg, P_bits, built, enc_count=3):
@@ -443,7 +472,9 @@ def analyse(cfg, P_bits, built, enc_count=3):
                * (1 if cfg.get("sign_lvl") else mm))
         S.append(att * math.prod(rp["bonus_options"]))
         t, bn = cfg[f"t{i}"], cfg.get(f"b{i}", 0)
-        E.append(math.comb(cfg["n"], t) * math.comb(cfg["n"] - t, bn) * base * 2.0 ** -P_bits)
+        # FindAndDelete depends on the union, not on which t of t+b positions
+        # were labeled signed. Count each distinct sighash once.
+        E.append(math.comb(cfg["n"], t + bn) * base * 2.0 ** -P_bits)
     p = [1 - math.exp(-e) for e in E]
     # per pinned attempt: pinning 2^P, then round i (expected 2^P p_i shots) reached with prob prod p_<i
     attempt = 1 + sum(math.prod(p[:i + 1]) for i in range(R))
@@ -615,7 +646,7 @@ def vectors_for(tag, cfg, rng):
         rp0 = rr["plan"]["rounds"][0]
         n_ = cfg["n"]
         # region order above the pool (bottom->top): C_{R-1}.., D_{R-1}.., ..., C_0, D_0; for R=1: C_0 (n), D_0 (n)
-        d_dummy = rp0["P1"] - n_ - 1                    # depth of the deepest dummy D0_{n-1}
+        d_dummy = rp0["deepest_dummy"]
         dsig = rr["dummies"][0][n_ - 1]
         kd = enc(recover(dsig[4], dsig[7], Z_SINGLE_BUG, 0))
         c2 = dict(c)

@@ -1,0 +1,40 @@
+{
+  "cases": [
+    {
+      "tier": "D",
+      "golden_bytes": true,
+      "lean_seeds": [
+        1,
+        97
+      ],
+      "schema_mutations": 7,
+      "unmeasured_rejected": true,
+      "conservative_hours": 4.656596742952944
+    },
+    {
+      "tier": "E",
+      "golden_bytes": true,
+      "lean_seeds": [
+        1,
+        97
+      ],
+      "schema_mutations": 7,
+      "unmeasured_rejected": true,
+      "conservative_hours": 4.739033880248336
+    },
+    {
+      "mutation": "no_hors_check",
+      "detected": true,
+      "reason": null
+    },
+    {
+      "mutation": "no_clamp",
+      "detected": true,
+      "reason": null
+    }
+  ],
+  "core_vectors": 160,
+  "core": "unexpected results: 0",
+  "lean": "replay /var/folders/b6/t439mlp94rj6rzwbkbyrl5qc0000gn/T/tmp7udwds1k/judge_vectors.txt: 160 vectors, 0 disagree with Core, 0 outside the model",
+  "probability_and_union_counts": true
+}

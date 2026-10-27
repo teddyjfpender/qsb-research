@@ -240,3 +240,40 @@ unranked and with full-family soundness still unproved. Close this research
 pass. Neither the two-hour nor thirty-minute objective was achieved; no global
 optimality claim is made. `CLOSEOUT.md`, updated candidates and proposal, CUDA
 renderer, raw measurements and `gpu_validation/report.json` complete the work.
+
+## Owner-requested ranked promotion (judge 3)
+
+The owner explicitly requested the remaining trusted builder, Lean, analyser,
+rate-table and ranked-leaderboard integration. This authorizes an organizer
+release beyond the ordinary solver sandbox; no existing historical acceptance
+is relabeled and no frozen security theorem is weakened.
+
+Implemented `qsb-design-v3` while retaining v2 input support. Spacer selection
+and destructive round-chain cleanup now live in the trusted Python and Lean
+builders. The published seed-1 bytes match exactly; two independent build seeds
+per candidate pass the Lean byte checker. The new full-family proof target
+explicitly includes residual pin-chain nonce signatures, and remains unproved:
+ranked labels stay `audited`. Original TS2 family proofs still compile.
+
+The judge now imports no proposal code. Exact rates are frozen from the 18
+real-DER GPU repeats, keyed by all semantic layout parameters; other new
+shapes are unmeasured and rejected. Scores use the existing conservative policy:
+D 4.657 h and E 4.739 h. Both the JSON and leaderboard also show the 4.413/4.498 h
+median-rate projections. The DER empty-integer probability bug and the bonus
+union overcount are corrected globally for this new release.
+
+Promotion regressions passed 160 Core/Lean vectors, schema and measurement
+rejection controls, and whole-builder mutations removing MIN or HORS checks.
+Seven crashed/truncated-verifier controls also pass. The full Lean regression
+passes 75 byte-identical builds and 658 consensus replays, including the prior
+real production spend; no new axioms or sorry proofs were added. Deep-ranked
+results and the final manifest are recorded in `judge/releases/qsb-judge-3.json`.
+
+Final deep runs under manifest `ffb31e8bd64490dd` accepted both spacers and
+revalidated `gpu_d_0` / `gpu_e_0` for comparison. D/E freedom audits cover
+101,352 / 101,592 runs, with 1,000 honest samples and 264 Core/Lean vectors each.
+All gates passed. The two spacers are the current revalidated frontier;
+historical runs retain their original manifest. The 36 existing red-team cases
+also passed. All three original D/E tier thresholds remain met after both
+counting corrections. This completes the requested ranked integration; the
+under-two-hour construction goal remains unmet, without an optimality claim.

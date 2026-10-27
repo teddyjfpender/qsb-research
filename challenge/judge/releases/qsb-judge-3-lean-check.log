@@ -1,0 +1,19 @@
+== 1. export Python builds and regenerate the Lean tier data
+   REAL_TS2 build == real/script.hex (the spend Core accepted)
+== 2. regenerate consensus vectors from the Python generators
+   Core on vectors/mechanism.txt: unexpected results: 0
+   Core on vectors/end_to_end.txt: unexpected results: 0
+edge vectors: 62 written with Core's verdicts; 0 differ from the intended verdict
+== 3. frozen statements, build and check every proof
+   frozen statement files unchanged
+   proofs OK (axioms: Lean.ofReduceBool + propext/Classical/Quot.sound)
+== 4. Lean builder == Python builder (bytes, op count, max stack)
+scripts vectors/scripts.json: 75 builds, 0 differ between Lean and Python
+== 5. Lean interpreter + Lean crypto vs Bitcoin Core verdicts
+replay vectors/edge.txt: 62 vectors, 0 disagree with Core, 0 outside the model
+replay vectors/mechanism.txt: 114 vectors, 0 disagree with Core, 0 outside the model
+replay vectors/end_to_end.txt: 131 vectors, 0 disagree with Core, 0 outside the model
+replay ../final_menu_vectors.txt: 118 vectors, 0 disagree with Core, 0 outside the model
+replay ../security_menu_vectors.txt: 232 vectors, 0 disagree with Core, 0 outside the model
+replay ../real/production_vector.txt: 1 vectors, 0 disagree with Core, 0 outside the model
+ALL CHECKS PASSED

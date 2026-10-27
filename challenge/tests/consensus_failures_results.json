@@ -1,0 +1,21 @@
+[
+  {
+    "returncode": 0,
+    "empty_output_rejected_by": [
+      "core",
+      "lean_replay",
+      "lean_builder"
+    ]
+  },
+  {
+    "returncode": 1,
+    "empty_output_rejected_by": [
+      "core",
+      "lean_replay",
+      "lean_builder"
+    ]
+  },
+  {
+    "nonzero_exit_with_success_text_rejected": true
+  }
+]

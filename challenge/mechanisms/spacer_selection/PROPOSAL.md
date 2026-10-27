@@ -1,14 +1,17 @@
 # Spacer selectors: a new independent-round script layout
 
-The prototype removes one opcode from every HORS selection without sharing
-secrets or dummy regions between rounds. The released byte artifacts are a
-**mechanism-track proposal**, not a ranked submission or a fully proved D/E
-family. They still use the existing DER predicate. Exact-layout RTX 4090
+The construction removes one opcode from every HORS selection without sharing
+secrets or dummy regions between rounds. It is now **promoted into qsb-judge-3**
+as the deep-accepted `spacer_d` and `spacer_e` submissions. Full-family soundness
+remains unproved and both are labeled `audited`. They use the existing DER
+predicate. Exact-layout RTX 4090
 measurements now project **4.412697 GPU-hours at tier D and 4.498099 at tier E**.
 The original 4.253431/4.759079 estimates were broadly supported but are
 superseded by these measured-rate projections. Neither is a completed
 production solve. The user's two-hour and thirty-minute targets remain unmet.
-See [CLOSEOUT.md](CLOSEOUT.md) for the measured submission and research closure.
+The ranked conservative scores are **4.656597 / 4.739034 hours**. See the
+[judge-3 release](../../judge/releases/qsb-judge-3.md) for integration and
+acceptance evidence, and [CLOSEOUT.md](CLOSEOUT.md) for measurement details.
 
 ## The trick and stack effect
 
@@ -155,10 +158,11 @@ No full production DER solve was performed. The scripts and their existing
 security audit status are unchanged. Raw runs, inputs, source digests and the
 reproducible report are in `gpu_validation/`.
 
-The measured mechanism proposal is retained for review, and this research pass
-is closed at the user's request. It is not ranked or promoted. No under-two-hour
-construction or proof of global optimality is claimed. The rented pod was
-terminated after the artifacts were retrieved.
+The initial measurement pass was closed at the user's request. The owner then
+requested trusted integration and ranked promotion, completed in judge-3.
+No under-two-hour construction or proof of global optimality is claimed. The
+rented pod was terminated after the artifacts were retrieved; promotion used
+the existing measured rates and did not rent another GPU.
 
 ## Validation and submission artifacts
 
@@ -179,10 +183,11 @@ terminated after the artifacts were retrieved.
 - Production `design_check` reports no unsafe dummy/commitment items for either
   candidate. Static checks and production/stand-in twin checks pass.
 - The local Lean pairing theorem uses only `propext` and `Quot.sound`, without
-  `sorry` or `native_decide`. Full-family soundness and a trusted Lean builder
-  have not been added.
+  `sorry` or `native_decide`. Judge-3 includes trusted Python/Lean builders and
+  local pairing/cleanup lemmas. Full-family soundness remains unproved.
 
-Reproduce from the repository root:
+The original proposal validation above is preserved in `validation.json`.
+Its historical search/check commands, run at commit `f502b91`, were:
 
 ```
 python3 challenge/mechanisms/spacer_selection/search.py --steps 100000 --finalists 500
@@ -191,11 +196,12 @@ cd lean
 lake env lean ../challenge/mechanisms/spacer_selection/Proof.lean
 ```
 
-`D_candidate.json` and `E_candidate.json` contain exact production and stand-in
-script bytes, configurations and clearly labeled estimates for mechanism-track
-review. `validation.json` records the audits and replay results. The frozen
-builder, judge, analyser, Lean model and Core harness are unchanged. The
-proposal has not been promoted into the design language or ranked leaderboard.
+`D_candidate.json` and `E_candidate.json` retain exact production and stand-in
+script bytes and original estimates, and now link to their ranked acceptances.
+Judge-3 builds those same bytes independently, with the production Core harness
+unchanged. Its new deep runs each pass three audit seeds, 1,000 honest-space
+samples and 264 Core/Lean vectors. See the release document for current
+reproduction commands and the manifest-pinned trusted implementation.
 
 This establishes a useful new selection construction. It does not establish
 the fundamentally cheaper puzzle needed to meet the requested time budget:

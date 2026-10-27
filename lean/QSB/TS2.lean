@@ -413,6 +413,7 @@ theorem inj_range_map {β : Type} (f : Nat → β) (n : Nat) : ((List.range n).m
 theorem isTS2_facts (p : Params) (h : isTS2 p = true) :
     p.ts.length = 1 ∧ p.bs = [0] ∧ p.signJ = false ∧ p.signLvl = false ∧ p.poolDeep = true := by
   simp only [isTS2, Bool.and_eq_true, beq_iff_eq, Bool.not_eq_true'] at h
+  have h := h.1.1
   exact ⟨h.1.1.1.1.1.1.1.1.1, h.1.1.1.1.1.1.1.1.2, h.1.1.1.1.1.2, h.1.1.1.1.2, h.1.1.2⟩
 
 theorem blocks_instrs (p : Params) (rnd : Rand) : (blocksTS2 p rnd).map CI.instr =

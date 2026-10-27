@@ -27,6 +27,37 @@ def load_table():
     return json.loads((HERE / "rates.json").read_text())
 
 
+def measured_profile(cfg, built):
+    """Exact measured design shapes only. Random script constants do not alter work size.
+
+    No submission supplies rates. These organizer-frozen records are pinned in
+    the judge manifest and require every semantic/layout parameter to match.
+    """
+    if not (cfg.get("spacer_selection") or cfg.get("destructive_chain")):
+        return None
+    key = {name: cfg.get(name, False) for name in
+           ("hash", "n", "k", "pool_deep", "force_comp", "chain_pin", "sign_j", "sign_lvl",
+            "spacer_selection", "destructive_chain")}
+    key["rounds"] = [dict(t=cfg[f"t{i}"], b=cfg.get(f"b{i}", 0), k=cfg[f"k{i}"],
+                          chain=cfg[f"chain{i}"]) for i in range(1, len(built["ts"])+1)]
+    profiles = json.loads((HERE / "exact_rates.json").read_text())
+    for profile in profiles["profiles"]:
+        if key == profile["shape"]:
+            if len(built["script"]) != profile["production_bytes"] or built["ops"] != profile["ops"]:
+                raise Unmeasured("measured layout's bytes/op count changed; remeasurement required")
+            return profile
+    raise Unmeasured("no exact-layout RTX 4090 measurements for this construction and parameter shape")
+
+
+def hours_at_rates(rates, analysed, P):
+    p = [1 - math.exp(-x) for x in analysed["E"]]
+    total, reach = 2 ** P / rates[0], 1.0
+    for i, success in enumerate(p):
+        total += reach * success * 2 ** P / rates[i+1]
+        reach *= success
+    return total / math.prod(p) / 3600
+
+
 def lookup(tbl, stage, hsh, k, m, e):
     """Conservative rate for shape (k, m): the measured rate at a grid point, otherwise the minimum over
     the corners of the grid cell that encloses (k, m), times the noise margin. (The rate is not strictly
@@ -58,6 +89,10 @@ def round_stream_bytes(built, r):
 
 
 def gpu_hours(cfg, built, analysed, P, tbl):
+    profile = measured_profile(cfg, built)
+    if profile is not None:
+        stage_rates = [min(s["der_rates"]) * profile["noise_margin"] for s in profile["stages"]]
+        return hours_at_rates(stage_rates, analysed, P), stage_rates
     hsh = cfg["hash"]
     R = len(built["ts"])
     pins = [lookup(tbl, "pin", hsh, cfg["k"], cfg["chain_pin"], e) for e in (1, 3)
@@ -81,13 +116,7 @@ def gpu_hours(cfg, built, analysed, P, tbl):
         if not opts:
             raise Unmeasured(f"round shape (hash={hsh}, k={k_}, m={m_}) is outside the measured grid")
         stage_rates.append(max(opts))
-    p = [1 - math.exp(-x) for x in analysed["E"]]
-    t = 2 ** P / stage_rates[0]
-    reach = 1.0
-    for i in range(R):
-        t += reach * p[i] * 2 ** P / stage_rates[i + 1]
-        reach *= p[i]
-    return t / math.prod(p) / 3600, stage_rates
+    return hours_at_rates(stage_rates, analysed, P), stage_rates
 
 
 def _has(tbl, stage, hsh, k, m, e):

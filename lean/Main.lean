@@ -43,7 +43,9 @@ def checkScripts (path : System.FilePath) : IO (Nat × Nat) := do
       n := ← getE pj "n", k := ← getE pj "k", ts := ← getE pj "ts", bs := ← getE pj "bs",
       kbound := ← getE pj "kbound", chainPin := ← getE pj "chain_pin", chains := ← getE pj "chains",
       hashOp := ((← getE pj "hash_op" : Nat)).toUInt8, poolDeep := ← getE pj "pool_deep",
-      forceComp := ← getE pj "force_comp", signJ := ← getE pj "sign_j", signLvl := ← getE pj "sign_lvl" }
+      forceComp := ← getE pj "force_comp", signJ := ← getE pj "sign_j", signLvl := ← getE pj "sign_lvl",
+      spacerSelection := (pj.getObjValAs? Bool "spacer_selection").toOption.getD false,
+      destructiveChain := (pj.getObjValAs? Bool "destructive_chain").toOption.getD false }
     let rnd : Build.Rand := { dummies := ← hexLists e "dummies", pre := ← hexLists e "pre",
                               preJ := ← hexLists e "pre_j", preL := ← hexLists e "pre_l" }
     let o : Build.Opts := { testMode := ← getE e "test_mode", realRoundPuzzle := ← getE e "real_round_puzzle",

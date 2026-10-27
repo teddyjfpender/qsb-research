@@ -14,3 +14,4 @@ import QSB.Gadget
 import QSB.TS2
 import QSB.TS2Instances
 import QSB.Frozen
+import QSB.SpacerSoundness

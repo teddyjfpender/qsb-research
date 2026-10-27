@@ -21,3 +21,5 @@ import QSB
 #print axioms QSB.TS2.ts2_family_sound
 #print axioms QSB.TS2Instances.realTs2_sound
 #print axioms QSB.TS2Instances.ts2_sound
+#print axioms QSB.SpacerSelection.selects_paired_dummy
+#print axioms QSB.DestructiveChain.same_selected_value_and_suffix

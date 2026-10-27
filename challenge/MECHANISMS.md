@@ -1,5 +1,11 @@
 # Mechanism track: getting objective feedback on new ideas without trusting their code
 
+The spacer-selection and destructive-round-chain mechanism has been promoted
+in [qsb-judge-3](judge/releases/qsb-judge-3.md). Its D/E shapes now have trusted
+builder/Lean support and frozen exact-layout rates; they use ordinary ranked
+submissions. Their full-family security remains `audited`. The general
+data-only provisional evaluator described below is still future work.
+
 Parameter search inside the design language is automated and saturated (`tools/optimize.py`). The
 remaining gains need new mechanisms, and new mechanisms are exactly where a judge is easiest to fool:
 - the new code could lie;

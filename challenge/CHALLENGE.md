@@ -71,7 +71,14 @@ if it costs no more *and* gives no fewer bits.
   - the cheapest deep-verified design at ≥ 85, 90, 100, 110, 116, 120 and 128 bits;
   - the hypervolume the frontier dominates.
 
-**Current board** (judge `qsb-judge-2`). There are 38 deep-verified frontier designs, all found by
+**Current release: `qsb-judge-3`.** Spacer D/E are integrated into the trusted
+builder, Lean port and ranked judge. Their measured-rate projections are
+4.413/4.498 hours; conservative scored costs are 4.657/4.739 hours. See the
+[release notes](judge/releases/qsb-judge-3.md) for schema fields, proof limits,
+measurement provenance and versioned leaderboard behavior. Current rows come
+only from runs revalidated under the new manifest.
+
+**Historical board** (judge `qsb-judge-2`). There were 38 deep-verified frontier designs, all found by
 `tools/optimize.py` (569 screens, 35 min). Excerpt:
 
 | sats | 2nd-pre bits | confidence | GPU-h | vB | design |
@@ -131,6 +138,10 @@ A directory containing exactly one file, `design.json`, of at most 4 KiB:
 | `rounds[i].chain` | hash-chain length in the round | 1–16 |
 
 Other rules:
+- Schema `qsb-design-v3` additionally requires `selection_layout` (`split` or
+  `spacer`) and Boolean `destructive_chain`. Spacer layouts require `pool_deep`,
+  unsigned indices/levels and no bonus selections. New layouts need exact GPU
+  measurements; the original grid is not silently reused for them.
 - There are 1 or 2 rounds.
 - `t + b ≤ n/2` in every round. This is the layout condition the Lean soundness proof needs.
 - **Rejected on sight:** unknown keys, missing keys, wrong types, booleans used as numbers, floats,

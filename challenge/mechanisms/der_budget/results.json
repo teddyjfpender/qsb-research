@@ -1,0 +1,535 @@
+{
+  "scope": "Conditional cost-model certificate, not a universal puzzle lower bound.",
+  "patterns": [
+    {
+      "length": 20,
+      "valid_patterns": 12,
+      "formula_patterns": 13,
+      "exact_probability": "390405/36893488147419103232",
+      "frozen_probability": "845835/73786976294838206464",
+      "exact_bits": 46.42538799564135,
+      "frozen_bits": 46.30998326635312,
+      "attempt_inflation": 1.0832789026779883,
+      "valid_integer_lengths": [
+        [
+          1,
+          12
+        ],
+        [
+          2,
+          11
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          4,
+          9
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          9,
+          4
+        ],
+        [
+          10,
+          3
+        ],
+        [
+          11,
+          2
+        ],
+        [
+          12,
+          1
+        ]
+      ],
+      "three_hit_rate_needed_billion_per_second": {
+        "two_hours": 39.37523015353618,
+        "half_hour": 157.50092061414472
+      },
+      "rejected_extra_pattern": {
+        "len_r": 13,
+        "len_s": 0
+      },
+      "rejected_example": "3011020d01010101010101010101010101020001"
+    },
+    {
+      "length": 32,
+      "valid_patterns": 24,
+      "formula_patterns": 25,
+      "exact_probability": "780555/36893488147419103232",
+      "frozen_probability": "1626135/73786976294838206464",
+      "exact_bits": 45.42585923361415,
+      "frozen_bits": 45.366984397281485,
+      "attempt_inflation": 1.0416530545573341,
+      "valid_integer_lengths": [
+        [
+          1,
+          24
+        ],
+        [
+          2,
+          23
+        ],
+        [
+          3,
+          22
+        ],
+        [
+          4,
+          21
+        ],
+        [
+          5,
+          20
+        ],
+        [
+          6,
+          19
+        ],
+        [
+          7,
+          18
+        ],
+        [
+          8,
+          17
+        ],
+        [
+          9,
+          16
+        ],
+        [
+          10,
+          15
+        ],
+        [
+          11,
+          14
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          13,
+          12
+        ],
+        [
+          14,
+          11
+        ],
+        [
+          15,
+          10
+        ],
+        [
+          16,
+          9
+        ],
+        [
+          17,
+          8
+        ],
+        [
+          18,
+          7
+        ],
+        [
+          19,
+          6
+        ],
+        [
+          20,
+          5
+        ],
+        [
+          21,
+          4
+        ],
+        [
+          22,
+          3
+        ],
+        [
+          23,
+          2
+        ],
+        [
+          24,
+          1
+        ]
+      ],
+      "three_hit_rate_needed_billion_per_second": {
+        "two_hours": 19.69404683602218,
+        "half_hour": 78.77618734408873
+      },
+      "rejected_extra_pattern": {
+        "len_r": 25,
+        "len_s": 0
+      },
+      "rejected_example": "301d021901010101010101010101010101010101010101010101010101020001"
+    }
+  ],
+  "validation": {
+    "core_vectors": 552,
+    "core_summary": "unexpected results: 0",
+    "lean_summary": "552 vectors, 0 disagree with Core, 0 outside the model",
+    "exhaustive_integer_prefixes": [
+      {
+        "length": 1,
+        "accepted": 128,
+        "total": 256
+      },
+      {
+        "length": 2,
+        "accepted": 32640,
+        "total": 65536
+      }
+    ]
+  },
+  "frozen_model": {
+    "stage_bounds": [
+      {
+        "stage": "pin",
+        "hash": "sha256",
+        "best_measured_shape": {
+          "stage": "pin",
+          "hash": "sha256",
+          "k": 128,
+          "m": 16,
+          "e": 1,
+          "rate": 14872000000.0,
+          "gpu": "NVIDIA GeForce RTX 4090"
+        },
+        "hours": 0.8921289519007147,
+        "exact_hours": "36028797018963968/40385189766796875"
+      },
+      {
+        "stage": "pin",
+        "hash": "sha1",
+        "best_measured_shape": {
+          "stage": "pin",
+          "hash": "sha1",
+          "k": 64,
+          "m": 16,
+          "e": 3,
+          "rate": 31225000000.0,
+          "gpu": "NVIDIA GeForce RTX 4090"
+        },
+        "hours": 0.8168936285892164,
+        "exact_hours": "288230376151711744/352837096611328125"
+      },
+      {
+        "stage": "pin",
+        "hash": "rmd",
+        "best_measured_shape": {
+          "stage": "pin",
+          "hash": "rmd",
+          "k": 128,
+          "m": 16,
+          "e": 3,
+          "rate": 25502000000.0,
+          "gpu": "NVIDIA GeForce RTX 4090"
+        },
+        "hours": 1.000215808669841,
+        "exact_hours": "144115188075855872/144084093479296875"
+      },
+      {
+        "stage": "rnd",
+        "hash": "sha256",
+        "best_measured_shape": {
+          "stage": "rnd",
+          "hash": "sha256",
+          "k": 96,
+          "m": 16,
+          "e": 1,
+          "rate": 14509000000.0,
+          "gpu": "NVIDIA GeForce RTX 4090"
+        },
+        "hours": 0.9144490848898911,
+        "exact_hours": "288230376151711744/315195652676953125"
+      },
+      {
+        "stage": "rnd",
+        "hash": "sha1",
+        "best_measured_shape": {
+          "stage": "rnd",
+          "hash": "sha1",
+          "k": 96,
+          "m": 16,
+          "e": 3,
+          "rate": 30977000000.0,
+          "gpu": "NVIDIA GeForce RTX 4090"
+        },
+        "hours": 0.8234336298769501,
+        "exact_hours": "288230376151711744/350034739526953125"
+      },
+      {
+        "stage": "rnd",
+        "hash": "rmd",
+        "best_measured_shape": {
+          "stage": "rnd",
+          "hash": "rmd",
+          "k": 96,
+          "m": 16,
+          "e": 3,
+          "rate": 25169000000.0,
+          "gpu": "NVIDIA GeForce RTX 4090"
+        },
+        "hours": 1.0134492253446017,
+        "exact_hours": "288230376151711744/284405344583203125"
+      }
+    ],
+    "three_stage_lower_bound_hours": 2.4637608883431166,
+    "exact_three_stage_lower_bound": "26928499352725973106688/10929834741729111328125",
+    "maximum_two_stage_classical_bits": 92.61996653270624,
+    "speedup_needed_even_in_relaxation": {
+      "two_hours": 1.2318804441715583,
+      "half_hour": 4.927521776686233
+    }
+  },
+  "corrected_probability": {
+    "stage_bounds": [
+      {
+        "stage": "pin",
+        "hash": "sha256",
+        "best_measured_shape": {
+          "stage": "pin",
+          "hash": "sha256",
+          "k": 128,
+          "m": 16,
+          "e": 1,
+          "rate": 14872000000.0,
+          "gpu": "NVIDIA GeForce RTX 4090"
+        },
+        "hours": 0.9292888478064126,
+        "exact_hours": "18014398509481984/19385144405859375"
+      },
+      {
+        "stage": "pin",
+        "hash": "sha1",
+        "best_measured_shape": {
+          "stage": "pin",
+          "hash": "sha1",
+          "k": 64,
+          "m": 16,
+          "e": 3,
+          "rate": 31225000000.0,
+          "gpu": "NVIDIA GeForce RTX 4090"
+        },
+        "hours": 0.8849236335827665,
+        "exact_hours": "144115188075855872/162856073232421875"
+      },
+      {
+        "stage": "pin",
+        "hash": "rmd",
+        "best_measured_shape": {
+          "stage": "pin",
+          "hash": "rmd",
+          "k": 128,
+          "m": 16,
+          "e": 3,
+          "rate": 25502000000.0,
+          "gpu": "NVIDIA GeForce RTX 4090"
+        },
+        "hours": 1.083512683657042,
+        "exact_hours": "72057594037927936/66503692226953125"
+      },
+      {
+        "stage": "rnd",
+        "hash": "sha256",
+        "best_measured_shape": {
+          "stage": "rnd",
+          "hash": "sha256",
+          "k": 96,
+          "m": 16,
+          "e": 1,
+          "rate": 14509000000.0,
+          "gpu": "NVIDIA GeForce RTX 4090"
+        },
+        "hours": 0.9525386825127141,
+        "exact_hours": "144115188075855872/151295890362890625"
+      },
+      {
+        "stage": "rnd",
+        "hash": "sha1",
+        "best_measured_shape": {
+          "stage": "rnd",
+          "hash": "sha1",
+          "k": 96,
+          "m": 16,
+          "e": 3,
+          "rate": 30977000000.0,
+          "gpu": "NVIDIA GeForce RTX 4090"
+        },
+        "hours": 0.8920082790012552,
+        "exact_hours": "144115188075855872/161562612666796875"
+      },
+      {
+        "stage": "rnd",
+        "hash": "rmd",
+        "best_measured_shape": {
+          "stage": "rnd",
+          "hash": "rmd",
+          "k": 96,
+          "m": 16,
+          "e": 3,
+          "rate": 25169000000.0,
+          "gpu": "NVIDIA GeForce RTX 4090"
+        },
+        "hours": 1.0978481647511575,
+        "exact_hours": "144115188075855872/131270600710546875"
+      }
+    ],
+    "three_stage_lower_bound_hours": 2.6689401915852766,
+    "exact_three_stage_lower_bound": "13464249676362986553344/5044792580520732421875",
+    "maximum_two_stage_classical_bits": 92.8507759912827,
+    "speedup_needed_even_in_relaxation": {
+      "two_hours": 1.3344700957926383,
+      "half_hour": 5.337880383170553
+    }
+  },
+  "accepted_candidates": [
+    {
+      "name": "gpu_d_0",
+      "estimates": {
+        "frozen": {
+          "hours": 5.329748480913937,
+          "security": {
+            "S": [
+              1152,
+              1728
+            ],
+            "E": [
+              3.5145305562142637,
+              5.271795834321396
+            ],
+            "p": [
+              0.9702382288462806,
+              0.9948656182102095
+            ],
+            "honest_shots_log2": 46.971603638170244,
+            "preimage_bits": 115.17614068823868,
+            "collision_bits": 82.69196951222065,
+            "collision_birthday": 82.69196951222065,
+            "collision_fixed": 98.73857503776277,
+            "quantum_query_bits": 51.50310784339818
+          },
+          "stage_rates": [
+            6081330000.0,
+            8006332607.17199,
+            7877267617.6293545
+          ]
+        },
+        "corrected": {
+          "hours": 5.5668730140166645,
+          "security": {
+            "S": [
+              1152,
+              1728
+            ],
+            "E": [
+              3.373993424046374,
+              5.060990136069561
+            ],
+            "p": [
+              0.9657474212126296,
+              0.9936607203449762
+            ],
+            "honest_shots_log2": 47.03393660640923,
+            "preimage_bits": 115.35276519723666,
+            "collision_bits": 82.7652621165584,
+            "collision_birthday": 82.7652621165584,
+            "collision_fixed": 98.88576212859442,
+            "quantum_query_bits": 51.59142009789718
+          },
+          "stage_rates": [
+            6081330000.0,
+            8006332607.17199,
+            7877267617.6293545
+          ]
+        }
+      }
+    },
+    {
+      "name": "gpu_e_0",
+      "estimates": {
+        "frozen": {
+          "hours": 5.573731099420119,
+          "security": {
+            "S": [
+              396,
+              1584
+            ],
+            "E": [
+              1.5198388308340525,
+              6.07935532333621
+            ],
+            "p": [
+              0.7812528605946544,
+              0.9977103477373926
+            ],
+            "honest_shots_log2": 47.082977760464324,
+            "preimage_bits": 116.84223995168523,
+            "collision_bits": 83.10084020339025,
+            "collision_birthday": 83.10084020339025,
+            "collision_fixed": 100.13439011052796,
+            "quantum_query_bits": 52.128638725482034
+          },
+          "stage_rates": [
+            8144635000.0,
+            5547609309.581595,
+            9613857419.513092
+          ]
+        },
+        "corrected": {
+          "hours": 5.845654996977662,
+          "security": {
+            "S": [
+              396,
+              1584
+            ],
+            "E": [
+              1.4590643441063307,
+              5.836257376425323
+            ],
+            "p": [
+              0.7675463303435042,
+              0.9970802502733461
+            ],
+            "honest_shots_log2": 47.15251452372773,
+            "preimage_bits": 117.01886446068322,
+            "collision_bits": 83.17780094385364,
+            "collision_birthday": 83.17780094385364,
+            "collision_fixed": 100.28157720135962,
+            "quantum_query_bits": 52.21695097998103
+          },
+          "stage_rates": [
+            8144635000.0,
+            5547609309.581595,
+            9613857419.513092
+          ]
+        }
+      }
+    }
+  ],
+  "reference_sha256": "6cf82b295f7fcc3ecdb2db24603cd7c755af2588a21e69ea69c523528660a6d8"
+}

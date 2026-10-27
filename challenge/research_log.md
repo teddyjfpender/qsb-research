@@ -77,3 +77,40 @@ At existing measured compression rates, three independent DER hits already cost
 about two hours before EC and retries; this does not prove an impossibility for
 new predicates, faster kernels, or other constructions. Future work must test
 such changes rather than present more small parameter gains as meeting the goal.
+
+## DER pattern count and GPU-budget certificate
+
+Hypothesis: an exact enumeration of the DER length patterns and an optimistic
+relaxation of the frozen GPU table can determine whether any parameter choice,
+including mixed puzzle hashes, could meet the requested two-hour budget.
+Inspection found that `qsb_pool.p_der(L)` includes `len_R = L - 7`, which makes
+`len_S = 0`. Core, the local Python predicate, the Lean interpreter, and the CUDA
+predicate reject that pattern. Reproduce the discrepancy outside trusted files,
+then report both the frozen-model bound and the corrected-probability bound.
+
+Result: the discrepancy is confirmed. The 20-byte predicate has 12 valid
+integer-length patterns, not 13; the 32-byte predicate has 24, not 25. Expected
+attempts increase by 8.3279% and 4.1653%, respectively. The independent Python
+predicate checks all 65,792 one-/two-byte integer prefixes; 552 concrete
+positive/negative pattern vectors pass Core and agree with Lean. Local Lean
+lemmas prove nonempty S, the length endpoint, and a cleared-denominator retry
+inequality without sorry or native_decide. Trusted files remain untouched.
+
+Recomputing the two accepted, bonus-free designs with exact DER probability
+gives **5.566873 GPU-h for gpu_d_0** and **5.845655 GPU-h for gpu_e_0**. Both still
+meet all three respective security thresholds. Previous 5.329748/5.573731 values
+are historical frozen-model estimates; they are not the corrected estimates.
+
+An exact-rational optimistic relaxation of the entire frozen RTX 4090 rate
+table gives **2.668940 GPU-h** for three stages after correcting probability
+(2.463761 with the frozen probability). It independently chooses each stage's
+best shape/hash, ignores size/op limits and extra sighash work, and assumes no
+retries. Therefore parameter tuning or mixed hashes within that cost model
+cannot meet two hours. This is not a universal bound on new predicates,
+constructions, kernels, or hardware. The earlier compression-only illustrations
+also used the erroneous probability and must not be treated as exact bounds.
+
+Artifacts: `mechanisms/der_budget/{check.py,results.json,vectors.txt,Proof.lean,PROPOSAL.md}`.
+No new GPU measurement or ranked submission was made for this accounting
+finding. The requested under-two-hour and under-thirty-minute upper-tier
+solutions have not yet been demonstrated.

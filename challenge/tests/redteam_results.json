@@ -1,0 +1,182 @@
+[
+ {
+  "case": "baseline A_TS4 is accepted",
+  "ok": true,
+  "detail": "accepted, score {'sats': 50696, 'preimage_bits': 89.73, 'quantum_bits': 35.96, 'collision_bits': 65.21, 'bits_confidence': 'audited'}"
+ },
+ {
+  "case": "baseline L_lean is accepted",
+  "ok": true,
+  "detail": "accepted, score {'sats': 21014, 'preimage_bits': 89.73, 'quantum_bits': 38.57, 'collision_bits': 65.39, 'bits_confidence': 'audited'}"
+ },
+ {
+  "case": "baseline E_116 is accepted",
+  "ok": true,
+  "detail": "accepted, score {'sats': 57258, 'preimage_bits': 116.18, 'quantum_bits': 52.0, 'collision_bits': 82.63, 'bits_confidence': 'audited'}"
+ },
+ {
+  "case": "claimed metric in design.json",
+  "ok": true,
+  "detail": "rejected at schema: unknown keys ['security_bits'] (claims and metrics are not accepted)"
+ },
+ {
+  "case": "string number",
+  "ok": true,
+  "detail": "rejected at schema: n must be an integer in [4, 300], got '64'"
+ },
+ {
+  "case": "boolean posing as integer",
+  "ok": true,
+  "detail": "rejected at schema: n must be an integer in [4, 300], got True"
+ },
+ {
+  "case": "float parameter",
+  "ok": true,
+  "detail": "rejected at schema: n must be an integer in [4, 300], got 64.0"
+ },
+ {
+  "case": "negative parameter",
+  "ok": true,
+  "detail": "rejected at schema: k must be an integer in [1, 300], got -1"
+ },
+ {
+  "case": "v1 design with a 'track' key (bands no longer exist)",
+  "ok": true,
+  "detail": "rejected at schema: unknown keys ['track'] (claims and metrics are not accepted)"
+ },
+ {
+  "case": "wrong schema version",
+  "ok": true,
+  "detail": "rejected at schema: schema must be 'qsb-design-v2'"
+ },
+ {
+  "case": "oversized file (> 4 KiB)",
+  "ok": true,
+  "detail": "rejected at schema: design.json larger than 4 KiB"
+ },
+ {
+  "case": "extra key inside a round",
+  "ok": true,
+  "detail": "rejected at schema: round 1 must have exactly the keys ['b', 'chain', 'k', 't']"
+ },
+ {
+  "case": "three rounds",
+  "ok": true,
+  "detail": "rejected at schema: rounds must be a list of 1 or 2 round objects"
+ },
+ {
+  "case": "sign_j without pool-first layout",
+  "ok": true,
+  "detail": "rejected at schema: sign_j / sign_lvl are implemented for the pool-first layout only"
+ },
+ {
+  "case": "t > n/2 (breaks the proof's layout condition)",
+  "ok": true,
+  "detail": "rejected at schema: round 1: t + b must be at most n/2 (layout condition of the soundness proof)"
+ },
+ {
+  "case": "not JSON",
+  "ok": true,
+  "detail": "rejected at schema: not JSON: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)"
+ },
+ {
+  "case": "real TS2 (83.7 bits) is admissible and scored as a vector",
+  "ok": true,
+  "detail": "accepted, score {'sats': 51239, 'preimage_bits': 83.73, 'quantum_bits': 34.96, 'collision_bits': 65.05, 'bits_confidence': 'proven'}"
+ },
+ {
+  "case": "design below the admissibility floor (78.5 bits)",
+  "ok": true,
+  "detail": "rejected at security: 2nd-preimage 78.56 < admissibility floor 80.0"
+ },
+ {
+  "case": "honest spender has < 1 expected solution",
+  "ok": true,
+  "detail": "rejected at security: expected honest solutions 0.00 < 1.0"
+ },
+ {
+  "case": "op count over 201",
+  "ok": true,
+  "detail": "rejected at static: static op count 248 (> 201); test-mode: static op count 248 (> 201)"
+ },
+ {
+  "case": "script over 10,000 bytes",
+  "ok": true,
+  "detail": "rejected at static: script is 11553 bytes (> 10,000); test-mode: script is 11889 bytes (> 10,000)"
+ },
+ {
+  "case": "unmeasured stage shape (pool of 4)",
+  "ok": true,
+  "detail": "rejected at cost: pinning shape (hash=sha256, k=4, m=8) is outside the measured grid"
+ },
+ {
+  "case": "honest analyser on an unsigned design: audit agrees",
+  "ok": true,
+  "detail": "true"
+ },
+ {
+  "case": "analyser mutated to pretend the pool index and level are signed (undercounts S by k*m)",
+  "ok": true,
+  "detail": "false"
+ },
+ {
+  "case": "analyser mutated to ignore key encodings in pinning-free round (S/3)",
+  "ok": true,
+  "detail": "false"
+ },
+ {
+  "case": "builder mutated: HORS preimage check removed (anyone can select dummies)",
+  "ok": true,
+  "detail": "false"
+ },
+ {
+  "case": "builder mutated: OP_SIZE 33 check removed (round accepts every encoding)",
+  "ok": true,
+  "detail": "false"
+ },
+ {
+  "case": "builder mutated: dummies collide, so honest subsets alias (E overstated)",
+  "ok": true,
+  "detail": "false"
+ },
+ {
+  "case": "honest search space of the unmodified builder is distinct",
+  "ok": true,
+  "detail": "true"
+ },
+ {
+  "case": "builder mutated: OP_MIN clamps removed (indices reach past their bounds)",
+  "ok": true,
+  "detail": "false"
+ },
+ {
+  "case": "judge FindAndDelete == reference FindAndDelete",
+  "ok": true,
+  "detail": "equivalent"
+ },
+ {
+  "case": "audit interpreter mutated to under-accept: Core cross-check catches it",
+  "ok": true,
+  "detail": "36 realised audit verdicts contradict Core"
+ },
+ {
+  "case": "editing a judge constant (fee = 0) is detected by the manifest",
+  "ok": true,
+  "detail": "['challenge/judge/constants.json']"
+ },
+ {
+  "case": "score does not depend on the judge seed",
+  "ok": true,
+  "detail": "[{\"sats\": 21014, \"preimage_bits\": 89.73, \"quantum_bits\": 38.57, \"collision_bits\": 65.39, \"bits_confidence\": \"audited\"}, {\"sats\": 21014, \"preimage_bits\": 89.73, \"quantum_bits\": 38.57, \"collision_bits\": 65.39, \"bits_confidence\": \"audited\"}, \"accepted\", \"accepted\"]"
+ },
+ {
+  "case": "screen mode gives the ranked score (and is marked unranked)",
+  "ok": true,
+  "detail": "[\"screened\", {\"sats\": 21014, \"preimage_bits\": 89.73, \"quantum_bits\": 38.57, \"collision_bits\": 65.39, \"bits_confidence\": \"audited\"}, \"accepted\", {\"sats\": 21014, \"preimage_bits\": 89.73, \"quantum_bits\": 38.57, \"collision_bits\": 65.39, \"bits_confidence\": \"audited\"}]"
+ },
+ {
+  "case": "leaderboard: Pareto frontier over (sats, bits); dominated and later exact ties excluded; non-dominated standard runs pending",
+  "ok": true,
+  "detail": "true"
+ }
+]

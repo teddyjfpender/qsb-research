@@ -1,0 +1,1 @@
+{"kernel":"pool2","chain":1,"gpu":"NVIDIA GeForce RTX 5090","K":64,"MZ":8,"enc":1,"tpb":128,"hash":"sha","gate":"zeros","N":28,"extra_blocks":0,"seconds":15.07,"candidates":913571840,"z_per_s":6.0616e+07,"shots_per_s":7.7589e+09,"hits":453,"expected_hits":435.6}

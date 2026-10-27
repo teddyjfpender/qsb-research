@@ -1,0 +1,154 @@
+{
+ "judge": "qsb-judge-1",
+ "seed": 2860020651,
+ "mode": "standard",
+ "ranked": true,
+ "gates": {
+  "integrity": {
+   "ok": true,
+   "changed": []
+  },
+  "schema": {
+   "ok": true,
+   "track": "t116"
+  },
+  "build": {
+   "ok": true
+  },
+  "static": {
+   "ok": true,
+   "ops": 200,
+   "bytes": 9199,
+   "test_bytes": 9325,
+   "max_stack": 635,
+   "puzzle_substitutions": 6,
+   "design_check_findings": 0
+  },
+  "security": {
+   "ok": true,
+   "P": 45.367,
+   "preimage_bits": 116.35,
+   "quantum_bits": 52.38,
+   "collision_bits": 82.65,
+   "E": [
+    1.788,
+    2.682
+   ],
+   "S": [
+    768,
+    1152
+   ]
+  },
+  "audit": {
+   "ok": true,
+   "seeds": 1,
+   "runs": 13858,
+   "stages": [
+    {
+     "stage": 0,
+     "z_views": 64,
+     "levels": 1,
+     "encodings": 3,
+     "measured": 384,
+     "claimed": 384,
+     "ok": true
+    },
+    {
+     "stage": 1,
+     "z_views": 64,
+     "levels": 2,
+     "encodings": 3,
+     "measured": 768,
+     "claimed": 768,
+     "ok": true
+    },
+    {
+     "stage": 2,
+     "z_views": 64,
+     "levels": 3,
+     "encodings": 3,
+     "measured": 1152,
+     "claimed": 1152,
+     "ok": true
+    }
+   ],
+   "honest_space": {
+    "ok": true,
+    "samples": 150
+   }
+  },
+  "consensus": {
+   "ok": true,
+   "vectors": 102,
+   "core": "unexpected results: 0",
+   "lean_replay": "replay /var/folders/5x/7hym3yzn05z0k_z3g1m17brc0000gn/T/tmpyufricph/judge_vectors.txt: 102 vectors, 0 disagree with Core, 0 outside the model",
+   "lean_builder": "Lean builder rebuilt identical bytes"
+  },
+  "cost": {
+   "ok": true,
+   "gpu_hours_rtx4090": 6.175,
+   "stage_rates": [
+    5.842,
+    7.788,
+    7.611
+   ],
+   "script_bytes": 9199,
+   "scriptsig_bytes": 1007,
+   "total_vbytes": 10266
+  }
+ },
+ "design": {
+  "schema": "qsb-design-v1",
+  "track": "t116",
+  "hash": "sha256",
+  "n": 130,
+  "k": 64,
+  "pool_deep": true,
+  "force_comp": false,
+  "chain_pin": 1,
+  "sign_j": false,
+  "sign_lvl": false,
+  "rounds": [
+   {
+    "t": 7,
+    "b": 0,
+    "k": 64,
+    "chain": 2
+   },
+   {
+    "t": 7,
+    "b": 0,
+    "k": 64,
+    "chain": 3
+   }
+  ]
+ },
+ "score_total_sats": 55591,
+ "diagnostics": {
+  "headroom": {
+   "ops": 1,
+   "script_bytes": 801,
+   "preimage_bits": 0.35,
+   "quantum_bits": 2.38,
+   "collision_bits": 2.65,
+   "min_expected_solutions": 1.79
+  },
+  "cost_split": {
+   "fee_sats": 51330,
+   "gpu_sats": 4261,
+   "fee_share": 0.923
+  },
+  "score_at_other_fee_rates": {
+   "1_sat_per_vB": 14527,
+   "5_sat_per_vB": 55591,
+   "20_sat_per_vB": 209581,
+   "50_sat_per_vB": 517561
+  }
+ },
+ "proof": "not yet covered by a Lean soundness theorem (audit + Core evidence only)",
+ "verdict": "accepted",
+ "seconds": 86.7,
+ "manifest_digest": "ac72bc1dced0ed04",
+ "submission": "opt_t116",
+ "design_sha256": "aa55809e9d6a2dfc79c1c73f99aa98e55c699c6da861d644bde0f504a72d28f3"
+}

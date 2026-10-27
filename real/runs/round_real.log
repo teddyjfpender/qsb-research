@@ -1,0 +1,21 @@
+round mode: midBytes=7744 rp=25 t=517
+gtable: cache hit
+[0 s] candidates 4194304 shots 5.369e+08
+[60 s] candidates 2516582400 shots 3.221e+11
+[120 s] candidates 5028970496 shots 6.437e+11
+[180 s] candidates 7541358592 shots 9.653e+11
+[240 s] candidates 10053746688 shots 1.287e+12
+[300 s] candidates 12566134784 shots 1.608e+12
+[360 s] candidates 15078522880 shots 1.930e+12
+[420 s] candidates 17590910976 shots 2.252e+12
+[480 s] candidates 20103299072 shots 2.573e+12
+[541 s] candidates 22615687168 shots 2.895e+12
+[601 s] candidates 25128075264 shots 3.216e+12
+[661 s] candidates 27640463360 shots 3.538e+12
+[721 s] candidates 30152851456 shots 3.860e+12
+[781 s] candidates 32665239552 shots 4.181e+12
+[841 s] candidates 35177627648 shots 4.503e+12
+[901 s] candidates 37690015744 shots 4.824e+12
+[961 s] candidates 40202403840 shots 5.146e+12
+[1021 s] candidates 42714791936 shots 5.467e+12
+[1081 s] candidates 45227180032 shots 5.789e+12

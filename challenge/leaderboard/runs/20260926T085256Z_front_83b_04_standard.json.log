@@ -1,0 +1,2 @@
+[JUDGE] {'hash': 'sha1', 'n': 48, 'k': 16, 'pool_deep': True, 'force_comp': False, 'chain_pin': 4, 'sign_j': False, 'sign_lvl': False, 't1': 13, 'b1': 0, 'k1': 16, 'chain1': 6, 'chain_r': 6, 'seed': 3473452595}: ops=188 production bytes=2001 test-mode bytes=2211 max stack=159
+[JUDGE] designer check: 0 unsafe region items

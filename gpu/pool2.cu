@@ -48,6 +48,7 @@ extern "C" {
 __constant__ uint32_t cMid[8];
 __constant__ uint8_t cSuffix[128];
 __constant__ int cSufLen, cSeqOff, cLtOff, cTotalLen, cZeros;
+__constant__ int cChain;          /* hash-chain OR levels per key (1 = plain puzzle) */
 __constant__ uint32_t cXW[16];
 __constant__ uint64_t cJX[KMAX][4], cJY[KMAX][4];
 #ifdef ROUND_MODE
@@ -215,16 +216,26 @@ __device__ __forceinline__ int gate_rmd(const uint32_t s[5], uint32_t *w0) {
     return der_ok(h, 20);
 }
 
+template <int GATE>
+__device__ __forceinline__ int gate_sha1(const uint32_t hs[5], uint32_t *w0) {
+    *w0 = hs[0];
+    if (!GATE) { uint32_t lz = hs[0] ? __clz(hs[0]) : 32 + __clz(hs[1]); return lz >= (uint32_t)cZeros; }
+    if ((hs[0] >> 24) != 0x30) return 0;
+    uint8_t h[20];
+    for (int i = 0; i < 5; i++) { h[4*i] = hs[i] >> 24; h[4*i+1] = hs[i] >> 16; h[4*i+2] = hs[i] >> 8; h[4*i+3] = hs[i]; }
+    return der_ok(h, 20);
+}
+
 /* hash (prefix || X || Y) for enc 0 (33 B, prefix 02|par), 1 (65 B, 04), 2 (65 B, 06|par).
  * X, Y canonical. Returns gate bitmask over encodings; w0 receives each first hash word. */
 template <int HASH, int GATE, int ENC>
-__device__ __forceinline__ int shots(const uint64_t X[4], const uint64_t Y[4], uint32_t w0[3]) {
+__device__ __forceinline__ unsigned long long shots(const uint64_t X[4], const uint64_t Y[4], uint32_t w0[3]) {
     const uint32_t *x32 = (const uint32_t *)X, *y32 = (const uint32_t *)Y;
     uint32_t S[16];                          /* big-endian words of X||Y */
 #pragma unroll
     for (int k = 0; k < 8; k++) { S[k] = x32[7 - k]; S[8 + k] = y32[7 - k]; }
     const uint32_t par = y32[0] & 1;
-    int mask = 0;
+    unsigned long long mask = 0;
 #pragma unroll
     for (int e = 0; e < ENC; e++) {
         const uint32_t pfx = e == 0 ? 2 + par : (e == 1 ? 4 : 6 + par);
@@ -236,7 +247,7 @@ __device__ __forceinline__ int shots(const uint64_t X[4], const uint64_t Y[4], u
             w[8] = (S[7] << 24) | 0x00800000u;
 #pragma unroll
             for (int i = 9; i < 16; i++) w[i] = 0;
-            if (HASH == 0) w[15] = 33 * 8; else w[14] = 33 * 8;
+            if (HASH != 1) w[15] = 33 * 8; else w[14] = 33 * 8;
         } else {
 #pragma unroll
             for (int i = 1; i < 16; i++) w[i] = (S[i - 1] << 24) | (S[i] >> 8);
@@ -251,7 +262,45 @@ __device__ __forceinline__ int shots(const uint64_t X[4], const uint64_t Y[4], u
                 w2[15] = 65 * 8;
                 sha256_fast(hs, w2);
             }
-            if (gate_sha<HASH, GATE>(hs, &w0[e])) mask |= 1 << e;
+            if (gate_sha<HASH, GATE>(hs, &w0[e])) mask |= 1ull << (3 + e * 16);   /* level 0 bit */
+            /* hash-chain OR: level L+1 = SHA256(level L), 32-byte input, one block each */
+            for (int L = 1; L < cChain; L++) {
+                uint32_t wc[16];
+#pragma unroll
+                for (int i = 0; i < 8; i++) wc[i] = hs[i];
+                wc[8] = 0x80000000u;
+#pragma unroll
+                for (int i = 9; i < 15; i++) wc[i] = 0;
+                wc[15] = 256;
+                sha256_init(hs); sha256_fast(hs, wc);
+                uint32_t dummy;
+                if (gate_sha<HASH, GATE>(hs, &dummy)) mask |= 1ull << (3 + e * 16 + L);   /* level L bit */
+            }
+        } else if (HASH == 2) {           /* OP_SHA1: big-endian like SHA-256, 20-byte output */
+            uint32_t hs[5] = {0x67452301u, 0xEFCDAB89u, 0x98BADCFEu, 0x10325476u, 0xC3D2E1F0u};
+            sha1_fast(hs, w);
+            if (e) {
+                uint32_t w2[16];
+                w2[0] = (S[15] << 24) | 0x00800000u;
+#pragma unroll
+                for (int i = 1; i < 16; i++) w2[i] = 0;
+                w2[15] = 65 * 8;
+                sha1_fast(hs, w2);
+            }
+            if (gate_sha1<GATE>(hs, &w0[e])) mask |= 1ull << (3 + e * 16);
+            for (int L = 1; L < cChain; L++) {  /* level L+1 = SHA1(level L), 20-byte input */
+                uint32_t wc[16];
+#pragma unroll
+                for (int i = 0; i < 5; i++) wc[i] = hs[i];
+                wc[5] = 0x80000000u;
+#pragma unroll
+                for (int i = 6; i < 15; i++) wc[i] = 0;
+                wc[15] = 160;
+                hs[0] = 0x67452301u; hs[1] = 0xEFCDAB89u; hs[2] = 0x98BADCFEu; hs[3] = 0x10325476u; hs[4] = 0xC3D2E1F0u;
+                sha1_fast(hs, wc);
+                uint32_t dummy;
+                if (gate_sha1<GATE>(hs, &dummy)) mask |= 1ull << (3 + e * 16 + L);
+            }
         } else {
 #pragma unroll
             for (int i = 0; i < 16; i++) w[i] = __byte_perm(w[i], 0, 0x0123);
@@ -265,7 +314,20 @@ __device__ __forceinline__ int shots(const uint64_t X[4], const uint64_t Y[4], u
                 w2[14] = 65 * 8;
                 ripemd160_fast(s, w2);
             }
-            if (gate_rmd<GATE>(s, &w0[e])) mask |= 1 << e;
+            if (gate_rmd<GATE>(s, &w0[e])) mask |= 1ull << (3 + e * 16);
+            /* hash-chain OR with RIPEMD-160: level L+1 = RIPEMD160(level L), 20-byte input */
+            for (int L = 1; L < cChain; L++) {
+                uint32_t wc[16];
+#pragma unroll
+                for (int i = 0; i < 5; i++) wc[i] = s[i];          /* output bytes are LE words already */
+                wc[5] = 0x80;
+#pragma unroll
+                for (int i = 6; i < 16; i++) wc[i] = 0;
+                wc[14] = 160;
+                ripemd160_init(s); ripemd160_fast(s, wc);
+                uint32_t dummy;
+                if (gate_rmd<GATE>(s, &dummy)) mask |= 1ull << (3 + e * 16 + L);
+            }
         }
     }
     return mask;
@@ -343,9 +405,9 @@ __global__ void __launch_bounds__(128) pool2_kernel(uint32_t seq, uint32_t lt_ba
             fcanon(x3); fcanon(y3);
             uint32_t w0[3] = {0, 0, 0};
 #if defined(ABL_NOHASH)          /* ablation: EC + loop only; gate on x bits so work is not optimized away */
-            int mask = ((uint32_t)(x3[3] >> 32) >> (32 - cZeros)) == 0 ? 1 : 0;
+            unsigned long long mask = ((uint32_t)(x3[3] >> 32) >> (32 - cZeros)) == 0 ? (1ull << 3) : 0;
 #else
-            int mask = shots<HASH, GATE, ENC>(x3, y3, w0);
+            unsigned long long mask = shots<HASH, GATE, ENC>(x3, y3, w0);
 #endif
             if (dbg && tid == 0 && m == 0) {
                 uint64_t *o = dbg + (2 * j + sg) * 12;
@@ -353,11 +415,12 @@ __global__ void __launch_bounds__(128) pool2_kernel(uint32_t seq, uint32_t lt_ba
                 for (int e = 0; e < ENC; e++) o[8 + e] = w0[e];
             }
             while (mask) {
-                int e = __ffs(mask) - 1; mask &= mask - 1;
+                int bit = __ffsll(mask) - 1; mask &= mask - 1;
+                int e = (bit - 3) / 16, L = (bit - 3) % 16;       /* encoding, chain level (0-based) */
                 uint32_t pos = atomicAdd(hit_cnt, 1);
                 if (pos < max_hits) {
                     hits[4 * pos] = seq; hits[4 * pos + 1] = lt0 + m;
-                    hits[4 * pos + 2] = j + 1; hits[4 * pos + 3] = sg | (e << 1);
+                    hits[4 * pos + 2] = j + 1; hits[4 * pos + 3] = sg | (e << 1) | (L << 3);
                 }
             }
         }
@@ -428,17 +491,18 @@ static void launch(dim3 g, dim3 b, uint32_t seq, uint32_t lt, int extra, int K, 
     pool2_kernel<HASH, GATE, ENC><<<g, b>>>(seq, lt, extra, K, MZ, gx, gy, hc, h, mh, dbg);
 }
 static launch_fn pick(int hash, int gate, int enc) {
-    static launch_fn T[2][2][2] = {
+    static launch_fn T[3][2][2] = {
         {{launch<0, 0, 1>, launch<0, 0, 3>}, {launch<0, 1, 1>, launch<0, 1, 3>}},
-        {{launch<1, 0, 1>, launch<1, 0, 3>}, {launch<1, 1, 1>, launch<1, 1, 3>}}};
+        {{launch<1, 0, 1>, launch<1, 0, 3>}, {launch<1, 1, 1>, launch<1, 1, 3>}},
+        {{launch<2, 0, 1>, launch<2, 0, 3>}, {launch<2, 1, 1>, launch<2, 1, 3>}}};
     return T[hash][gate][enc == 3];
 }
 
 static double now() { struct timespec t; clock_gettime(CLOCK_MONOTONIC, &t); return t.tv_sec + 1e-9 * t.tv_nsec; }
 
 int main(int argc, char **argv) {
-    if (argc < 9) { fprintf(stderr, "usage: %s pinning.bin K sha|rmd zeros|der N seconds extra_blocks hits_out [enc] [seq]\n", argv[0]); return 1; }
-    int K = atoi(argv[2]), hash = !strcmp(argv[3], "rmd"), gate = !strcmp(argv[4], "der"), N = atoi(argv[5]);
+    if (argc < 9) { fprintf(stderr, "usage: %s pinning.bin K sha|rmd|sha1 zeros|der N seconds extra_blocks hits_out [enc] [seq]\n", argv[0]); return 1; }
+    int K = atoi(argv[2]), hash = !strcmp(argv[3], "rmd") ? 1 : (!strcmp(argv[3], "sha1") ? 2 : 0), gate = !strcmp(argv[4], "der"), N = atoi(argv[5]);
     double seconds = atof(argv[6]); int extra = atoi(argv[7]); const char *hits_out = argv[8];
     int enc = argc > 9 ? atoi(argv[9]) : 3;
     uint32_t seq = argc > 10 ? (uint32_t)strtoul(argv[10], 0, 0) : 0x12345678u;
@@ -446,6 +510,8 @@ int main(int argc, char **argv) {
     int MZ = BMAX / K; if (MZ > MZMAX) MZ = MZMAX; if (MZ < 1) MZ = 1;
     if (getenv("POOL_MZ")) MZ = atoi(getenv("POOL_MZ"));
     int TPB = getenv("POOL_TPB") ? atoi(getenv("POOL_TPB")) : 128;
+    int chain = getenv("POOL_CHAIN") ? atoi(getenv("POOL_CHAIN")) : 1;
+    if (chain < 1 || chain > 16) { fprintf(stderr, "chain 1..16\n"); return 1; }
 
     FILE *f = fopen(argv[1], "rb"); if (!f) { perror("bin"); return 1; }
     static uint8_t raw[16384]; size_t nr = fread(raw, 1, sizeof raw, f); fclose(f); (void)nr;
@@ -479,6 +545,7 @@ int main(int argc, char **argv) {
     CK(cudaMemcpyToSymbol(cLtOff, &ltOff, 4)); CK(cudaMemcpyToSymbol(cTotalLen, &total, 4));
     CK(cudaMemcpyToSymbol(cZeros, &N, 4)); CK(cudaMemcpyToSymbol(cXW, xw, 64));
     }
+    CK(cudaMemcpyToSymbol(cChain, &chain, 4));
 
     const size_t gtb = 16ULL * 65536 * 32;
     uint8_t *hX = (uint8_t *)malloc(gtb), *hY = (uint8_t *)malloc(gtb);
@@ -534,13 +601,14 @@ int main(int argc, char **argv) {
     uint32_t *hh = (uint32_t *)malloc(16 * (size_t)keep + 16);
     CK(cudaMemcpy(hh, dH, 16 * (size_t)keep, cudaMemcpyDeviceToHost));
     FILE *o = fopen(hits_out, "w");
-    for (uint32_t i = 0; i < keep; i++) fprintf(o, "%u %u %u %u %u\n", hh[4*i], hh[4*i+1], hh[4*i+2], hh[4*i+3] & 1, hh[4*i+3] >> 1);
+    for (uint32_t i = 0; i < keep; i++) fprintf(o, "%u %u %u %u %u %u\n", hh[4*i], hh[4*i+1], hh[4*i+2], hh[4*i+3] & 1,
+                                                (hh[4*i+3] >> 1) & 3, (hh[4*i+3] >> 3) + 1);
     fclose(o);
-    double el = t1 - t0, shots_ = (double)cand * 2 * K * enc;
-    printf("{\"kernel\":\"pool2\",\"gpu\":\"%s\",\"K\":%d,\"MZ\":%d,\"enc\":%d,\"tpb\":%d,\"hash\":\"%s\",\"gate\":\"%s\",\"N\":%d,"
+    double el = t1 - t0, shots_ = (double)cand * 2 * K * enc * chain;
+    printf("{\"kernel\":\"pool2\",\"chain\":%d,\"gpu\":\"%s\",\"K\":%d,\"MZ\":%d,\"enc\":%d,\"tpb\":%d,\"hash\":\"%s\",\"gate\":\"%s\",\"N\":%d,"
            "\"extra_blocks\":%d,\"seconds\":%.2f,\"candidates\":%llu,\"z_per_s\":%.4e,\"shots_per_s\":%.4e,\"hits\":%u,"
            "\"expected_hits\":%.1f}\n",
-           prop.name, K, MZ, enc, TPB, hash ? "rmd" : "sha", gate ? "der" : "zeros", N, extra, el,
+           chain, prop.name, K, MZ, enc, TPB, hash == 1 ? "rmd" : (hash == 2 ? "sha1" : "sha"), gate ? "der" : "zeros", N, extra, el,
            (unsigned long long)cand, cand / el, shots_ / el, hc, gate ? 0.0 : shots_ / (double)(1ULL << N));
     return 0;
 }

@@ -1,0 +1,1 @@
+{"K": 24, "chain": 8, "enc": 1, "hits_by_encoding": [18044, 0, 0], "hits_by_level": {"1": 2248, "2": 2325, "3": 2292, "4": 2213, "5": 2321, "6": 2273, "7": 2152, "8": 2220}, "hash": "sha1", "extra": 0, "N": 24, "reported": 18044, "unique": 18044, "duplicates": 0, "verified": 300, "failed": 0, "expected": 18073.1, "poisson_z": -0.22, "control_false_pass": 0, "ok": true}

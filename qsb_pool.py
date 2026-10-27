@@ -80,26 +80,76 @@ class Builder:
         self.script += push_num(bound)
         self._op("OP_MIN")
 
-    def puzzle(self, key_label):
-        """[.., key] -> [..]: H(key) must be strict DER (else abort); CHECKSIG vs a 1-byte key -> false -> DROP."""
-        if self.test_mode:
+    def puzzle(self, key_label, m=1, lvl_label=None, cleanup=False, sign_lvl=None):
+        """[.., key] -> [..]: some H-chain level must be strict DER (else abort).
+
+        m == 1:  H OP_1 OP_CHECKSIG OP_DROP  (3 ops).
+        m  > 1:  hash-chain OR. h1 = H(key), h_i = H(h_{i-1}) via OP_DUP H; the witness level index
+                 (OP_MIN-clamped) OP_PICKs one h to DER-check. Extra ops 2m+1 (+ceil(m/2) cleanup).
+        """
+        def H():
+            if self.test_mode:                      # stand-in: every level is the fixed DER string
+                self._op("OP_DROP")
+                self.script += push_min(TEST_DER20)
+            else:
+                self._op(self.hash_op)
+        if m == 1:
+            H()
+            self.script += push_num(1)
+            self._op("OP_CHECKSIG")
             self._op("OP_DROP")
-            self.script += push_min(TEST_DER20)
-        else:
-            self._op(self.hash_op)
+            self.stack.pop()
+            return
+        H()
+        self.stack[-1] = "h1"
+        for i in range(2, m + 1):
+            self._op("OP_DUP")
+            self.stack.append(f"h{i}")
+            H()
+        self.roll(lvl_label)
+        self.min_(m - 1)
+        if sign_lvl:                                # Lamport-sign the level: open commitment CL_v
+            cl0, pre_label = sign_lvl
+            self._op("OP_DUP")
+            self.stack.append("v_copy")
+            off = self.depth(cl0) - 1               # depth of CL_0 once v_copy+off is popped by PICK
+            self.script += push_num(off)
+            self._op("OP_ADD")
+            self._op("OP_PICK")
+            self.stack.pop()
+            self.stack.append("cl_sel")
+            self.roll(pre_label)
+            self._op("OP_HASH160")
+            self._op("OP_EQUALVERIFY")
+            self.stack.pop()
+            self.stack.pop()
+        self._op("OP_PICK")                         # witness value v picks h_{m-v}
+        self.stack.pop()
+        self.stack.append("hsel")
         self.script += push_num(1)
         self._op("OP_CHECKSIG")
         self._op("OP_DROP")
         self.stack.pop()
+        if cleanup:
+            left = m
+            while left >= 2:
+                self._op("OP_2DROP")
+                del self.stack[-2:]
+                left -= 2
+            if left:
+                self._op("OP_DROP")
+                self.stack.pop()
 
 
 def build(cfg, hash_op=None, test_mode=False, pad_ops=0, pad_bytes=0, real_round_puzzle=False):
-    hash_op = hash_op or {"sha256": "OP_SHA256", "rmd": "OP_RIPEMD160"}[cfg.get("hash", "rmd")]
+    hash_op = hash_op or {"sha256": "OP_SHA256", "rmd": "OP_RIPEMD160", "sha1": "OP_SHA1"}[cfg.get("hash", "rmd")]
     n, k = cfg["n"], cfg["k"]
     ts = [cfg["t1"]] + ([cfg["t2"]] if "t2" in cfg else [])       # one or two digest rounds
     R = len(ts)
     bs = [cfg.get(f"b{i + 1}", 0) for i in range(R)]
     kbound = [cfg.get("k_pin", k)] + [cfg.get(f"k{i + 1}", k) for i in range(R)]
+    chain_pin = cfg.get("chain_pin", 1)
+    chains = [cfg.get(f"chain{i + 1}", cfg.get("chain_r", 1)) for i in range(R)]
     rng = random.Random(cfg.get("seed", 1))
 
     # ---- keys and constants
@@ -109,6 +159,10 @@ def build(cfg, hash_op=None, test_mode=False, pad_ops=0, pad_bytes=0, real_round
     dummies = [[der9(rr, ss, 0x03) for rr, ss in dummy_rs[rd * n:(rd + 1) * n]] for rd in range(R)]
     pre = [[rng.randbytes(20) for _ in range(n)] for _ in range(R)]
     comm = [[hash160(p) for p in pre[rd]] for rd in range(R)]
+    sign_j, sign_lvl = cfg.get("sign_j", False), cfg.get("sign_lvl", False)
+    assert not (sign_j or sign_lvl) or cfg.get("pool_deep"), "signed j/level implemented for the pool-first layout"
+    pre_j = [[rng.randbytes(20) for _ in range(cfg.get(f"k{rd + 1}", k))] for rd in range(R)]
+    pre_l = [[rng.randbytes(20) for _ in range(16)] for rd in range(R)]
     pool = [der_sig(POOL_R, s, 0x01) for s in range(1, k + 1)]   # pool[s-1]; 10 bytes once s >= 128
 
     # ---- witness layout (bottom -> top): round 2 items, round 1 items, pinning items
@@ -117,7 +171,13 @@ def build(cfg, hash_op=None, test_mode=False, pad_ops=0, pad_bytes=0, real_round
         wit += [f"KD{rd}_{i}" for i in range(ts[rd] + bs[rd])] + [f"key{rd}"]
         wit += [f"pre{rd}_{i}" for i in range(ts[rd])]
         wit += [f"x{rd}_{i}" for i in range(ts[rd] + bs[rd])] + [f"j{rd}"]
-    wit += ["keyp", "jp"]
+        if chains[rd] > 1:
+            wit += [f"l{rd}"]
+        if sign_j:
+            wit += [f"prej{rd}"]
+        if sign_lvl and chains[rd] > 1:
+            wit += [f"prel{rd}"]
+    wit += ["keyp", "jp"] + (["lp"] if chain_pin > 1 else [])
 
     b = Builder(wit, hash_op, test_mode)
     plan = {"pin": {}, "rounds": [{} for _ in range(R)]}
@@ -129,6 +189,13 @@ def build(cfg, hash_op=None, test_mode=False, pad_ops=0, pad_bytes=0, real_round
     if pool_deep:            # pool first in the script: round sighashes then never rehash the pool bytes
         for s in range(k, 0, -1):
             b.push(f"P{s}", pool[s - 1], nonmin=True)
+        for rd in range(R):  # signed pool index / chain level commitments (same orientation as the pool)
+            if sign_j:
+                for s_ in range(kbound[rd + 1], 0, -1):
+                    b.push(f"CJ{rd}_{s_}", hash160(pre_j[rd][s_ - 1]))
+            if sign_lvl and chains[rd] > 1:
+                for v in range(chains[rd] - 1, -1, -1):
+                    b.push(f"CL{rd}_{v}", hash160(pre_l[rd][v]))
     for rd in reversed(range(R)):
         for i in reversed(range(n)):
             b.push(f"C{rd}_{i}", comm[rd][i])
@@ -151,8 +218,8 @@ def build(cfg, hash_op=None, test_mode=False, pad_ops=0, pad_bytes=0, real_round
     b.stack.pop()
     b.stack.pop()
     b.roll("keyp")
-    b.puzzle("keyp")
-    assert pool_deep or b.stack[-1] == "P1"
+    b.puzzle("keyp", m=chain_pin, lvl_label="lp")
+    assert pool_deep or chain_pin > 1 or b.stack[-1] == "P1"
 
     # ---- rounds
     if real_round_puzzle:
@@ -166,6 +233,21 @@ def build(cfg, hash_op=None, test_mode=False, pad_ops=0, pad_bytes=0, real_round
         d1 = b.depth("P1") - 1
         rp["P1"] = d1
         b.min_(d1 + kbound[rd + 1] - 1)
+        if sign_j:                          # open CJ_s: commitment sits a constant offset above P_s
+            b._op("OP_DUP")
+            b.stack.append("j_copy")
+            # PICK runs with j still on the stack: CJ_s depth = (P_s depth w/o j) - delta + 1
+            off = (b.depth("P1") - b.depth(f"CJ{rd}_1")) - 1
+            b.script += push_num(off)
+            b._op("OP_SUB")
+            b._op("OP_PICK")
+            b.stack.pop()
+            b.stack.append("cj_sel")
+            b.roll(f"prej{rd}")
+            b._op("OP_HASH160")
+            b._op("OP_EQUALVERIFY")
+            b.stack.pop()
+            b.stack.pop()
         b._op("OP_PICK")                                          # witness j = d1 + (s-1)
         b.stack.pop()
         b.stack.append(f"nsig{rd}")
@@ -218,7 +300,8 @@ def build(cfg, hash_op=None, test_mode=False, pad_ops=0, pad_bytes=0, real_round
             b._op("OP_EQUALVERIFY")
         b._op("OP_DUP")
         b.stack.append(f"key{rd}_copy")
-        b.puzzle(f"key{rd}_copy")
+        b.puzzle(f"key{rd}_copy", m=chains[rd], lvl_label=f"l{rd}", cleanup=True,
+                 sign_lvl=(f"CL{rd}_0", f"prel{rd}") if (sign_lvl and chains[rd] > 1) else None)
         b.push_n("m", t + 1)
         b._op("OP_SWAP")
         b.stack[-2:] = b.stack[-2:][::-1]
@@ -234,7 +317,8 @@ def build(cfg, hash_op=None, test_mode=False, pad_ops=0, pad_bytes=0, real_round
         b.ops += 1
     assert not any(l.startswith(("x", "pre", "KD", "key", "j")) for l in b.stack), b.stack
     return dict(script=bytes(b.script), ops=b.ops, max_stack=b.max_stack, plan=plan, dummies=dummies,
-                pre=pre, pool=pool, cfg=cfg, witness=wit, ts=ts, bs=bs)
+                pre=pre, pool=pool, cfg=cfg, witness=wit, ts=ts, bs=bs, chain_pin=chain_pin, chains=chains,
+                pre_j=pre_j, pre_l=pre_l)
 
 
 def design_check(built):
@@ -246,15 +330,19 @@ def design_check(built):
     """
     import hashlib as _h
     from qsbcore import ripemd160 as _r, recover_all
-    H = (lambda b: _h.sha256(b).digest()) if built["cfg"].get("hash") == "sha256" else _r
+    H = {"sha256": lambda b: _h.sha256(b).digest(), "sha1": lambda b: _h.sha1(b).digest()}.get(built["cfg"].get("hash"), _r)
     bad = []
     for rd, ds in enumerate(built["dummies"]):
         for i, d in enumerate(ds):
+            mmax = max([built["chain_pin"]] + built["chains"])
             for Q in recover_all(d[4], d[7], Z_SINGLE_BUG):       # includes x = r + n points when on-curve
                 for kind in ("comp", "uncomp", "hybrid"):
-                    if is_valid_der(H(enc(Q, kind))):
-                        bad.append(("dummy", rd, i, kind))
-    for rd, ps in enumerate(built["pre"]):
+                    h = H(enc(Q, kind))
+                    for lvl in range(mmax):                        # every hash-chain level
+                        if is_valid_der(h):
+                            bad.append(("dummy", rd, i, kind, lvl + 1))
+                        h = H(h)
+    for rd, ps in enumerate(built["pre"] + built.get("pre_j", []) + built.get("pre_l", [])):
         for i, p_ in enumerate(ps):
             if is_valid_der(hash160(p_)):
                 bad.append(("commitment", rd, i))
@@ -279,6 +367,9 @@ def spend(built, choice, tx=None, tamper=None):
     s_p = choice["jp"] + 1 if choice["jp"] < built["cfg"].get("k_pin", built["cfg"]["k"]) else built["cfg"].get("k_pin", built["cfg"]["k"])
     z_p = sighash_all(ins, outs, idx, script, locktime=lt)
     wit["jp"] = built["plan"]["pin"]["P1"] + choice["jp"]
+    lvls = choice.get("lvl", [1] * (1 + len(built["ts"])))
+    if built["chain_pin"] > 1:
+        wit["lp"] = built["chain_pin"] - lvls[0]
     wit["keyp"] = enc(recover(POOL_R, s_p, z_p, choice["odd"][0]), choice["enc"][0])
     zs = [z_p]
     for rd in range(len(built["ts"])):
@@ -296,6 +387,12 @@ def spend(built, choice, tx=None, tamper=None):
         sc = find_and_delete(sc, built["pool"][s - 1])            # a no-op: PUSHDATA1 is never matched
         z = tamper.get(f"z{rd}", sighash_all(ins, outs, idx, sc, locktime=lt))
         zs.append(z)
+        if built["chains"][rd] > 1:
+            wit[f"l{rd}"] = tamper.get(f"l{rd}", built["chains"][rd] - lvls[rd + 1])
+            if built["cfg"].get("sign_lvl"):
+                wit[f"prel{rd}"] = tamper.get(f"prel{rd}", built["pre_l"][rd][built["chains"][rd] - lvls[rd + 1]])
+        if built["cfg"].get("sign_j"):
+            wit[f"prej{rd}"] = tamper.get(f"prej{rd}", built["pre_j"][rd][min(max(s, 1), kb) - 1])
         wit[f"j{rd}"] = tamper.get(f"j{rd}_abs", built["plan"]["rounds"][rd]["P1"] + (j - 1))   # j: 1-based s
         wit[f"key{rd}"] = tamper.get(f"key{rd}_raw", None) or enc(recover(POOL_R, s, z, choice["odd"][rd + 1]), choice["enc"][rd + 1])
         removed = []
@@ -335,8 +432,16 @@ def analyse(cfg, P_bits, built, enc_count=3):
     S, E = [], []
     for i in range(1, R + 1):
         rp = built["plan"]["rounds"][i - 1]
-        base = 2 * cfg.get(f"k{i}", cfg["k"]) * (1 if cfg.get("force_comp") else enc_count)
-        S.append(base * math.prod(rp["bonus_options"]))
+        kk, mm = cfg.get(f"k{i}", cfg["k"]), cfg.get(f"chain{i}", cfg.get("chain_r", 1))
+        base = 2 * kk * (1 if cfg.get("force_comp") else enc_count) * mm       # honest freedom per subset
+        # Unsigned pool index: the nonce PICK also reaches every item above the pool. The pinning
+        # chain's levels stay on the stack (no cleanup), and the pinning hit among them is a valid DER
+        # signature, so it is one more nonce option (found by the challenge judge's freedom audit).
+        # Count all chain_pin levels (conservative; only DER-valid ones can work).
+        extra = cfg.get("chain_pin", 1) if cfg.get("chain_pin", 1) > 1 else 0
+        att = (2 * (1 if cfg.get("force_comp") else enc_count) * (1 if cfg.get("sign_j") else kk + extra)
+               * (1 if cfg.get("sign_lvl") else mm))
+        S.append(att * math.prod(rp["bonus_options"]))
         t, bn = cfg[f"t{i}"], cfg.get(f"b{i}", 0)
         E.append(math.comb(cfg["n"], t) * math.comb(cfg["n"] - t, bn) * base * 2.0 ** -P_bits)
     p = [1 - math.exp(-e) for e in E]
@@ -350,8 +455,16 @@ def analyse(cfg, P_bits, built, enc_count=3):
     relabel = math.prod(math.comb(cfg[f"t{i}"] + cfg.get(f"b{i}", 0), cfg[f"t{i}"]) for i in range(1, R + 1))
     signed_bits = sum(math.log2(math.comb(cfg["n"], cfg[f"t{i}"])) for i in range(1, R + 1))
     per_digest = 2.0 ** P_bits * (1 + sum(math.prod(E[:i + 1]) for i in range(R))) / (math.prod(E) * relabel)
-    coll = math.log2(per_digest) + signed_bits / 2
-    return dict(E=E, p=p, honest_shots_log2=math.log2(honest), preimage_bits=pre, collision_bits=coll)
+    coll_birthday = math.log2(per_digest) + signed_bits / 2
+    # Fixed-digest strategy (SECURITY_PROOF.md, Theorem 3): pin N = q p txs, test every one against the
+    # same digest's full round blocks. E[collisions] ~ q^2 p prod(S_i p)^2 / (2 sum S_i), so
+    # log2 q* = (P + 2 sum(P - log S_i) + log sum S_i + 1) / 2.
+    coll_fixed = (P_bits + 2 * sum(P_bits - math.log2(Si) for Si in S) + math.log2(sum(S)) + 1) / 2
+    coll = min(coll_birthday, coll_fixed)
+    S_pin = 2 * cfg.get("k_pin", cfg["k"]) * enc_count * cfg.get("chain_pin", 1)
+    quantum = (P_bits + sum(P_bits - math.log2(Si) for Si in S) - math.log2(S_pin)) / 2 - 1.5   # Theorem 2
+    return dict(S=S, E=E, p=p, honest_shots_log2=math.log2(honest), preimage_bits=pre, collision_bits=coll,
+                collision_birthday=coll_birthday, collision_fixed=coll_fixed, quantum_query_bits=quantum)
 
 
 def config_a_reference(P_bits):
@@ -377,7 +490,7 @@ def main():
             print(f"reference: paper Config A, {hname}, recounted: honest 2^{hon:.2f} shots, pre-image {pre:.1f} bits")
         print()
         print(f"{'config':34} {'ops':>4} {'bytes':>6} {'stack':>5} {'E1':>6} {'E2':>6} {'p1p2':>5} "
-              f"{'honest':>7} {'pre-img':>7} {'collis':>6}")
+              f"{'honest':>7} {'pre-img':>7} {'collis':>6} {'Q-qry':>6}")
         for name, cfg in CONFIGS.items():
             bt = build(cfg)
             for hname, P_bits in (("RIPEMD", math.log2(1 / p_der(20))), ("SHA256", math.log2(1 / p_der(32)))):
@@ -385,7 +498,7 @@ def main():
                 flag = " (OVER 10,000 B: invalid)" if len(bt["script"]) > 10000 or bt["ops"] > 201 else ""
                 print(f"{name + ' ' + hname + flag:34} {bt['ops']:4d} {len(bt['script']):6d} {bt['max_stack']:5d} "
                       f"{r['E'][0]:6.1f} {(r['E'][1] if len(r['E']) > 1 else float('nan')):6.2f} {math.prod(r['p']):5.2f} "
-                      f"2^{r['honest_shots_log2']:5.2f} {r['preimage_bits']:7.1f} {r['collision_bits']:6.1f}")
+                      f"2^{r['honest_shots_log2']:5.2f} {r['preimage_bits']:7.1f} {r['collision_bits']:6.1f} {r['quantum_query_bits']:6.1f}")
     if a.vectors:
         emit_vectors()
 
@@ -412,7 +525,11 @@ def emit_vectors():
     for tag, cfg in (("NB", dict(n=140, t1=8, t2=7, k=64, seed=5)),
                      ("BK", dict(n=148, t1=7, b1=1, t2=8, k=12, seed=6)),
                      ("TS", dict(n=250, t1=16, k=127, k1=8, seed=7)),
-                     ("TS2", dict(n=150, t1=16, k=300, k1=64, force_comp=True, pool_deep=True, hash="sha256", seed=8))):
+                     ("TS2", dict(n=150, t1=16, k=300, k1=64, force_comp=True, pool_deep=True, hash="sha256", seed=8)),
+                     ("TS3", dict(n=150, t1=12, k=300, k1=16, force_comp=True, pool_deep=True, hash="sha256",
+                                  chain_pin=8, chain_r=8, seed=9)),
+                     ("TS4", dict(n=120, t1=8, k=300, k1=64, force_comp=True, pool_deep=True, hash="sha256",
+                                  chain_pin=16, chain_r=16, sign_j=True, sign_lvl=True, seed=10))):
         out += vectors_for(tag, cfg, rng)
     print("\n".join(out))
 
@@ -431,6 +548,8 @@ def vectors_for(tag, cfg, rng):
         return dict(jp=rng.randrange(cfg["k"]), j=[rng.randrange(1, cfg.get(f"k{i + 1}", cfg["k"]) + 1) for i in range(R)],
                     subsets=[rng.sample(range(cfg["n"]), T[i]) for i in range(R)],
                     odd=[rng.randrange(2) for _ in range(R + 1)],
+                    lvl=[rng.randrange(1, cfg.get("chain_pin", 1) + 1)] +
+                        [rng.randrange(1, cfg.get(f"chain{i + 1}", cfg.get("chain_r", 1)) + 1) for i in range(R)],
                     enc=[rng.choice(["comp", "uncomp", "hybrid"])] +
                         [("comp" if cfg.get("force_comp") else rng.choice(["comp", "uncomp", "hybrid"])) for _ in range(R)])
 
@@ -466,6 +585,17 @@ def vectors_for(tag, cfg, rng):
     c["subsets"] = [c["subsets"][0][:cfg["t1"] - 1] + [c["subsets"][0][0]] + c["subsets"][0][cfg["t1"]:]] + c["subsets"][1:]
     e("neg_repeated_dummy_in_round", tb, c, False)
     e("neg_production_script_nonhit_aborts", prod, rand_choice(), False)
+    if cfg.get("sign_j"):
+        c = rand_choice(); s_ = min(c["j"][0], cfg["k1"]); other = s_ % cfg["k1"] + 1
+        e("neg_signed_j_preimage_for_other_index", tb, c, False, tamper={"prej0": tb["pre_j"][0][other - 1]})
+    m1 = cfg.get("chain1", cfg.get("chain_r", 1))
+    if cfg.get("sign_lvl") and m1 > 1:
+        c = rand_choice(); v = m1 - c["lvl"][1]
+        e("neg_signed_level_preimage_for_other_level", tb, c, False,
+          tamper={"prel0": tb["pre_l"][0][(v + 1) % m1]})
+    if m1 > 1 and not cfg.get("sign_lvl"):
+        e("chain_level_huge_is_clamped", tb, rand_choice(), True, tamper={"l0": 10 ** 6})
+        e("neg_chain_level_negative", tb, rand_choice(), False, tamper={"l0": -1})
     if cfg.get("force_comp"):
         c = rand_choice(); c["enc"] = [c["enc"][0]] + ["uncomp"] * R
         e("neg_round_key_uncompressed_rejected_by_OP_SIZE", tb, c, False)
@@ -491,7 +621,7 @@ def vectors_for(tag, cfg, rng):
         c2 = dict(c)
         tx2, idx2, _ = spend(rr, c2, tamper={"j0_abs": d_dummy, "key0_raw": kd})
         out.append(f"{tag}_neg_deep_j_reaches_dummy_fixed_key_not_DER {rr['script'].hex()} {tx2.hex()} {idx2} 0")
-    if cfg.get("b1"):
+    if cfg.get("b1") and not cfg.get("pool_deep"):
         # Attacker view: a bonus index below the region reaches a pool sig. It is never deleted
         # (PUSHDATA1) and verifies under a key anyone can recover, so the spend is VALID. This is
         # why analyse() counts A+m-1 bonus options instead of n-t.
@@ -509,9 +639,11 @@ def vectors_for(tag, cfg, rng):
                 bt = build(cfg, test_mode=True, pad_bytes=pb)
                 if len(bt["script"]) == target:
                     return bt
-            raise ValueError(target)
-        e("size_padded_to_10000", padded_to(10000), rand_choice(), True)
-        e("size_padded_to_10001", padded_to(10001), rand_choice(), False)
+            return None          # a single pad push jumps over this exact size (push-header growth)
+        p0, p1 = padded_to(10000), padded_to(10001)
+        if p0 and p1:
+            e("size_padded_to_10000", p0, rand_choice(), True)
+            e("size_padded_to_10001", p1, rand_choice(), False)
     return out
 
 

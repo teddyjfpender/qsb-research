@@ -1,0 +1,141 @@
+{
+ "judge": "qsb-judge-2",
+ "seed": 1468222652,
+ "mode": "deep",
+ "ranked": true,
+ "gates": {
+  "integrity": {
+   "ok": true,
+   "changed": []
+  },
+  "schema": {
+   "ok": true
+  },
+  "build": {
+   "ok": true
+  },
+  "static": {
+   "ok": true,
+   "ops": 198,
+   "bytes": 8574,
+   "test_bytes": 8616,
+   "max_stack": 653,
+   "puzzle_substitutions": 2,
+   "design_check_findings": 0
+  },
+  "security": {
+   "ok": true,
+   "P": 45.367,
+   "preimage_bits": 83.73,
+   "quantum_bits": 34.96,
+   "collision_bits": 65.05,
+   "E": [
+    3865145507.617
+   ],
+   "S": [
+    128
+   ]
+  },
+  "audit": {
+   "ok": true,
+   "seeds": 3,
+   "runs": 81084,
+   "stages": [
+    {
+     "stage": 0,
+     "z_views": 300,
+     "levels": 1,
+     "encodings": 3,
+     "measured": 1800,
+     "claimed": 1800,
+     "ok": true
+    },
+    {
+     "stage": 1,
+     "z_views": 64,
+     "levels": 1,
+     "encodings": 1,
+     "measured": 128,
+     "claimed": 128,
+     "ok": true
+    }
+   ],
+   "honest_space": {
+    "ok": true,
+    "samples": 1000
+   }
+  },
+  "consensus": {
+   "ok": true,
+   "vectors": 262,
+   "core": "unexpected results: 0",
+   "lean_replay": "replay /var/folders/5x/7hym3yzn05z0k_z3g1m17brc0000gn/T/tmpn6gr8111/judge_vectors.txt: 262 vectors, 0 disagree with Core, 0 outside the model",
+   "lean_builder": "Lean builder rebuilt identical bytes"
+  },
+  "cost": {
+   "ok": true,
+   "gpu_hours_rtx4090": 4.426,
+   "stage_rates": [
+    6.511,
+    5.061
+   ],
+   "script_bytes": 8574,
+   "scriptsig_bytes": 1003,
+   "total_vbytes": 9637
+  }
+ },
+ "design": {
+  "schema": "qsb-design-v2",
+  "hash": "sha256",
+  "n": 150,
+  "k": 300,
+  "pool_deep": true,
+  "force_comp": true,
+  "chain_pin": 1,
+  "sign_j": false,
+  "sign_lvl": false,
+  "rounds": [
+   {
+    "t": 16,
+    "b": 0,
+    "k": 64,
+    "chain": 1
+   }
+  ]
+ },
+ "proof": {
+  "label": "proven",
+  "theorem": "QSB.TS2.ts2_family_sound",
+  "note": "family theorem; the instance side condition SideTS2 is checked by native_decide"
+ },
+ "score": {
+  "sats": 51239,
+  "preimage_bits": 83.73,
+  "quantum_bits": 34.96,
+  "collision_bits": 65.05,
+  "bits_confidence": "proven"
+ },
+ "diagnostics": {
+  "headroom": {
+   "ops": 3,
+   "script_bytes": 1426,
+   "min_expected_solutions": 3865145507.62
+  },
+  "cost_split": {
+   "fee_sats": 48185,
+   "gpu_sats": 3054,
+   "fee_share": 0.94
+  },
+  "sats_at_other_fee_rates": {
+   "1_sat_per_vB": 12691,
+   "5_sat_per_vB": 51239,
+   "20_sat_per_vB": 195794,
+   "50_sat_per_vB": 484904
+  }
+ },
+ "verdict": "accepted",
+ "seconds": 342.2,
+ "manifest_digest": "5b25b5dd95302427",
+ "submission": "TS2",
+ "design_sha256": "9ffa0648ab19dfac066038c5fa088cead66fa1efc531707adc356ddc73ce743e"
+}

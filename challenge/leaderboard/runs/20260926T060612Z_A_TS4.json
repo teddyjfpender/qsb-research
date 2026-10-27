@@ -1,0 +1,117 @@
+{
+ "judge": "qsb-judge-1",
+ "seed": 3398836724,
+ "gates": {
+  "integrity": {
+   "ok": true,
+   "changed": []
+  },
+  "schema": {
+   "ok": true,
+   "track": "t90"
+  },
+  "build": {
+   "ok": true
+  },
+  "static": {
+   "ok": true,
+   "ops": 196,
+   "bytes": 9219,
+   "test_bytes": 9891,
+   "max_stack": 666,
+   "puzzle_substitutions": 32,
+   "design_check_findings": 0
+  },
+  "security": {
+   "ok": true,
+   "P": 45.367,
+   "preimage_bits": 89.73,
+   "quantum_bits": 35.96,
+   "collision_bits": 65.21,
+   "E": [
+    37.925
+   ],
+   "S": [
+    2
+   ]
+  },
+  "audit": {
+   "ok": true,
+   "runs": 9700,
+   "accepted": 1228,
+   "stages": [
+    {
+     "stage": 0,
+     "z_views": 300,
+     "levels": 16,
+     "encodings": 3,
+     "measured": 28800,
+     "claimed": 28800,
+     "ok": true
+    },
+    {
+     "stage": 1,
+     "z_views": 1,
+     "levels": 1,
+     "encodings": 1,
+     "measured": 2,
+     "claimed": 2,
+     "ok": true
+    }
+   ],
+   "off_pool_nonces": 123,
+   "uncovered_off_pool": 0,
+   "wrong_round_count": 0,
+   "counterexample": null,
+   "honest_space": {
+    "ok": true,
+    "samples": 150
+   }
+  },
+  "consensus": {
+   "ok": true,
+   "vectors": 106,
+   "core": "unexpected results: 0",
+   "lean_replay": "replay /var/folders/5x/7hym3yzn05z0k_z3g1m17brc0000gn/T/tmpmaso8az5/judge_vectors.txt: 106 vectors, 0 disagree with Core, 0 outside the model",
+   "lean_builder": "Lean builder rebuilt identical bytes"
+  },
+  "cost": {
+   "ok": true,
+   "gpu_hours_rtx4090": 1.842,
+   "stage_rates": [
+    13.855,
+    13.515
+   ],
+   "script_bytes": 9219,
+   "scriptsig_bytes": 606,
+   "total_vbytes": 9885
+  }
+ },
+ "design": {
+  "schema": "qsb-design-v1",
+  "track": "t90",
+  "hash": "sha256",
+  "n": 120,
+  "k": 300,
+  "pool_deep": true,
+  "force_comp": true,
+  "chain_pin": 16,
+  "sign_j": true,
+  "sign_lvl": true,
+  "rounds": [
+   {
+    "t": 8,
+    "b": 0,
+    "k": 64,
+    "chain": 16
+   }
+  ]
+ },
+ "score_total_sats": 50696,
+ "proof": "not yet covered by a Lean soundness theorem (audit + Core evidence only)",
+ "verdict": "accepted",
+ "seconds": 49.9,
+ "manifest_digest": "abddf96cd82c68f9",
+ "submission": "A_TS4",
+ "design_sha256": "28f786b538af6eeb6185fc3c9eded2b382f5474f02677a3d5e487a6ce674c754"
+}

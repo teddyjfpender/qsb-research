@@ -1,0 +1,154 @@
+{
+ "judge": "qsb-judge-1",
+ "seed": 516472789,
+ "mode": "deep",
+ "ranked": true,
+ "gates": {
+  "integrity": {
+   "ok": true,
+   "changed": []
+  },
+  "schema": {
+   "ok": true,
+   "track": "t116"
+  },
+  "build": {
+   "ok": true
+  },
+  "static": {
+   "ok": true,
+   "ops": 200,
+   "bytes": 9551,
+   "test_bytes": 9677,
+   "max_stack": 667,
+   "puzzle_substitutions": 6,
+   "design_check_findings": 0
+  },
+  "security": {
+   "ok": true,
+   "P": 45.367,
+   "preimage_bits": 116.18,
+   "quantum_bits": 52.0,
+   "collision_bits": 82.63,
+   "E": [
+    2.011,
+    2.682
+   ],
+   "S": [
+    864,
+    1152
+   ]
+  },
+  "audit": {
+   "ok": true,
+   "seeds": 3,
+   "runs": 83898,
+   "stages": [
+    {
+     "stage": 0,
+     "z_views": 96,
+     "levels": 1,
+     "encodings": 3,
+     "measured": 576,
+     "claimed": 576,
+     "ok": true
+    },
+    {
+     "stage": 1,
+     "z_views": 48,
+     "levels": 3,
+     "encodings": 3,
+     "measured": 864,
+     "claimed": 864,
+     "ok": true
+    },
+    {
+     "stage": 2,
+     "z_views": 96,
+     "levels": 2,
+     "encodings": 3,
+     "measured": 1152,
+     "claimed": 1152,
+     "ok": true
+    }
+   ],
+   "honest_space": {
+    "ok": true,
+    "samples": 1000
+   }
+  },
+  "consensus": {
+   "ok": true,
+   "vectors": 264,
+   "core": "unexpected results: 0",
+   "lean_replay": "replay /var/folders/5x/7hym3yzn05z0k_z3g1m17brc0000gn/T/tmp4sbmi9t_/judge_vectors.txt: 264 vectors, 0 disagree with Core, 0 outside the model",
+   "lean_builder": "Lean builder rebuilt identical bytes"
+  },
+  "cost": {
+   "ok": true,
+   "gpu_hours_rtx4090": 6.041,
+   "stage_rates": [
+    6.081,
+    7.289,
+    7.8
+   ],
+   "script_bytes": 9551,
+   "scriptsig_bytes": 1007,
+   "total_vbytes": 10618
+  }
+ },
+ "design": {
+  "schema": "qsb-design-v1",
+  "track": "t116",
+  "hash": "sha256",
+  "n": 130,
+  "k": 96,
+  "pool_deep": true,
+  "force_comp": false,
+  "chain_pin": 1,
+  "sign_j": false,
+  "sign_lvl": false,
+  "rounds": [
+   {
+    "t": 7,
+    "b": 0,
+    "k": 48,
+    "chain": 3
+   },
+   {
+    "t": 7,
+    "b": 0,
+    "k": 96,
+    "chain": 2
+   }
+  ]
+ },
+ "score_total_sats": 57258,
+ "diagnostics": {
+  "headroom": {
+   "ops": 1,
+   "script_bytes": 449,
+   "preimage_bits": 0.18,
+   "quantum_bits": 2.0,
+   "collision_bits": 2.63,
+   "min_expected_solutions": 2.01
+  },
+  "cost_split": {
+   "fee_sats": 53090,
+   "gpu_sats": 4168,
+   "fee_share": 0.927
+  },
+  "score_at_other_fee_rates": {
+   "1_sat_per_vB": 14786,
+   "5_sat_per_vB": 57258,
+   "20_sat_per_vB": 216528,
+   "50_sat_per_vB": 535068
+  }
+ },
+ "proof": "not yet covered by a Lean soundness theorem (audit + Core evidence only)",
+ "verdict": "accepted",
+ "seconds": 355.3,
+ "manifest_digest": "ac72bc1dced0ed04",
+ "submission": "E_116",
+ "design_sha256": "6877180562e0163b7b0cb8668fc796962f68c644e809a46d7a885e61a6d34568"
+}

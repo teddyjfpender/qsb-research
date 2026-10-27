@@ -1,0 +1,73 @@
+{
+ "judge": "qsb-judge-1",
+ "seed": 3015174779,
+ "gates": {
+  "integrity": {
+   "ok": true,
+   "changed": []
+  },
+  "schema": {
+   "ok": true,
+   "track": "t116"
+  },
+  "build": {
+   "ok": true
+  },
+  "static": {
+   "ok": true,
+   "ops": 201,
+   "bytes": 9551,
+   "test_bytes": 9719,
+   "max_stack": 667,
+   "puzzle_substitutions": 8,
+   "design_check_findings": 0
+  },
+  "security": {
+   "ok": false,
+   "error": "2nd-preimage 108.02 < 116.0; quantum 47.13 < 50.0; collision 77.44 < 80.0",
+   "P": 45.367,
+   "preimage_bits": 108.02,
+   "quantum_bits": 47.13,
+   "collision_bits": 77.44,
+   "E": [
+    18.774,
+    4.023
+   ],
+   "S": [
+    159192,
+    1782
+   ]
+  }
+ },
+ "design": {
+  "schema": "qsb-design-v1",
+  "track": "t116",
+  "hash": "sha256",
+  "n": 130,
+  "k": 96,
+  "pool_deep": true,
+  "force_comp": false,
+  "chain_pin": 3,
+  "sign_j": false,
+  "sign_lvl": false,
+  "rounds": [
+   {
+    "t": 6,
+    "b": 1,
+    "k": 96,
+    "chain": 2
+   },
+   {
+    "t": 7,
+    "b": 0,
+    "k": 96,
+    "chain": 3
+   }
+  ]
+ },
+ "verdict": "rejected",
+ "rejected_at": "security",
+ "manifest_digest": "abddf96cd82c68f9",
+ "submission": "C_108",
+ "design_sha256": "11f0ea970b4890e82857e4eb983899a1a8d5586b94f3ba7caaa4b9144ec0cb4a"
+}

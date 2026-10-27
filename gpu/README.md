@@ -1,5 +1,152 @@
 # GPU validation of the nonce-signature pool (RTX 4090, 2026-09-24)
 
+## Round 6: OP_SHA1 puzzles (`hash sha1`)
+
+`pool2 ... sha1 ...` hashes keys and chain levels with SHA-1: big-endian words, a 20-byte output, and
+20-byte chain input. The microbenchmark measures SHA-1 chain levels at 36.3 G/s on the 4090 and
+53.8 G/s on the 5090, against 16.3 and 23.4 G/s for SHA-256.
+
+**TS4 shapes, same session** (`results6/rtx4090`, `results6/rtx5090`):
+
+| shape | 4090 SHA-256 | 4090 SHA-1 | 5090 SHA-256 | 5090 SHA-1 |
+|---|---|---|---|---|
+| pinning k300 m16 | 14.98 G/s | 30.42 G/s | 20.85 G/s | 44.03 G/s |
+| round k64 m16 | 14.58 G/s | 29.37 G/s | 20.33 G/s | 40.95 G/s |
+
+**Correctness** (`verify_pool_hits.py` now knows SHA-1): 300/300 hits verified for a chain with m=8
+(all 8 levels) and for three encodings with m=3 (all encodings and levels), on both cards. Poisson z
+was between −0.36 and 0.49, with 0 control false-passes.
+
+The 4090 also measured 42 more SHA-1 shapes (`sweep6.sh`) to fit the cost model; the worst fit error is
+14%. The 5090 run of `sweep6.sh` overlapped a second copy of itself on the same GPU, so its rates are
+invalid. They are kept only as `rates_all_contaminated.jsonl`, and the 5090 model uses the 4090 fit
+scaled by the clean measured ratio (1.418).
+
+## Round 5: RIPEMD-160 chains, three encodings with chains, and security-menu stage rates
+
+What changed in `pool2.cu`:
+- `POOL_CHAIN` now supports RIPEMD-160 chains, with 20-byte levels.
+- Three encodings (02/03, 04, 06/07) combine with chains.
+
+Every rate below is measured on an RTX 4090 over the real problem shapes, 12 s per run
+(`results5/runs7/rates.jsonl`). Observed hit counts are Poisson-consistent with the expected counts.
+
+| stage shape | attempts/s |
+|---|---|
+| pinning RIPEMD k300 m16 | **25.51 G** |
+| round RIPEMD k64 m16 | **25.17 G** |
+| pinning SHA k96 m3 | 10.63 G |
+| pinning SHA k96 m1 | 6.55 G |
+| pinning SHA k32 m3 | 9.39 G |
+| round SHA k96 m2 e3 | 8.64 G |
+| round SHA k96 m3 e3 | 10.13 G |
+| round SHA k48 m3 e3 | 9.81 G |
+| round SHA k32 m3 e3 | 9.46 G |
+| round SHA k16 m2 e3 | 7.13 G |
+
+**CPU verification of dumped hits** (`verify_pool_hits.py`):
+
+| run | hits verified | spread | duplicates | control false-passes | Poisson z |
+|---|---|---|---|---|---|
+| RIPEMD chain m8 | 300/300 | all 8 levels | 0 | 0 | 0.1 |
+| enc3 + SHA chain m3 | 300/300 | all 3 encodings × 3 levels | 0 | 0 | −1.06 |
+
+These rates cost the menu tiers in `../SECURITY_MENU.md` (`../final_menu.py`).
+
+## Round 4: hash-chain OR and signed pool index/level (TS4)
+
+**Two script changes** (`../qsb_pool.py`, consensus-tested):
+- **Hash-chain OR** (`chain_pin`, `chain_r`). The script computes h₁ = H(key), h_{i+1} = H(h_i), and
+  the witness picks one level to DER-check with `OP_MIN` + `OP_PICK`. Each recovered key yields m
+  attempts, so per-attempt cost approaches one SHA-256 block.
+- **Signed pool index and chain level** (`sign_j`, `sign_lvl`). HORS commitments for every j and
+  every level are opened like the dummy selections (+6 ops each). The attacker loses that freedom,
+  so a round's second-preimage contribution rises to P − 1 bits. The honest spender keeps it, so the
+  speed is unchanged.
+
+**Kernel:** `pool2.cu` takes `POOL_CHAIN=m` and records each hit's level; `verify_pool_hits.py`
+re-derives chained hits.
+
+**Measured on the real TS2 problem shapes** (`../real/pin.bin`, `../real/round.bin`), attempts/s:
+
+| stage | RTX 4090 m=1 | m=4 | m=8 | m=16 | RTX 5090 m=1 | RTX 5090 m=16 |
+|---|---|---|---|---|---|---|
+| pinning, pool 300 | 7.03G | 11.60G | 13.26G | **14.28G** | 9.62G | **21.13G** |
+| round, bound 64 | 5.65G | 10.44G | 12.68G | **14.42G** | 7.76G | **20.59G** |
+| round, bound 32 | 4.64G | 9.32G | 11.70G | 13.80G | | |
+| round, bound 16 | 3.40G | 7.72G | 10.29G | 12.74G | | |
+| round, bound 4 | 1.31G | 3.78G | 5.77G (m=8) | 8.12G | | |
+
+**Verification.** Chain-level hits re-derived on CPU: 120/120 (4090 pinning m16), 120/120 (4090
+round k32 m16), 120/120 (4090 round k4 m8), 80/80 + 80/80 (5090). Levels 1–16 are all represented.
+
+**TS4** (n120, t8, pinning pool 300 chain 16; round bound 64 chain 16; j and level signed;
+compressed rounds; pool-first; SHA-256):
+
+| | value |
+|---|---|
+| size | 196 ops, 9,219 bytes |
+| consensus tests | 26 end-to-end vectors, all as expected |
+| second preimage | **89.7 bits** |
+| collision | 65.2 bits |
+| quantum queries | 36.0 bits |
+| RTX 4090 | **1.76 h** (58x vs today's 101 h) |
+| RTX 5090 | **1.21 h**, measured stage rates |
+
+**SHA-256 experiments** (`microbench.cu`; all self-tests pass):
+
+| experiment | RTX 4090 | RTX 5090 | verdict |
+|---|---|---|---|
+| chain-level SHA-256 (32-byte input) | 16.26G/s | 23.91G/s | baseline |
+| rotations via IMAD (pipe balancing) | 15.64G/s | 23.04G/s | slower, rejected |
+| two chains interleaved (instruction-level parallelism 2) | n/a | 22.96G/s per hash | slower, so throughput-bound, rejected |
+| SHA-1 chain level (20-byte input) | 36.35G/s | 54.49G/s | 2.2x per block, but only ~1.1x per DER hit end to end; not worth it |
+
+TS4 runs at 0.070 ns per attempt on the 4090, against 0.062 ns for one SHA-256 block: within 13% of
+the two-stage hash floor on this hardware.
+
+
+## Real spend: a genuine TS2 puzzle solution, verified by Bitcoin Core (2026-09-24)
+
+This is a complete spend of the **production** TS2 script: real `OP_SHA256` strict-DER puzzles, no
+stand-ins. Pinning and round were found on one RTX 4090 and verified with libbitcoinconsensus.
+
+**Setup** (`../real_spend.py`, `real_chain.sh`, `pool2.cu` with `-DROUND_MODE`):
+- **Script:** 8,574 bytes, 198 ops (n150, t16, pinning pool 300, round bound 64, forced-compressed,
+  pool-first); `design_check()` passes.
+- **Transaction:** 3 inputs with QSB at index 2 (the dummies' SIGHASH_SINGLE bug needs input index
+  ≥ #outputs), 2 outputs (a payment and an 8-byte OP_RETURN nonce as the pinning search field),
+  nSequence 0xffffffff, nLockTime 0.
+- **Round search:** real FindAndDelete subsets (16 of the last 48 dummies, by counter unranking)
+  rebuilt from the actual script bytes. The kernel's stream model is asserted equal to
+  `sighash_all` before grinding.
+
+**Pipeline checks before the real run:** at low difficulty, 200/200 pinning hits and 200/200 round
+hits on the real transaction re-derived on the CPU.
+
+**Result:**
+
+| stage | attempts | time (RTX 4090) | vs expected | hit | SHA-256(key) |
+|---|---|---|---|---|---|
+| pinning | 1.00×10^14 (6.64G/s) | 4 h 11 min | 2.25x (unlucky) | nonce (38, 3712432639), s=199, odd R | `301d020f230c8dc5deb91d1880ef3547badc09020a3105c169f53eeb625b909b` |
+| round | 6.1×10^12 (5.36G/s) | 19 min | 0.14x (lucky) | subset counter (11, 318174305), s=47, odd R | `301d02170d393cdfbaee3517ba72614fb0fdd03f87e1ae94d824cf02024f9073` |
+
+Both hashes are strict-DER 32-byte signatures. The signed digest (dummy indices) is
+[1, 9, 11, 25, 26, 29, 31, 33, 35, 38, 39, 40, 41, 45, 46, 47].
+
+**Core verification** (`../real/production_vector.txt`, run through `consensus_check`):
+
+| test | result |
+|---|---|
+| real spend, unmodified (1,174-byte tx) | **VALID** |
+| payment amount +1 sat | INVALID |
+| one bit of the OP_RETURN nonce flipped | INVALID |
+
+Total grind: ≈4.5 h on one 4090. The expected cost for this design is ≈4.1 h (the table above);
+the realized time is one draw from a heavy-tailed distribution. Artifacts are in `../real/`
+(`script.hex`, `spend_tx.hex`, `production_vector.txt`, `runs/`).
+
+
 ## Round 3: bigger pools, the 2-stage TS2 design, and Blackwell (RTX 4090 + RTX 5090)
 
 **Changes:**

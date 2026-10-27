@@ -1,0 +1,1 @@
+{"round_problem": "ok", "midstate_bytes": 7744, "rp": 25, "tail": 517, "subsets": 2254848913647, "stream_model_check": "z matches sighash_all"}

@@ -1,0 +1,1 @@
+{"K": 24, "chain": 8, "enc": 1, "hits_by_encoding": [11855, 0, 0], "hits_by_level": {"1": 1463, "2": 1550, "3": 1478, "4": 1423, "5": 1489, "6": 1496, "7": 1504, "8": 1452}, "hash": "rmd", "extra": 0, "N": 24, "reported": 11855, "unique": 11855, "duplicates": 0, "verified": 300, "failed": 0, "expected": 11844.0, "poisson_z": 0.1, "control_false_pass": 0, "ok": true}

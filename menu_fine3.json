@@ -1,0 +1,172 @@
+{
+ "100": {
+  "cfg": {
+   "hash": "sha256",
+   "n": 130,
+   "k": 96,
+   "chain_pin": 3,
+   "force_comp": false,
+   "sign_j": false,
+   "sign_lvl": false,
+   "pool_deep": true,
+   "t1": 6,
+   "b1": 1,
+   "k1": 96,
+   "chain1": 2,
+   "t2": 7,
+   "b2": 0,
+   "k2": 96,
+   "chain2": 3,
+   "chain_r": 2
+  },
+  "enc_honest": 3,
+  "h4090": 3.63,
+  "h5090": 2.47,
+  "ops": 201,
+  "bytes": 9551,
+  "pre": 108.1,
+  "coll": 77.4,
+  "Q": 47.2,
+  "E": [
+   18.8,
+   4.0
+  ],
+  "valid": true
+ },
+ "104": {
+  "cfg": {
+   "hash": "sha256",
+   "n": 130,
+   "k": 96,
+   "chain_pin": 3,
+   "force_comp": false,
+   "sign_j": false,
+   "sign_lvl": false,
+   "pool_deep": true,
+   "t1": 6,
+   "b1": 1,
+   "k1": 96,
+   "chain1": 2,
+   "t2": 7,
+   "b2": 0,
+   "k2": 96,
+   "chain2": 3,
+   "chain_r": 2
+  },
+  "enc_honest": 3,
+  "h4090": 3.63,
+  "h5090": 2.47,
+  "ops": 201,
+  "bytes": 9551,
+  "pre": 108.1,
+  "coll": 77.4,
+  "Q": 47.2,
+  "E": [
+   18.8,
+   4.0
+  ],
+  "valid": true
+ },
+ "108": {
+  "cfg": {
+   "hash": "sha256",
+   "n": 130,
+   "k": 96,
+   "chain_pin": 3,
+   "force_comp": false,
+   "sign_j": false,
+   "sign_lvl": false,
+   "pool_deep": true,
+   "t1": 6,
+   "b1": 1,
+   "k1": 96,
+   "chain1": 2,
+   "t2": 7,
+   "b2": 0,
+   "k2": 96,
+   "chain2": 3,
+   "chain_r": 2
+  },
+  "enc_honest": 3,
+  "h4090": 3.63,
+  "h5090": 2.47,
+  "ops": 201,
+  "bytes": 9551,
+  "pre": 108.1,
+  "coll": 77.4,
+  "Q": 47.2,
+  "E": [
+   18.8,
+   4.0
+  ],
+  "valid": true
+ },
+ "112": {
+  "cfg": {
+   "hash": "sha256",
+   "n": 140,
+   "k": 32,
+   "chain_pin": 3,
+   "force_comp": false,
+   "sign_j": false,
+   "sign_lvl": false,
+   "pool_deep": true,
+   "t1": 6,
+   "b1": 1,
+   "k1": 16,
+   "chain1": 2,
+   "t2": 7,
+   "b2": 0,
+   "k2": 32,
+   "chain2": 3,
+   "chain_r": 2
+  },
+  "enc_honest": 3,
+  "h4090": 4.55,
+  "h5090": 3.11,
+  "ops": 201,
+  "bytes": 9472,
+  "pre": 112.2,
+  "coll": 78.4,
+  "Q": 50.0,
+  "E": [
+   5.3,
+   2.3
+  ],
+  "valid": true
+ },
+ "116": {
+  "cfg": {
+   "hash": "sha256",
+   "n": 130,
+   "k": 96,
+   "chain_pin": 1,
+   "force_comp": false,
+   "sign_j": false,
+   "sign_lvl": false,
+   "pool_deep": true,
+   "t1": 7,
+   "b1": 0,
+   "k1": 48,
+   "chain1": 3,
+   "t2": 7,
+   "b2": 0,
+   "k2": 96,
+   "chain2": 2,
+   "chain_r": 3
+  },
+  "enc_honest": 3,
+  "h4090": 5.0,
+  "h5090": 3.42,
+  "ops": 200,
+  "bytes": 9551,
+  "pre": 116.2,
+  "coll": 82.6,
+  "Q": 52.0,
+  "E": [
+   2.0,
+   2.7
+  ],
+  "valid": true
+ }
+}

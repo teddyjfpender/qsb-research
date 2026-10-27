@@ -1,0 +1,1 @@
+{"kernel":"pool2","chain":3,"gpu":"NVIDIA GeForce RTX 4090","K":24,"MZ":21,"enc":3,"tpb":128,"hash":"sha1","gate":"zeros","N":24,"extra_blocks":0,"seconds":10.26,"candidates":440401920,"z_per_s":4.2943e+07,"shots_per_s":1.8552e+10,"hits":11306,"expected_hits":11340.0}

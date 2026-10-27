@@ -1,0 +1,152 @@
+[
+ {
+  "tier": "A",
+  "desc": "up to 89.7 bits (2-stage, SHA-256): TS4",
+  "cfg": {
+   "hash": "sha256",
+   "n": 120,
+   "t1": 8,
+   "k": 300,
+   "k1": 64,
+   "force_comp": true,
+   "pool_deep": true,
+   "chain_pin": 16,
+   "chain_r": 16,
+   "sign_j": true,
+   "sign_lvl": true
+  },
+  "enc_honest": 1,
+  "ops": 196,
+  "bytes": 9219,
+  "E": [
+   37.9
+  ],
+  "preimage": 89.7,
+  "quantum": 36.0,
+  "collision": 65.2,
+  "h4090": 1.76,
+  "h5090": 1.21,
+  "h5090_source": "measured"
+ },
+ {
+  "tier": "B",
+  "desc": "up to 91.6 bits (2-stage, RIPEMD-160): TS4-R",
+  "cfg": {
+   "hash": "rmd",
+   "n": 120,
+   "t1": 8,
+   "k": 300,
+   "k1": 64,
+   "force_comp": true,
+   "pool_deep": true,
+   "chain_pin": 16,
+   "chain_r": 16,
+   "sign_j": true,
+   "sign_lvl": true
+  },
+  "enc_honest": 1,
+  "ops": 196,
+  "bytes": 9219,
+  "E": [
+   19.7
+  ],
+  "preimage": 91.6,
+  "quantum": 36.9,
+  "collision": 66.2,
+  "h4090": 1.91,
+  "h5090": 1.32,
+  "h5090_source": "est"
+ },
+ {
+  "tier": "C",
+  "desc": "up to 108 bits (3-stage)",
+  "cfg": {
+   "hash": "sha256",
+   "n": 130,
+   "k": 96,
+   "chain_pin": 3,
+   "pool_deep": true,
+   "t1": 6,
+   "b1": 1,
+   "k1": 96,
+   "chain1": 2,
+   "t2": 7,
+   "k2": 96,
+   "chain2": 3
+  },
+  "enc_honest": 3,
+  "ops": 201,
+  "bytes": 9551,
+  "E": [
+   18.8,
+   4.0
+  ],
+  "preimage": 108.0,
+  "quantum": 47.1,
+  "collision": 77.4,
+  "h4090": 3.94,
+  "h5090": 2.72,
+  "h5090_source": "est"
+ },
+ {
+  "tier": "D",
+  "desc": "up to 112 bits (3-stage)",
+  "cfg": {
+   "hash": "sha256",
+   "n": 140,
+   "k": 32,
+   "chain_pin": 3,
+   "pool_deep": true,
+   "t1": 6,
+   "b1": 1,
+   "k1": 16,
+   "chain1": 2,
+   "t2": 7,
+   "k2": 32,
+   "chain2": 3
+  },
+  "enc_honest": 3,
+  "ops": 201,
+  "bytes": 9472,
+  "E": [
+   5.3,
+   2.3
+  ],
+  "preimage": 111.8,
+  "quantum": 49.8,
+  "collision": 78.4,
+  "h4090": 4.81,
+  "h5090": 3.32,
+  "h5090_source": "est"
+ },
+ {
+  "tier": "E",
+  "desc": "up to 116 bits (3-stage)",
+  "cfg": {
+   "hash": "sha256",
+   "n": 130,
+   "k": 96,
+   "chain_pin": 1,
+   "pool_deep": true,
+   "t1": 7,
+   "k1": 48,
+   "chain1": 3,
+   "t2": 7,
+   "k2": 96,
+   "chain2": 2
+  },
+  "enc_honest": 3,
+  "ops": 200,
+  "bytes": 9551,
+  "E": [
+   2.0,
+   2.7
+  ],
+  "preimage": 116.2,
+  "quantum": 52.0,
+  "collision": 82.6,
+  "h4090": 5.22,
+  "h5090": 3.6,
+  "h5090_source": "est"
+ }
+]

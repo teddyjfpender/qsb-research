@@ -82,6 +82,17 @@ def run(script, stack, sighash_fn, log=print):
         elif op == OP["OP_ADD"]:
             b_, a_ = num(stack.pop()), num(stack.pop())
             stack.append(enc_num(a_ + b_))
+        elif op == OP["OP_SUB"]:
+            b_, a_ = num(stack.pop()), num(stack.pop())
+            stack.append(enc_num(a_ - b_))
+        elif op == OP["OP_2DROP"]:
+            stack.pop(); stack.pop()
+        elif op == OP["OP_SIZE"]:
+            stack.append(enc_num(len(stack[-1])))
+        elif op == OP["OP_SHA1"]:
+            stack.append(hashlib.sha1(stack.pop()).digest())
+        elif op == OP["OP_SHA256"]:
+            stack.append(hashlib.sha256(stack.pop()).digest())
         elif op == OP["OP_DUP"]:
             stack.append(stack[-1])
         elif op == OP["OP_DROP"]:
@@ -95,8 +106,9 @@ def run(script, stack, sighash_fn, log=print):
         elif op == OP["OP_RIPEMD160"]:
             stack.append(hashlib.new("ripemd160", stack.pop()).digest())
         elif op == OP["OP_EQUALVERIFY"]:
-            if stack.pop() != stack.pop():
-                return False, f"EQUALVERIFY @{pos}"
+            a1, a2 = stack.pop(), stack.pop()
+            if a1 != a2:
+                return False, f"EQUALVERIFY @{pos} ({a1.hex()[:16]} vs {a2.hex()[:16]})"
         elif op in (OP["OP_CHECKSIG"], OP["OP_CHECKSIGVERIFY"]):
             pub, sig = stack.pop(), stack.pop()
             if sig and not is_valid_der(sig):

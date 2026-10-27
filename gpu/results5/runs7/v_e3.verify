@@ -1,0 +1,1 @@
+{"K": 24, "chain": 3, "enc": 3, "hits_by_encoding": [1906, 1998, 1968], "hits_by_level": {"1": 1870, "2": 1975, "3": 2027}, "hash": "sha", "extra": 0, "N": 24, "reported": 5872, "unique": 5872, "duplicates": 0, "verified": 300, "failed": 0, "expected": 5953.5, "poisson_z": -1.06, "control_false_pass": 0, "ok": true}

@@ -1,0 +1,38 @@
+R=1: 406900 feasible candidates
+R=2: 274 feasible candidates
+[MENU80] {'hash': 'sha256', 'n': 80, 'k': 300, 'chain_pin': 16, 'force_comp': False, 'sign_j': True, 'sign_lvl': True, 'pool_deep': True, 't1': 8, 'b1': 1, 'k1': 64, 'chain1': 16, 'chain_r': 16, 'seed': 80}: ops=199 production bytes=7979 test-mode bytes=8651 max stack=588
+[MENU80] designer check: 0 unsafe region items
+[MENU84] {'hash': 'sha256', 'n': 100, 'k': 300, 'chain_pin': 16, 'force_comp': False, 'sign_j': True, 'sign_lvl': False, 'pool_deep': True, 't1': 9, 'b1': 0, 'k1': 64, 'chain1': 16, 'chain_r': 16, 'seed': 84}: ops=199 production bytes=8262 test-mode bytes=8934 max stack=612
+[MENU84] designer check: 0 unsafe region items
+[MENU88] {'hash': 'sha256', 'n': 120, 'k': 300, 'chain_pin': 16, 'force_comp': False, 'sign_j': True, 'sign_lvl': True, 'pool_deep': True, 't1': 8, 'b1': 0, 'k1': 64, 'chain1': 16, 'chain_r': 16, 'seed': 88}: ops=194 production bytes=9215 test-mode bytes=9887 max stack=666
+[MENU88] designer check: 0 unsafe region items
+[MENU90] {'hash': 'rmd', 'n': 120, 'k': 300, 'chain_pin': 16, 'force_comp': False, 'sign_j': True, 'sign_lvl': True, 'pool_deep': True, 't1': 8, 'b1': 0, 'k1': 64, 'chain1': 16, 'chain_r': 16, 'seed': 90}: ops=194 production bytes=9215 test-mode bytes=9887 max stack=666
+[MENU90] designer check: 0 unsafe region items
+[MENU92] {'hash': 'sha256', 'n': 120, 'k': 128, 'chain_pin': 4, 'force_comp': False, 'sign_j': False, 'sign_lvl': False, 'pool_deep': True, 't1': 6, 'b1': 1, 'k1': 64, 'chain1': 1, 't2': 8, 'b2': 0, 'k2': 64, 'chain2': 1, 'chain_r': 1, 'seed': 92}: ops=199 production bytes=9272 test-mode bytes=9398 max stack=661
+[MENU92] designer check: 0 unsafe region items
+[MENU96] {'hash': 'sha256', 'n': 120, 'k': 128, 'chain_pin': 4, 'force_comp': False, 'sign_j': False, 'sign_lvl': False, 'pool_deep': True, 't1': 6, 'b1': 1, 'k1': 64, 'chain1': 1, 't2': 8, 'b2': 0, 'k2': 64, 'chain2': 1, 'chain_r': 1, 'seed': 96}: ops=199 production bytes=9272 test-mode bytes=9398 max stack=661
+[MENU96] designer check: 0 unsafe region items
+[MENU100] {'hash': 'sha256', 'n': 120, 'k': 128, 'chain_pin': 4, 'force_comp': False, 'sign_j': False, 'sign_lvl': False, 'pool_deep': True, 't1': 6, 'b1': 1, 'k1': 64, 'chain1': 1, 't2': 8, 'b2': 0, 'k2': 64, 'chain2': 1, 'chain_r': 1, 'seed': 100}: ops=199 production bytes=9272 test-mode bytes=9398 max stack=661
+[MENU100] designer check: 0 unsafe region items
+[MENU104] {'hash': 'sha256', 'n': 120, 'k': 128, 'chain_pin': 4, 'force_comp': False, 'sign_j': False, 'sign_lvl': False, 'pool_deep': True, 't1': 6, 'b1': 1, 'k1': 64, 'chain1': 1, 't2': 8, 'b2': 0, 'k2': 64, 'chain2': 1, 'chain_r': 1, 'seed': 104}: ops=199 production bytes=9272 test-mode bytes=9398 max stack=661
+[MENU104] designer check: 0 unsafe region items
+[MENU108] {'hash': 'sha256', 'n': 120, 'k': 128, 'chain_pin': 4, 'force_comp': False, 'sign_j': False, 'sign_lvl': False, 'pool_deep': True, 't1': 6, 'b1': 1, 'k1': 64, 'chain1': 1, 't2': 8, 'b2': 0, 'k2': 64, 'chain2': 1, 'chain_r': 1, 'seed': 108}: ops=199 production bytes=9272 test-mode bytes=9398 max stack=661
+[MENU108] designer check: 0 unsafe region items
+[MENU112] {'hash': 'sha256', 'n': 120, 'k': 128, 'chain_pin': 4, 'force_comp': False, 'sign_j': False, 'sign_lvl': False, 'pool_deep': True, 't1': 6, 'b1': 1, 'k1': 64, 'chain1': 1, 't2': 8, 'b2': 0, 'k2': 32, 'chain2': 1, 'chain_r': 1, 'seed': 112}: ops=199 production bytes=9272 test-mode bytes=9398 max stack=661
+[MENU112] designer check: 0 unsafe region items
+[MENU116] {'hash': 'rmd', 'n': 120, 'k': 128, 'chain_pin': 1, 'force_comp': False, 'sign_j': False, 'sign_lvl': False, 'pool_deep': True, 't1': 7, 'b1': 1, 'k1': 16, 'chain1': 1, 't2': 8, 'b2': 0, 'k2': 64, 'chain2': 1, 'chain_r': 1, 'seed': 116}: ops=201 production bytes=9282 test-mode bytes=9345 max stack=662
+[MENU116] designer check: 0 unsafe region items
+consensus: 232 vectors, unexpected results: 0
+| target | stages | hash | parameters | ops | bytes | E | 2nd-pre | collision | quantum | RTX 4090 | RTX 5090 | vs today (101 h) |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| ≥80 | 2 | sha256 | n80 pool300 pinchain16; r1: t8+1b k64 m16 sign-j sign-lvl | 199 | 7979 | [282.6] | **81.5** | 59.6 | 31.9 | 1.7 h | 1.15 h | 60x |
+| ≥84 | 2 | sha256 | n100 pool300 pinchain16; r1: t9 k64 m16 sign-j | 199 | 8262 | [257.6] | **84.1** | 65.3 | 33.2 | 1.7 h | 1.15 h | 60x |
+| ≥88 | 2 | sha256 | n120 pool300 pinchain16; r1: t8 k64 m16 sign-j sign-lvl | 194 | 9215 | [113.8] | **88.1** | 65.2 | 35.2 | 1.7 h | 1.15 h | 60x |
+| ≥90 | 2 | rmd | n120 pool300 pinchain16; r1: t8 k64 m16 sign-j sign-lvl | 194 | 9215 | [59.2] | **90.0** | 66.1 | 36.1 | 1.79 h | 1.16 h | 57x |
+| ≥92 | 3 | sha256 | n120 pool128 pinchain4; r1: t6+1b k64 m1; r2: t8 k64 m1 | 199 | 9272 | [3.5, 7.1] | **112.0** | 78.5 | 48.7 | 4.84 h | 3.3 h | 21x |
+| ≥96 | 3 | sha256 | n120 pool128 pinchain4; r1: t6+1b k64 m1; r2: t8 k64 m1 | 199 | 9272 | [3.5, 7.1] | **112.0** | 78.5 | 48.7 | 4.84 h | 3.3 h | 21x |
+| ≥100 | 3 | sha256 | n120 pool128 pinchain4; r1: t6+1b k64 m1; r2: t8 k64 m1 | 199 | 9272 | [3.5, 7.1] | **112.0** | 78.5 | 48.7 | 4.84 h | 3.3 h | 21x |
+| ≥104 | 3 | sha256 | n120 pool128 pinchain4; r1: t6+1b k64 m1; r2: t8 k64 m1 | 199 | 9272 | [3.5, 7.1] | **112.0** | 78.5 | 48.7 | 4.84 h | 3.3 h | 21x |
+| ≥108 | 3 | sha256 | n120 pool128 pinchain4; r1: t6+1b k64 m1; r2: t8 k64 m1 | 199 | 9272 | [3.5, 7.1] | **112.0** | 78.5 | 48.7 | 4.84 h | 3.3 h | 21x |
+| ≥112 | 3 | sha256 | n120 pool128 pinchain4; r1: t6+1b k64 m1; r2: t8 k32 m1 | 199 | 9272 | [3.5, 3.6] | **113.0** | 78.7 | 49.2 | 5.16 h | 3.52 h | 20x |
+| ≥116 | 3 | rmd | n120 pool128 pinchain1; r1: t7+1b k16 m1; r2: t8 k64 m1 | 201 | 9282 | [7.4, 3.7] | **116.8** | 81.4 | 52.1 | 9.28 h | 6.3 h | 11x |

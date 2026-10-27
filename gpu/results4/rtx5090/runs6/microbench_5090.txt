@@ -1,0 +1,13 @@
+selftest: SHA-1(abc) OK, SHA-256(abc) OK, IMAD-mixed SHA-256 == SHA-256 OK, 2-way SHA-256 OK
+fmul (u128 limbs)              120.52 G ops/s    0.0083 ns/op (whole GPU)
+fsqr                           142.42 G ops/s    0.0070 ns/op (whole GPU)
+VanitySearch _ModMult          120.57 G ops/s    0.0083 ns/op (whole GPU)
+SHA-256 compress (fast)         24.38 G ops/s    0.0410 ns/op (whole GPU)
+SHA-256 compress (GPUHash)      24.30 G ops/s    0.0412 ns/op (whole GPU)
+RIPEMD-160 compress (fast)      47.85 G ops/s    0.0209 ns/op (whole GPU)
+ModInv (_ModInv)                 1.93 G ops/s    0.5177 ns/op (whole GPU)
+SHA-256 chain level (32B in)    23.81 G ops/s    0.0420 ns/op (whole GPU)
+SHA-256 chain, IMAD-mixed rot    22.78 G ops/s    0.0439 ns/op (whole GPU)
+SHA-1 chain level (20B in)      54.33 G ops/s    0.0184 ns/op (whole GPU)
+SHA-256 chain, 2 interleaved (per hash)    22.89 G ops/s    0.0437 ns/op (whole GPU)
+err: no error

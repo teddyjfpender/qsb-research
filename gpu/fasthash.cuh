@@ -88,3 +88,107 @@ __device__ __forceinline__ void ripemd160_fast(uint32_t h[5], const uint32_t X[1
 __device__ __forceinline__ void ripemd160_init(uint32_t s[5]) {
     s[0] = 0x67452301; s[1] = 0xEFCDAB89; s[2] = 0x98BADCFE; s[3] = 0x10325476; s[4] = 0xC3D2E1F0;
 }
+
+/* ------------------------------------------------------------------ experiments (microbench only) */
+/* rotr via IMAD: (x >> n) + x * 2^(32-n); disjoint bits, so '+' == '|'. Forces the multiply into the
+ * FMA/IMAD pipe instead of the shifter, to balance pipes (hypothesis; measured in microbench.cu). */
+__device__ __forceinline__ uint32_t rotr_imad(uint32_t x, int n) {
+    uint32_t r;
+    asm("mad.lo.u32 %0, %1, %2, %3;" : "=r"(r) : "r"(x), "r"(1u << (32 - n)), "r"(x >> n));
+    return r;
+}
+
+__device__ __forceinline__ void sha256_mixrot(uint32_t st[8], const uint32_t win[16]) {
+    const uint32_t Kc[64] = {
+        0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
+        0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
+        0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
+        0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
+        0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
+        0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
+        0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
+        0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2};
+    uint32_t w[16];
+#pragma unroll
+    for (int i = 0; i < 16; i++) w[i] = win[i];
+    uint32_t a = st[0], b = st[1], c = st[2], d = st[3], e = st[4], f = st[5], g = st[6], h = st[7];
+#pragma unroll
+    for (int i = 0; i < 64; i++) {
+        uint32_t wi;
+        if (i < 16) wi = w[i];
+        else {
+            const uint32_t w15 = w[(i + 1) & 15], w2 = w[(i + 14) & 15];
+            const uint32_t s0 = rotr_imad(w15, 7) ^ rotr32(w15, 18) ^ (w15 >> 3);
+            const uint32_t s1 = rotr_imad(w2, 17) ^ rotr32(w2, 19) ^ (w2 >> 10);
+            wi = w[i & 15] + s0 + w[(i + 9) & 15] + s1;
+            w[i & 15] = wi;
+        }
+        const uint32_t S1 = rotr_imad(e, 6) ^ rotr32(e, 11) ^ rotr_imad(e, 25);
+        const uint32_t ch = g ^ (e & (f ^ g));
+        const uint32_t t1 = h + S1 + ch + Kc[i] + wi;
+        const uint32_t S0 = rotr_imad(a, 2) ^ rotr32(a, 13) ^ rotr_imad(a, 22);
+        const uint32_t mj = (a & b) | (c & (a | b));
+        const uint32_t t2 = S0 + mj;
+        h = g; g = f; f = e; e = d + t1; d = c; c = b; b = a; a = t1 + t2;
+    }
+    st[0] += a; st[1] += b; st[2] += c; st[3] += d; st[4] += e; st[5] += f; st[6] += g; st[7] += h;
+}
+
+/* SHA-1 compression (for evaluating OP_SHA1 chain levels) */
+__device__ __forceinline__ void sha1_fast(uint32_t st[5], const uint32_t win[16]) {
+    uint32_t w[16];
+#pragma unroll
+    for (int i = 0; i < 16; i++) w[i] = win[i];
+    uint32_t a = st[0], b = st[1], c = st[2], d = st[3], e = st[4];
+#pragma unroll
+    for (int i = 0; i < 80; i++) {
+        uint32_t wi;
+        if (i < 16) wi = w[i];
+        else { wi = rotl32(w[(i + 13) & 15] ^ w[(i + 8) & 15] ^ w[(i + 2) & 15] ^ w[i & 15], 1); w[i & 15] = wi; }
+        uint32_t f, k;
+        if (i < 20) { f = d ^ (b & (c ^ d)); k = 0x5A827999; }
+        else if (i < 40) { f = b ^ c ^ d; k = 0x6ED9EBA1; }
+        else if (i < 60) { f = (b & c) | (d & (b | c)); k = 0x8F1BBCDC; }
+        else { f = b ^ c ^ d; k = 0xCA62C1D6; }
+        const uint32_t t = rotl32(a, 5) + f + e + k + wi;
+        e = d; d = c; c = rotl32(b, 30); b = a; a = t;
+    }
+    st[0] += a; st[1] += b; st[2] += c; st[3] += d; st[4] += e;
+}
+
+/* Two independent SHA-256 compressions interleaved round by round (instruction-level parallelism 2). */
+__device__ __forceinline__ void sha256_fast2(uint32_t sa[8], const uint32_t wa_in[16], uint32_t sb[8], const uint32_t wb_in[16]) {
+    const uint32_t Kc[64] = {
+        0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
+        0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
+        0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
+        0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
+        0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
+        0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
+        0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
+        0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2};
+    uint32_t wa[16], wb[16];
+#pragma unroll
+    for (int i = 0; i < 16; i++) { wa[i] = wa_in[i]; wb[i] = wb_in[i]; }
+    uint32_t a = sa[0], b = sa[1], c = sa[2], d = sa[3], e = sa[4], f = sa[5], g = sa[6], h = sa[7];
+    uint32_t A = sb[0], B = sb[1], C = sb[2], D = sb[3], E = sb[4], F = sb[5], G = sb[6], H = sb[7];
+#pragma unroll
+    for (int i = 0; i < 64; i++) {
+        uint32_t xa, xb;
+        if (i < 16) { xa = wa[i]; xb = wb[i]; }
+        else {
+            uint32_t p = wa[(i + 1) & 15], q = wa[(i + 14) & 15], P2 = wb[(i + 1) & 15], Q2 = wb[(i + 14) & 15];
+            xa = wa[i & 15] + (rotr32(p, 7) ^ rotr32(p, 18) ^ (p >> 3)) + wa[(i + 9) & 15] + (rotr32(q, 17) ^ rotr32(q, 19) ^ (q >> 10));
+            xb = wb[i & 15] + (rotr32(P2, 7) ^ rotr32(P2, 18) ^ (P2 >> 3)) + wb[(i + 9) & 15] + (rotr32(Q2, 17) ^ rotr32(Q2, 19) ^ (Q2 >> 10));
+            wa[i & 15] = xa; wb[i & 15] = xb;
+        }
+        const uint32_t t1 = h + (rotr32(e, 6) ^ rotr32(e, 11) ^ rotr32(e, 25)) + (g ^ (e & (f ^ g))) + Kc[i] + xa;
+        const uint32_t T1 = H + (rotr32(E, 6) ^ rotr32(E, 11) ^ rotr32(E, 25)) + (G ^ (E & (F ^ G))) + Kc[i] + xb;
+        const uint32_t t2 = (rotr32(a, 2) ^ rotr32(a, 13) ^ rotr32(a, 22)) + ((a & b) | (c & (a | b)));
+        const uint32_t T2 = (rotr32(A, 2) ^ rotr32(A, 13) ^ rotr32(A, 22)) + ((A & B) | (C & (A | B)));
+        h = g; g = f; f = e; e = d + t1; d = c; c = b; b = a; a = t1 + t2;
+        H = G; G = F; F = E; E = D + T1; D = C; C = B; B = A; A = T1 + T2;
+    }
+    sa[0] += a; sa[1] += b; sa[2] += c; sa[3] += d; sa[4] += e; sa[5] += f; sa[6] += g; sa[7] += h;
+    sb[0] += A; sb[1] += B; sb[2] += C; sb[3] += D; sb[4] += E; sb[5] += F; sb[6] += G; sb[7] += H;
+}

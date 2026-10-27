@@ -1,0 +1,18 @@
+{
+ "version": "qsb-judge-2",
+ "min_expected_solutions_per_round": 1.0,
+ "fee_sat_per_vbyte": 5,
+ "gpu_sats_per_hour": 690,
+ "tx_overhead_vbytes": 60,
+ "audit_random_perturbations": 1500,
+ "realised_audit_vectors": {
+  "accepted": 40,
+  "rejected": 40
+ },
+ "admissible": {
+  "min_preimage_bits": 80.0,
+  "min_quantum_bits": 32.0,
+  "min_collision_bits": 60.0,
+  "_note": "floors that exclude toy designs only; above them, security is a scored dimension, not a band"
+ }
+}

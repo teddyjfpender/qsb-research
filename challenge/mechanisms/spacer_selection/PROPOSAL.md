@@ -3,9 +3,12 @@
 The prototype removes one opcode from every HORS selection without sharing
 secrets or dummy regions between rounds. The released byte artifacts are a
 **mechanism-track proposal**, not a ranked submission or a fully proved D/E
-family. They still use the existing DER predicate. Their estimated costs are
-4.253431 GPU-hours at tier D and 4.759079 at tier E, so the user's two-hour and
-thirty-minute targets remain unmet.
+family. They still use the existing DER predicate. Exact-layout RTX 4090
+measurements now project **4.412697 GPU-hours at tier D and 4.498099 at tier E**.
+The original 4.253431/4.759079 estimates were broadly supported but are
+superseded by these measured-rate projections. Neither is a completed
+production solve. The user's two-hour and thirty-minute targets remain unmet.
+See [CLOSEOUT.md](CLOSEOUT.md) for the measured submission and research closure.
 
 ## The trick and stack effect
 
@@ -103,16 +106,18 @@ and its constant push for each selection. It increases the initial stack by
 limits; bytes are not treated as unbounded.
 
 Interleaving also increases the suffix rehashed for each round. The estimates
-charge those additional SHA-256 blocks using the frozen cost model. The exact
-new layouts have not been measured on a GPU, and the current fixed round-problem
-renderer is not a production solver for these arbitrary script layouts.
+charge those additional SHA-256 blocks using the frozen cost model. The new
+proposal-local GPU renderer has since measured all four exact round layouts,
+including their interleaved commitments. It is a benchmark/search kernel for
+these layouts, not a complete production spending pipeline. The old fixed
+round-problem renderer remains unchanged.
 
 Deterministic search: seed 20261028, 100,000 mutation steps per tier, 500
 finalists rebuilt per tier. This is a search for good candidates, not a global
 optimality proof. Constraints preserve all three baseline-tier security axes
 recomputed with the corrected DER probability. No bonus selections are used.
 
-| Tier | Hash | n / pool / round bounds | Chains: pin / r1 / r2 | GPU-h estimate | Classical / quantum / collision bits |
+| Tier | Hash | n / pool / round bounds | Chains: pin / r1 / r2 | Original model GPU-h | Classical / quantum / collision bits |
 |---|---|---|---|---:|---|
 | D | SHA-256 | 129 / 96 / 96,96 | 2 / 4 / 5 | **4.253431** | 113.556305 / 50.193190 / 82.226848 |
 | E | SHA-1 | 135 / 64 / 64,64 | 2 / 4 / 5 | **4.759079** | 117.695523 / 52.555280 / 84.033726 |
@@ -125,11 +130,35 @@ pool-first layout, and unsigned nonce indices and levels.
 | D | 200 | 9,717 | 9,948 | 924 |
 | E | 200 | 9,749 | 9,980 | 928 |
 
-Compared with the corrected estimates for the current audited candidates
+In the original model comparison, relative to the corrected estimates for the current audited candidates
 `gpu_d_0` (5.566873 h) and `gpu_e_0` (5.845655 h), these are **23.59%** and
 **18.59%** less expected GPU work. D preserves its tier thresholds, not every
 higher security number of `gpu_d_0`. E improves all three modeled security axes
-over `gpu_e_0`. Neither timing is a newly measured runtime or a deadline guarantee.
+over `gpu_e_0`. Those percentages compare historical model estimates, not fresh
+measurements of both designs. The new measurement and its limitations follow.
+
+## Exact-layout GPU validation and closeout
+
+One RTX 4090, CUDA 12.8, driver 595.91.07, 450 W cap; three 20-second real-DER
+measurements per stage, with subset ranges spread across each round's space.
+Median rates (billions of attempts/second) are D: 8.3138 / 9.2656 / 9.3952;
+E: 16.281 / 20.763 / 21.244. The corrected DER probability and existing retry
+model give 4.412697 / 4.498099 expected GPU-hours. Applying a 5% rate allowance
+to each stage's slowest repeat gives 4.656597 / 4.739034 hours; this allowance is
+not a statistical confidence interval or guaranteed completion time.
+
+Across 12 reduced-difficulty runs, 3,464 hits were recorded without duplicates
+within each run. Independently sampled CPU checks verified 2,954 hits and
+rejected all 2,954 altered-sign controls. All encodings and chain levels were
+represented. The CPU stream model also passed 412 exact FindAndDelete cases.
+No full production DER solve was performed. The scripts and their existing
+security audit status are unchanged. Raw runs, inputs, source digests and the
+reproducible report are in `gpu_validation/`.
+
+The measured mechanism proposal is retained for review, and this research pass
+is closed at the user's request. It is not ranked or promoted. No under-two-hour
+construction or proof of global optimality is claimed. The rented pod was
+terminated after the artifacts were retrieved.
 
 ## Validation and submission artifacts
 

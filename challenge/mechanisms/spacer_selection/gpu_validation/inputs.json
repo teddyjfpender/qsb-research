@@ -1,0 +1,102 @@
+[
+  {
+    "tier": "D",
+    "stage": "pin",
+    "script_sha256": "b9e57f8016d43658012d7a8f01d2f66df9b64641743ff97ed5f97a8b4f1cd68f",
+    "midstate_bytes": 9856,
+    "suffix_bytes": 53,
+    "cfg": {
+      "R": 2,
+      "b1": 0,
+      "b2": 0,
+      "chain1": 4,
+      "chain2": 5,
+      "chain_pin": 2,
+      "destructive_chain": true,
+      "enc_honest": 3,
+      "force_comp": false,
+      "hash": "sha256",
+      "k": 96,
+      "k1": 96,
+      "k2": 96,
+      "n": 129,
+      "pool_deep": true,
+      "sign_j": false,
+      "sign_lvl": false,
+      "t1": 7,
+      "t2": 7
+    }
+  },
+  {
+    "tier": "D",
+    "stage": "round1",
+    "n": 129,
+    "t": 7,
+    "script_sha256": "b9e57f8016d43658012d7a8f01d2f66df9b64641743ff97ed5f97a8b4f1cd68f",
+    "midstate_bytes": 5312,
+    "rehash_blocks": 71,
+    "subsets": 99949406400,
+    "cpu_stream_cases": 103
+  },
+  {
+    "tier": "D",
+    "stage": "round2",
+    "n": 129,
+    "t": 7,
+    "script_sha256": "b9e57f8016d43658012d7a8f01d2f66df9b64641743ff97ed5f97a8b4f1cd68f",
+    "midstate_bytes": 1152,
+    "rehash_blocks": 136,
+    "subsets": 99949406400,
+    "cpu_stream_cases": 103
+  },
+  {
+    "tier": "E",
+    "stage": "pin",
+    "script_sha256": "70787cb14338f02af545e2cb31ec47d6d298465bc922818a0efc3ed4432dab03",
+    "midstate_bytes": 9920,
+    "suffix_bytes": 21,
+    "cfg": {
+      "R": 2,
+      "b1": 0,
+      "b2": 0,
+      "chain1": 4,
+      "chain2": 5,
+      "chain_pin": 2,
+      "destructive_chain": true,
+      "enc_honest": 3,
+      "force_comp": false,
+      "hash": "sha1",
+      "k": 64,
+      "k1": 64,
+      "k2": 64,
+      "n": 135,
+      "pool_deep": true,
+      "sign_j": false,
+      "sign_lvl": false,
+      "t1": 7,
+      "t2": 7
+    }
+  },
+  {
+    "tier": "E",
+    "stage": "round1",
+    "n": 135,
+    "t": 7,
+    "script_sha256": "70787cb14338f02af545e2cb31ec47d6d298465bc922818a0efc3ed4432dab03",
+    "midstate_bytes": 5120,
+    "rehash_blocks": 75,
+    "subsets": 138432467745,
+    "cpu_stream_cases": 103
+  },
+  {
+    "tier": "E",
+    "stage": "round2",
+    "n": 135,
+    "t": 7,
+    "script_sha256": "70787cb14338f02af545e2cb31ec47d6d298465bc922818a0efc3ed4432dab03",
+    "midstate_bytes": 768,
+    "rehash_blocks": 143,
+    "subsets": 138432467745,
+    "cpu_stream_cases": 103
+  }
+]

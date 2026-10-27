@@ -1,0 +1,23 @@
+{
+  "hits_sha256": "fd17239005848aeafaf2cb04b6724be40f090811de2b72d03becb67294df18ed",
+  "rate_sha256": "d199340c7fcec3f0bd014a2b972a0b1db6f69ae940ecc943b27d85cad1400d19",
+  "verifier_sha256": "cf1d5c9f385a50022014fd0c66434bcd5baf32efa31b3a585691ea781f9da1c3",
+  "tier": "E",
+  "stage": "pin",
+  "hits": 347,
+  "verified": 300,
+  "failed": 0,
+  "control_false_pass": 0,
+  "poisson_z": 1.9814848097530424,
+  "encodings": [
+    0,
+    1,
+    2
+  ],
+  "levels": [
+    1,
+    2
+  ],
+  "production_sighash": true,
+  "production_der_solve": false
+}

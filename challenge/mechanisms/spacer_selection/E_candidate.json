@@ -78,5 +78,13 @@
     ],
     "confidence": "unranked mechanism estimate; full family soundness not proved"
   },
-  "status": "proposal; not accepted by frozen ranked judge"
+  "status": "proposal; not accepted by frozen ranked judge",
+  "timing_validation": {
+    "original_estimate_hours": 4.759078543081689,
+    "measured_rate_expected_hours": 4.498098714285534,
+    "conservative_with_5pct_rate_margin_hours": 4.739033880248346,
+    "full_production_spend_solved": false,
+    "report": "gpu_validation/report.json",
+    "status": "exact-layout stage rates measured; original estimate superseded; projected mean, not full solve"
+  }
 }

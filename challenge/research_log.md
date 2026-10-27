@@ -199,3 +199,44 @@ existing deep-accepted candidates estimate at 5.566873/5.845655 GPU-h after the
 DER probability correction. No verified sub-two-hour or sub-thirty-minute
 upper-tier construction was produced. All generated work is local; no new GPU
 resources were rented, and no transactions or external submissions were sent.
+
+## Bounded spacer timing validation (user-requested closeout, 2026-10-27)
+
+Hypothesis: the 4.253431 h D and 4.759079 h E spacer estimates survive a
+fresh RTX 4090 measurement of the actual production script layouts. Build a
+proposal-local renderer, compare its sighashes and reduced-difficulty GPU hits
+with the independent CPU implementation, measure the real DER gate, and either
+retain supported estimates or replace/reject them. Finish with a mechanism
+submission and explicit closure; do not reopen the construction search.
+
+Outcome: completed exact-layout measurements on one RTX 4090 (CUDA 12.8,
+driver 595.91.07, 450 W). Three real-DER runs per stage measured median rates
+D 8.3138/9.2656/9.3952 G attempts/s and E 16.281/20.763/21.244 G attempts/s.
+With corrected DER probabilities and the unchanged retry model, projected
+means are **4.412697 h D / 4.498099 h E**, versus the old 4.253431/4.759079.
+The old estimates were broadly supported: D optimistic by 3.74%, E conservative
+by 5.48%. Slowest repeats with a 5% rate allowance yield 4.656597/4.739034 h;
+this is a planning allowance, not a confidence interval or deadline guarantee.
+
+Validation: 412 exact CPU stream cases; 3,464 reduced-difficulty GPU hits,
+2,954 independently re-derived samples passing, zero altered-sign control
+passes, all encodings/levels represented, no within-run duplicates. Source and
+input hashes match the GPU host. The existing Core/Lean and security-audit
+artifacts still apply to byte-identical scripts. No full production DER solve
+was attempted or claimed. Timed GPU work was 425.75 seconds, with 445.89 seconds
+for the benchmark driver including setup. The one newly rented pod was deleted;
+the subsequent pod list was empty. Authentication stayed in the local Runpod
+configuration outside this repository.
+
+At the user's request, also reviewed Zagitta/gpu-unlock and
+JustAResearcher/gpu-unlock-ada. Their tensor speedups do not map to the existing
+integer QSB kernels: the compiled round kernel contains no tensor instructions.
+No unlock was installed or benchmarked; this is an instruction-path assessment,
+not an unlocked A/B result. Sources and inspected revisions are in
+`mechanisms/spacer_selection/CLOSEOUT.md`.
+
+Final disposition: retain the measured **local mechanism-track submission**,
+unranked and with full-family soundness still unproved. Close this research
+pass. Neither the two-hour nor thirty-minute objective was achieved; no global
+optimality claim is made. `CLOSEOUT.md`, updated candidates and proposal, CUDA
+renderer, raw measurements and `gpu_validation/report.json` complete the work.

@@ -1,0 +1,20 @@
+pool2_exact.cu: In function ‘void compute_gtable(uint8_t*, uint8_t*)’:
+pool2_exact.cu:413:36: warning: ‘int EC_POINT_get_affine_coordinates_GFp(const EC_GROUP*, const EC_POINT*, BIGNUM*, BIGNUM*, BN_CTX*)’ is deprecated: Since OpenSSL 3.0 [-Wdeprecated-declarations]
+  413 |             EC_POINT_get_affine_coordinates_GFp(grp, pt, x, y, ctx);
+      |             ~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~
+/usr/include/openssl/ec.h:659:52: note: declared here
+  659 | OSSL_DEPRECATEDIN_3_0 int EC_POINT_get_affine_coordinates_GFp
+      |                                                    ^~~~~~~~~~
+pool2_exact.cu: In function ‘void compute_jA(int)’:
+pool2_exact.cu:431:46: warning: ‘int EC_POINT_set_compressed_coordinates_GFp(const EC_GROUP*, EC_POINT*, const BIGNUM*, int, BN_CTX*)’ is deprecated: Since OpenSSL 3.0 [-Wdeprecated-declarations]
+  431 |     if (!EC_POINT_set_compressed_coordinates_GFp(grp, A, one, 0, ctx)) { fprintf(stderr, "x=1 not on curve?\n"); exit(1); }
+      |       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+/usr/include/openssl/ec.h:686:52: note: declared here
+  686 | OSSL_DEPRECATEDIN_3_0 int EC_POINT_set_compressed_coordinates_GFp
+      |                                                    ^~~~~~~~~~~~~~
+pool2_exact.cu:436:36: warning: ‘int EC_POINT_get_affine_coordinates_GFp(const EC_GROUP*, const EC_POINT*, BIGNUM*, BIGNUM*, BN_CTX*)’ is deprecated: Since OpenSSL 3.0 [-Wdeprecated-declarations]
+  436 |         EC_POINT_get_affine_coordinates_GFp(grp, P, x, y, ctx);
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+/usr/include/openssl/ec.h:659:52: note: declared here
+  659 | OSSL_DEPRECATEDIN_3_0 int EC_POINT_get_affine_coordinates_GFp
+      |                                                    ^~~~~~~~~~

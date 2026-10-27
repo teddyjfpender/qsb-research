@@ -1,0 +1,26 @@
+{
+  "hits_sha256": "2d05ae5819c735a6c694b056a9ac80cc055d9d4172c98e2e3aa14db57cd24a18",
+  "rate_sha256": "56265458e790d7e4b90fc34af9749d25c7be561dd5394a9c717c761bff676e1a",
+  "verifier_sha256": "cf1d5c9f385a50022014fd0c66434bcd5baf32efa31b3a585691ea781f9da1c3",
+  "tier": "E",
+  "stage": "round2",
+  "hits": 427,
+  "verified": 300,
+  "failed": 0,
+  "control_false_pass": 0,
+  "poisson_z": 0.34156502553198664,
+  "encodings": [
+    0,
+    1,
+    2
+  ],
+  "levels": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "production_sighash": true,
+  "production_der_solve": false
+}

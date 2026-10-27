@@ -1,0 +1,475 @@
+{
+  "hardware": "NVIDIA GeForce RTX 4090",
+  "date": "2026-10-27",
+  "original_estimates_are_not_measurements": true,
+  "tiers": {
+    "D": {
+      "original_estimate_hours": 4.253431076769947,
+      "measured_rate_expected_hours": 4.412696662965164,
+      "optimistic_repeat_envelope_hours": 4.404416102292367,
+      "pessimistic_repeat_envelope_hours": 4.423766905805305,
+      "conservative_with_5pct_rate_margin_hours": 4.656596742952953,
+      "original_estimate_ratio": 1.0374440265565943,
+      "stages": [
+        {
+          "stage": "pin",
+          "rates": [
+            8326000000.0,
+            8299600000.0,
+            8313800000.0
+          ],
+          "median": 8313800000.0,
+          "minimum": 8299600000.0,
+          "maximum": 8326000000.0,
+          "der_hits": 0,
+          "seconds": 60.66
+        },
+        {
+          "stage": "round1",
+          "rates": [
+            9235700000.0,
+            9265600000.0,
+            9274400000.0
+          ],
+          "median": 9265600000.0,
+          "minimum": 9235700000.0,
+          "maximum": 9274400000.0,
+          "der_hits": 0,
+          "seconds": 60.67
+        },
+        {
+          "stage": "round2",
+          "rates": [
+            9370100000.0,
+            9395200000.0,
+            9426200000.0
+          ],
+          "median": 9395200000.0,
+          "minimum": 9370100000.0,
+          "maximum": 9426200000.0,
+          "der_hits": 0,
+          "seconds": 60.25
+        }
+      ],
+      "round_success_probabilities": [
+        0.9923427569706446,
+        0.9977348835245236
+      ],
+      "der_probability": 2.1156985668610573e-14,
+      "security": {
+        "S": [
+          2352,
+          2940
+        ],
+        "E": [
+          4.872103277854322,
+          6.090129097317902
+        ],
+        "p": [
+          0.9923427569706446,
+          0.9977348835245236
+        ],
+        "honest_shots_log2": 47.01671241348278,
+        "preimage_bits": 113.55630491628236,
+        "collision_bits": 82.2268483518034,
+        "collision_birthday": 82.2268483518034,
+        "collision_fixed": 97.52817397261462,
+        "quantum_query_bits": 50.193189957420024
+      },
+      "full_production_spend_solved": false,
+      "interpretation": "Measured stage throughput; projected mean with existing random-oracle/Poisson retry model. Not a full-solve observation or deadline guarantee."
+    },
+    "E": {
+      "original_estimate_hours": 4.759078543081689,
+      "measured_rate_expected_hours": 4.498098714285534,
+      "optimistic_repeat_envelope_hours": 4.493726060528304,
+      "pessimistic_repeat_envelope_hours": 4.502082186235929,
+      "conservative_with_5pct_rate_margin_hours": 4.739033880248346,
+      "original_estimate_ratio": 0.9451616890888378,
+      "stages": [
+        {
+          "stage": "pin",
+          "rates": [
+            16281000000.0,
+            16284000000.0,
+            16267000000.0
+          ],
+          "median": 16281000000.0,
+          "minimum": 16267000000.0,
+          "maximum": 16284000000.0,
+          "der_hits": 0,
+          "seconds": 60.56
+        },
+        {
+          "stage": "round1",
+          "rates": [
+            20736000000.0,
+            20763000000.0,
+            20809000000.0
+          ],
+          "median": 20763000000.0,
+          "minimum": 20736000000.0,
+          "maximum": 20809000000.0,
+          "der_hits": 0,
+          "seconds": 60.480000000000004
+        },
+        {
+          "stage": "round2",
+          "rates": [
+            21234000000.0,
+            21244000000.0,
+            21262000000.0
+          ],
+          "median": 21244000000.0,
+          "minimum": 21234000000.0,
+          "maximum": 21262000000.0,
+          "der_hits": 0,
+          "seconds": 60.260000000000005
+        }
+      ],
+      "round_success_probabilities": [
+        0.8946074980123295,
+        0.9399501200756599
+      ],
+      "der_probability": 1.0581948728730084e-14,
+      "security": {
+        "S": [
+          1584,
+          1980
+        ],
+        "E": [
+          2.250063784042251,
+          2.812579730052814
+        ],
+        "p": [
+          0.8946074980123295,
+          0.9399501200756599
+        ],
+        "honest_shots_log2": 48.1272064861739,
+        "preimage_bits": 117.69552265187747,
+        "collision_bits": 84.03372640873195,
+        "collision_birthday": 84.03372640873195,
+        "collision_fixed": 100.88246946481775,
+        "quantum_query_bits": 52.55528007557815
+      },
+      "full_production_spend_solved": false,
+      "interpretation": "Measured stage throughput; projected mean with existing random-oracle/Poisson retry model. Not a full-solve observation or deadline guarantee."
+    }
+  },
+  "correctness": [
+    {
+      "hits_sha256": "0a9078673c7f16685ffa49c9703a528f135433ff4e7a80416612ec237bf6a3cf",
+      "rate_sha256": "dd882779a7b48eb1ccf8b7a1eb9a2a1e6628ff8075cff17ed1c3f7b81278f7c1",
+      "verifier_sha256": "cf1d5c9f385a50022014fd0c66434bcd5baf32efa31b3a585691ea781f9da1c3",
+      "tier": "D",
+      "stage": "pin",
+      "hits": 160,
+      "verified": 160,
+      "failed": 0,
+      "control_false_pass": 0,
+      "poisson_z": -0.677323978987788,
+      "encodings": [
+        0,
+        1,
+        2
+      ],
+      "levels": [
+        1,
+        2
+      ],
+      "production_sighash": true,
+      "production_der_solve": false
+    },
+    {
+      "hits_sha256": "f17e2a1f7d64c2345995c0adc68c7a6878781f477f156860cadee7086ebead82",
+      "rate_sha256": "95c7ba7822f1cb28d3a6a7192ccb0bc47de43c8b81f41b607648c4f7a78d563a",
+      "verifier_sha256": "cf1d5c9f385a50022014fd0c66434bcd5baf32efa31b3a585691ea781f9da1c3",
+      "tier": "D",
+      "stage": "pin",
+      "hits": 154,
+      "verified": 154,
+      "failed": 0,
+      "control_false_pass": 0,
+      "poisson_z": -1.1391357828430975,
+      "encodings": [
+        0,
+        1,
+        2
+      ],
+      "levels": [
+        1,
+        2
+      ],
+      "production_sighash": true,
+      "production_der_solve": false
+    },
+    {
+      "hits_sha256": "b74c22c3ca94414f438c44e278a7504696ed251ee1d8a21430ed8d692e422f40",
+      "rate_sha256": "f2e7c028178c002fd377265dc563ac21ea5c627048794017b3cf346eb120090a",
+      "verifier_sha256": "cf1d5c9f385a50022014fd0c66434bcd5baf32efa31b3a585691ea781f9da1c3",
+      "tier": "D",
+      "stage": "round1",
+      "hits": 216,
+      "verified": 216,
+      "failed": 0,
+      "control_false_pass": 0,
+      "poisson_z": 0.9486832980505138,
+      "encodings": [
+        0,
+        1,
+        2
+      ],
+      "levels": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "production_sighash": true,
+      "production_der_solve": false
+    },
+    {
+      "hits_sha256": "c6174b561a600156c666ba18dd3ba3452918ac6466a9dbe44f49f0363fab469f",
+      "rate_sha256": "cf35b5065ba9aa608f3464995b94d0c048f795273d34d4eca6460bdc3b65945f",
+      "verifier_sha256": "cf1d5c9f385a50022014fd0c66434bcd5baf32efa31b3a585691ea781f9da1c3",
+      "tier": "D",
+      "stage": "round1",
+      "hits": 186,
+      "verified": 186,
+      "failed": 0,
+      "control_false_pass": 0,
+      "poisson_z": -1.1595018087284057,
+      "encodings": [
+        0,
+        1,
+        2
+      ],
+      "levels": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "production_sighash": true,
+      "production_der_solve": false
+    },
+    {
+      "hits_sha256": "07aa8c7f7936513f936451792eaf568c6b1f8474ac398aff9b0d9fad662ce781",
+      "rate_sha256": "1201820fe766020823aea453d3e035abc55f80f787e594dada7d039105895f3a",
+      "verifier_sha256": "cf1d5c9f385a50022014fd0c66434bcd5baf32efa31b3a585691ea781f9da1c3",
+      "tier": "D",
+      "stage": "round2",
+      "hits": 226,
+      "verified": 226,
+      "failed": 0,
+      "control_false_pass": 0,
+      "poisson_z": 0.06666666666666667,
+      "encodings": [
+        0,
+        1,
+        2
+      ],
+      "levels": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "production_sighash": true,
+      "production_der_solve": false
+    },
+    {
+      "hits_sha256": "e23a0fd73b9d00d5a9731ba1a6f18326e0d0306f48abb6c3a0e966ccdeb99dac",
+      "rate_sha256": "c7e4963733a60be91318580f2f60286be747ad50ee97c327aca790af9c1a4be6",
+      "verifier_sha256": "cf1d5c9f385a50022014fd0c66434bcd5baf32efa31b3a585691ea781f9da1c3",
+      "tier": "D",
+      "stage": "round2",
+      "hits": 221,
+      "verified": 221,
+      "failed": 0,
+      "control_false_pass": 0,
+      "poisson_z": -0.26666666666666666,
+      "encodings": [
+        0,
+        1,
+        2
+      ],
+      "levels": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "production_sighash": true,
+      "production_der_solve": false
+    },
+    {
+      "hits_sha256": "fd17239005848aeafaf2cb04b6724be40f090811de2b72d03becb67294df18ed",
+      "rate_sha256": "d199340c7fcec3f0bd014a2b972a0b1db6f69ae940ecc943b27d85cad1400d19",
+      "verifier_sha256": "cf1d5c9f385a50022014fd0c66434bcd5baf32efa31b3a585691ea781f9da1c3",
+      "tier": "E",
+      "stage": "pin",
+      "hits": 347,
+      "verified": 300,
+      "failed": 0,
+      "control_false_pass": 0,
+      "poisson_z": 1.9814848097530424,
+      "encodings": [
+        0,
+        1,
+        2
+      ],
+      "levels": [
+        1,
+        2
+      ],
+      "production_sighash": true,
+      "production_der_solve": false
+    },
+    {
+      "hits_sha256": "d9bcb79f0af5530ecb6c77d787e8e8ce56ced6378f6d1f7c38edeb9b1b30e547",
+      "rate_sha256": "a1fe2d1b9607f8520a28513994a03b410eb83293cc337bf4f8b466d7df99ae55",
+      "verifier_sha256": "cf1d5c9f385a50022014fd0c66434bcd5baf32efa31b3a585691ea781f9da1c3",
+      "tier": "E",
+      "stage": "pin",
+      "hits": 291,
+      "verified": 291,
+      "failed": 0,
+      "control_false_pass": 0,
+      "poisson_z": -1.1888908858518255,
+      "encodings": [
+        0,
+        1,
+        2
+      ],
+      "levels": [
+        1,
+        2
+      ],
+      "production_sighash": true,
+      "production_der_solve": false
+    },
+    {
+      "hits_sha256": "ac0e6653ebb1d7a93e2e63171c06c640e7a85e8a10ecad15db556ae6c98b9d48",
+      "rate_sha256": "f22850504e20b56863ff62aafc6eca761fc471c3c3e8673afe7a6b3d1f42e097",
+      "verifier_sha256": "cf1d5c9f385a50022014fd0c66434bcd5baf32efa31b3a585691ea781f9da1c3",
+      "tier": "E",
+      "stage": "round1",
+      "hits": 395,
+      "verified": 300,
+      "failed": 0,
+      "control_false_pass": 0,
+      "poisson_z": -0.6435959029348384,
+      "encodings": [
+        0,
+        1,
+        2
+      ],
+      "levels": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "production_sighash": true,
+      "production_der_solve": false
+    },
+    {
+      "hits_sha256": "1674e0ee95bf1c38b25f0f813d845f41589ea7552cdb4cc0e3b98ad6522547ac",
+      "rate_sha256": "3524ae18e4b70cd3f4561b864b3204ea553610a543324518bf6e345d827cbeb0",
+      "verifier_sha256": "cf1d5c9f385a50022014fd0c66434bcd5baf32efa31b3a585691ea781f9da1c3",
+      "tier": "E",
+      "stage": "round1",
+      "hits": 420,
+      "verified": 300,
+      "failed": 0,
+      "control_false_pass": 0,
+      "poisson_z": 0.5940885257860046,
+      "encodings": [
+        0,
+        1,
+        2
+      ],
+      "levels": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "production_sighash": true,
+      "production_der_solve": false
+    },
+    {
+      "hits_sha256": "2d05ae5819c735a6c694b056a9ac80cc055d9d4172c98e2e3aa14db57cd24a18",
+      "rate_sha256": "56265458e790d7e4b90fc34af9749d25c7be561dd5394a9c717c761bff676e1a",
+      "verifier_sha256": "cf1d5c9f385a50022014fd0c66434bcd5baf32efa31b3a585691ea781f9da1c3",
+      "tier": "E",
+      "stage": "round2",
+      "hits": 427,
+      "verified": 300,
+      "failed": 0,
+      "control_false_pass": 0,
+      "poisson_z": 0.34156502553198664,
+      "encodings": [
+        0,
+        1,
+        2
+      ],
+      "levels": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "production_sighash": true,
+      "production_der_solve": false
+    },
+    {
+      "hits_sha256": "6c4185dbfdebd87e08c4463dc0ba37f953d36871b947ca398bfa68d5066c1ee9",
+      "rate_sha256": "0cd3b4ef057da105f7c18b33e46d083d44896c3b53d3bff4c6940da590278e3c",
+      "verifier_sha256": "cf1d5c9f385a50022014fd0c66434bcd5baf32efa31b3a585691ea781f9da1c3",
+      "tier": "E",
+      "stage": "round2",
+      "hits": 421,
+      "verified": 300,
+      "failed": 0,
+      "control_false_pass": 0,
+      "poisson_z": 0.048795003647426664,
+      "encodings": [
+        0,
+        1,
+        2
+      ],
+      "levels": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "production_sighash": true,
+      "production_der_solve": false
+    }
+  ],
+  "source_and_input_sha256": {
+    "challenge/mechanisms/spacer_selection/gpu_validation/E_round1.bin": "d24dbd56df90632331a6c4830991d613dd81d423c053d6ac0717732aa970a453",
+    "challenge/mechanisms/spacer_selection/gpu_validation/E_round2.bin": "2fb0c3d4c327f1f60c516c82b4376c15dbf08e2c02269f63bdd86e6e6db5e281",
+    "challenge/mechanisms/spacer_selection/gpu_validation/D_pin.bin": "9639781c6a103afcb432188aedbad27c187ceca7be4c0ffa854ac0e5a0705646",
+    "challenge/mechanisms/spacer_selection/gpu_validation/E_pin.bin": "579e97855c11604b2ea1c0a685464f204a1391b2dd3250f1185b3697b2f44769",
+    "challenge/mechanisms/spacer_selection/gpu_validation/D_round1.bin": "61a183ae0903916f5b8de886b11daa55e7a28ad9b3cd3eb0c789a48412cdae25",
+    "challenge/mechanisms/spacer_selection/gpu_validation/D_round2.bin": "3f3f2d5db4d00600dfbc317fe72a8c6c078b5006c3ae622d4ccecdd6189c969e",
+    "challenge/mechanisms/spacer_selection/gpu_validation/pool2_exact.cu": "8a6e68b470025d90d2e58c8d160be8b79a168987fa5ef99185182cd6d689d40e",
+    "challenge/mechanisms/spacer_selection/round_renderer.cuh": "1f402e206a39534bcbfe52128d48968ba85cc9e6dee494c9968e16d07a3b5a92",
+    "challenge/mechanisms/spacer_selection/gpu_validation.py": "cf1d5c9f385a50022014fd0c66434bcd5baf32efa31b3a585691ea781f9da1c3",
+    "challenge/mechanisms/spacer_selection/run_gpu_validation.py": "bd90b9c423c69fb02d585a8f79d34c0b066d766da4e47535b66495773728248e",
+    "gpu/pool2.cu": "998f3f2b3a44c4b805ec49be749c9d459fdd3e86c07f1b175157e0a8bd76378b",
+    "gpu/GPUMath.h": "b0ddd2ed842cbd46109aa957e4a2ec26ce7fbfd3aa9305c9cc32ad416d2c722e",
+    "gpu/GPUHash.h": "043236a5ceb7ca0bf91fbdb9830edf8f3863fe445379c82ee930484e662725da",
+    "gpu/fasthash.cuh": "7a4e27c6684b4206156f28d46f6e378b3cebe21187e05c27594b8ca86b0e87c7",
+    "gpu/field2.cuh": "5ab1fac8a500debdcef7c8ad8d78fe53d3ca2615ab4eb223aeedd84cfbe6f599"
+  },
+  "measured_der_gpu_seconds": 362.88
+}

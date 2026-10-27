@@ -1,0 +1,2 @@
+name, uuid, driver_version, power.limit [W], clocks.current.sm [MHz], clocks.current.memory [MHz], temperature.gpu, utilization.gpu [%]
+NVIDIA GeForce RTX 4090, GPU-12b1cb75-816a-28e8-02a3-ccf5dd4bfccd, 595.91.07, 450.00 W, 210 MHz, 405 MHz, 32, 0 %

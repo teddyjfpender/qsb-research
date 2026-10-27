@@ -114,3 +114,48 @@ Artifacts: `mechanisms/der_budget/{check.py,results.json,vectors.txt,Proof.lean,
 No new GPU measurement or ranked submission was made for this accounting
 finding. The requested under-two-hour and under-thirty-minute upper-tier
 solutions have not yet been demonstrated.
+
+## Spacer selection hypothesis
+
+A new independent-round layout replaces separate C/D arrays with triplets
+`D_i, 0, C_i` (bottom to top). After rolling C_i and verifying its preimage,
+the same numeric index should roll D_i: the consumed index copy accounts for
+the one-item spacer. This removes the ADD opcode per HORS selection. A permanent
+zero sentinel below each region anchors the MIN bound despite arbitrary removal
+orders. Regions and secrets remain separate between rounds. Test the stack
+identity, arbitrary orders and adversarial indices before claiming unchanged
+freedom counts or evaluating longer chains. This is not the previously rejected
+shared-dummy construction, and it does not by itself evade the DER time bound.
+
+Result: implemented under `mechanisms/spacer_selection/`. Core and Lean agree
+on 3,032 focused selector vectors and 313 whole-script vectors per upper-tier
+candidate (3,658 total). A local Lean theorem proves the pairing/removal identity
+for arbitrary surrounding lists with only propext/Quot.sound. The intentionally
+broken no-bound variant accepts witness-supplied fake pairs; the intact MIN
+rejects them. This validates that the safety bound cannot simply be dropped.
+
+Three-seed freedom audits pass: 65,352 D runs and 65,592 E runs. Honest-space
+audits pass 300 samples per tier; production designer checks and static/twin
+checks pass. No full-family soundness proof or trusted Lean builder is claimed.
+
+The layout saves 14 selection opcodes in the two seven-selection rounds.
+Combined with the earlier destructive chain selector, it fits chain lengths
+2/4/5 in 200 opcodes. Exact rebuilt candidates (corrected DER probabilities):
+
+| Tier | Hash | n / k | GPU-h estimate | Classical / quantum / collision | Bytes / test bytes / stack |
+|---|---|---|---:|---|---|
+| D | SHA-256 | 129 / 96 | 4.253431 | 113.556305 / 50.193190 / 82.226848 | 9717 / 9948 / 924 |
+| E | SHA-1 | 135 / 64 | 4.759079 | 117.695523 / 52.555280 / 84.033726 | 9749 / 9980 / 928 |
+
+Estimated reductions against the previous corrected best audited candidates:
+23.59% D, 18.59% E. D preserves the D thresholds rather than every excess bit of
+gpu_d_0; E improves all three modeled axes over gpu_e_0. The longer interleaved
+sighash suffixes are charged in these estimates. Exact-layout GPU measurements
+and a production search renderer remain outstanding. No production puzzle hit
+or under-two-hour solution is claimed.
+
+The proposal, exact script-byte candidates, vectors, local proof, search and
+audit reports are submitted through the repository's mechanism track. This is
+a new selection construction, still within the three-DER-hit family and its
+conditional time bound. The user's request for a fundamentally faster puzzle
+remains the active objective; do not redefine it as these smaller gains.

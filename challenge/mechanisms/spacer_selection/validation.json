@@ -1,0 +1,375 @@
+{
+  "gadget": {
+    "vectors": 3032,
+    "core": "unexpected results: 0",
+    "lean": "replay /Users/theodorepender/code/cryptography/qsb-research/challenge/mechanisms/spacer_selection/gadget_vectors/judge_vectors.txt: 3032 vectors, 0 disagree with Core, 0 outside the model"
+  },
+  "tiers": {
+    "D": {
+      "candidate": {
+        "cfg": {
+          "R": 2,
+          "b1": 0,
+          "b2": 0,
+          "chain1": 4,
+          "chain2": 5,
+          "chain_pin": 2,
+          "destructive_chain": true,
+          "enc_honest": 3,
+          "force_comp": false,
+          "hash": "sha256",
+          "k": 96,
+          "k1": 96,
+          "k2": 96,
+          "n": 129,
+          "pool_deep": true,
+          "sign_j": false,
+          "sign_lvl": false,
+          "t1": 7,
+          "t2": 7
+        },
+        "hours": 4.253431076769947,
+        "security": {
+          "S": [
+            2352,
+            2940
+          ],
+          "E": [
+            4.872103277854322,
+            6.090129097317902
+          ],
+          "p": [
+            0.9923427569706446,
+            0.9977348835245236
+          ],
+          "honest_shots_log2": 47.01671241348278,
+          "preimage_bits": 113.55630491628236,
+          "collision_bits": 82.2268483518034,
+          "collision_birthday": 82.2268483518034,
+          "collision_fixed": 97.52817397261462,
+          "quantum_query_bits": 50.193189957420024
+        },
+        "ops": 200,
+        "script_bytes": 9717,
+        "test_bytes": 9948,
+        "max_stack": 924,
+        "substitutions": 11,
+        "stage_rates": [
+          8301670000.0,
+          9949494519.566036,
+          9845945433.846272
+        ],
+        "confidence": "unranked mechanism estimate; full family soundness not proved"
+      },
+      "designer_check": [],
+      "audits": [
+        {
+          "ok": true,
+          "runs": 21784,
+          "accepted": 4175,
+          "stages": [
+            {
+              "stage": 0,
+              "z_views": 96,
+              "levels": 2,
+              "encodings": 3,
+              "measured": 1152,
+              "claimed": 1152,
+              "ok": true
+            },
+            {
+              "stage": 1,
+              "z_views": 97,
+              "levels": 4,
+              "encodings": 3,
+              "measured": 2328,
+              "claimed": 2352,
+              "ok": true
+            },
+            {
+              "stage": 2,
+              "z_views": 97,
+              "levels": 5,
+              "encodings": 3,
+              "measured": 2910,
+              "claimed": 2940,
+              "ok": true
+            }
+          ],
+          "off_pool_nonces": 793,
+          "uncovered_off_pool": 0,
+          "wrong_round_count": 0,
+          "counterexample": null
+        },
+        {
+          "ok": true,
+          "runs": 21784,
+          "accepted": 4175,
+          "stages": [
+            {
+              "stage": 0,
+              "z_views": 96,
+              "levels": 2,
+              "encodings": 3,
+              "measured": 1152,
+              "claimed": 1152,
+              "ok": true
+            },
+            {
+              "stage": 1,
+              "z_views": 97,
+              "levels": 4,
+              "encodings": 3,
+              "measured": 2328,
+              "claimed": 2352,
+              "ok": true
+            },
+            {
+              "stage": 2,
+              "z_views": 97,
+              "levels": 5,
+              "encodings": 3,
+              "measured": 2910,
+              "claimed": 2940,
+              "ok": true
+            }
+          ],
+          "off_pool_nonces": 796,
+          "uncovered_off_pool": 0,
+          "wrong_round_count": 0,
+          "counterexample": null
+        },
+        {
+          "ok": true,
+          "runs": 21784,
+          "accepted": 4185,
+          "stages": [
+            {
+              "stage": 0,
+              "z_views": 96,
+              "levels": 2,
+              "encodings": 3,
+              "measured": 1152,
+              "claimed": 1152,
+              "ok": true
+            },
+            {
+              "stage": 1,
+              "z_views": 97,
+              "levels": 4,
+              "encodings": 3,
+              "measured": 2328,
+              "claimed": 2352,
+              "ok": true
+            },
+            {
+              "stage": 2,
+              "z_views": 97,
+              "levels": 5,
+              "encodings": 3,
+              "measured": 2910,
+              "claimed": 2940,
+              "ok": true
+            }
+          ],
+          "off_pool_nonces": 796,
+          "uncovered_off_pool": 0,
+          "wrong_round_count": 0,
+          "counterexample": null
+        }
+      ],
+      "honest_space": {
+        "ok": true,
+        "samples": 300
+      },
+      "replay": {
+        "vectors": 313,
+        "core": "unexpected results: 0",
+        "lean": "replay /Users/theodorepender/code/cryptography/qsb-research/challenge/mechanisms/spacer_selection/D_vectors/judge_vectors.txt: 313 vectors, 0 disagree with Core, 0 outside the model"
+      }
+    },
+    "E": {
+      "candidate": {
+        "cfg": {
+          "R": 2,
+          "b1": 0,
+          "b2": 0,
+          "chain1": 4,
+          "chain2": 5,
+          "chain_pin": 2,
+          "destructive_chain": true,
+          "enc_honest": 3,
+          "force_comp": false,
+          "hash": "sha1",
+          "k": 64,
+          "k1": 64,
+          "k2": 64,
+          "n": 135,
+          "pool_deep": true,
+          "sign_j": false,
+          "sign_lvl": false,
+          "t1": 7,
+          "t2": 7
+        },
+        "hours": 4.759078543081689,
+        "security": {
+          "S": [
+            1584,
+            1980
+          ],
+          "E": [
+            2.250063784042251,
+            2.812579730052814
+          ],
+          "p": [
+            0.8946074980123295,
+            0.9399501200756599
+          ],
+          "honest_shots_log2": 48.1272064861739,
+          "preimage_bits": 117.69552265187747,
+          "collision_bits": 84.03372640873195,
+          "collision_birthday": 84.03372640873195,
+          "collision_fixed": 100.88246946481775,
+          "quantum_query_bits": 52.55528007557815
+        },
+        "ops": 200,
+        "script_bytes": 9749,
+        "test_bytes": 9980,
+        "max_stack": 928,
+        "substitutions": 11,
+        "stage_rates": [
+          15577150000.0,
+          19980389103.701035,
+          19339856229.54843
+        ],
+        "confidence": "unranked mechanism estimate; full family soundness not proved"
+      },
+      "designer_check": [],
+      "audits": [
+        {
+          "ok": true,
+          "runs": 21864,
+          "accepted": 4126,
+          "stages": [
+            {
+              "stage": 0,
+              "z_views": 64,
+              "levels": 2,
+              "encodings": 3,
+              "measured": 768,
+              "claimed": 768,
+              "ok": true
+            },
+            {
+              "stage": 1,
+              "z_views": 65,
+              "levels": 4,
+              "encodings": 3,
+              "measured": 1560,
+              "claimed": 1584,
+              "ok": true
+            },
+            {
+              "stage": 2,
+              "z_views": 65,
+              "levels": 5,
+              "encodings": 3,
+              "measured": 1950,
+              "claimed": 1980,
+              "ok": true
+            }
+          ],
+          "off_pool_nonces": 829,
+          "uncovered_off_pool": 0,
+          "wrong_round_count": 0,
+          "counterexample": null
+        },
+        {
+          "ok": true,
+          "runs": 21864,
+          "accepted": 4121,
+          "stages": [
+            {
+              "stage": 0,
+              "z_views": 64,
+              "levels": 2,
+              "encodings": 3,
+              "measured": 768,
+              "claimed": 768,
+              "ok": true
+            },
+            {
+              "stage": 1,
+              "z_views": 65,
+              "levels": 4,
+              "encodings": 3,
+              "measured": 1560,
+              "claimed": 1584,
+              "ok": true
+            },
+            {
+              "stage": 2,
+              "z_views": 65,
+              "levels": 5,
+              "encodings": 3,
+              "measured": 1950,
+              "claimed": 1980,
+              "ok": true
+            }
+          ],
+          "off_pool_nonces": 827,
+          "uncovered_off_pool": 0,
+          "wrong_round_count": 0,
+          "counterexample": null
+        },
+        {
+          "ok": true,
+          "runs": 21864,
+          "accepted": 4129,
+          "stages": [
+            {
+              "stage": 0,
+              "z_views": 64,
+              "levels": 2,
+              "encodings": 3,
+              "measured": 768,
+              "claimed": 768,
+              "ok": true
+            },
+            {
+              "stage": 1,
+              "z_views": 65,
+              "levels": 4,
+              "encodings": 3,
+              "measured": 1560,
+              "claimed": 1584,
+              "ok": true
+            },
+            {
+              "stage": 2,
+              "z_views": 65,
+              "levels": 5,
+              "encodings": 3,
+              "measured": 1950,
+              "claimed": 1980,
+              "ok": true
+            }
+          ],
+          "off_pool_nonces": 828,
+          "uncovered_off_pool": 0,
+          "wrong_round_count": 0,
+          "counterexample": null
+        }
+      ],
+      "honest_space": {
+        "ok": true,
+        "samples": 300
+      },
+      "replay": {
+        "vectors": 313,
+        "core": "unexpected results: 0",
+        "lean": "replay /Users/theodorepender/code/cryptography/qsb-research/challenge/mechanisms/spacer_selection/E_vectors/judge_vectors.txt: 313 vectors, 0 disagree with Core, 0 outside the model"
+      }
+    }
+  }
+}

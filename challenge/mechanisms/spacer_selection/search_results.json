@@ -1,0 +1,579 @@
+{
+  "seed": 20261028,
+  "steps": 100000,
+  "probability": "corrected exact DER",
+  "tiers": {
+    "D": {
+      "target": {
+        "preimage_bits": 111.97555466684811,
+        "quantum_query_bits": 49.9028148327029,
+        "collision_bits": 78.50397862905078
+      },
+      "unique_feasible": 8456,
+      "rebuilt": 500,
+      "candidates": [
+        {
+          "cfg": {
+            "R": 2,
+            "b1": 0,
+            "b2": 0,
+            "chain1": 4,
+            "chain2": 5,
+            "chain_pin": 2,
+            "destructive_chain": true,
+            "enc_honest": 3,
+            "force_comp": false,
+            "hash": "sha256",
+            "k": 96,
+            "k1": 96,
+            "k2": 96,
+            "n": 129,
+            "pool_deep": true,
+            "sign_j": false,
+            "sign_lvl": false,
+            "t1": 7,
+            "t2": 7
+          },
+          "hours": 4.253431076769947,
+          "security": {
+            "S": [
+              2352,
+              2940
+            ],
+            "E": [
+              4.872103277854322,
+              6.090129097317902
+            ],
+            "p": [
+              0.9923427569706446,
+              0.9977348835245236
+            ],
+            "honest_shots_log2": 47.01671241348278,
+            "preimage_bits": 113.55630491628236,
+            "collision_bits": 82.2268483518034,
+            "collision_birthday": 82.2268483518034,
+            "collision_fixed": 97.52817397261462,
+            "quantum_query_bits": 50.193189957420024
+          },
+          "ops": 200,
+          "script_bytes": 9717,
+          "test_bytes": 9948,
+          "max_stack": 924,
+          "substitutions": 11,
+          "stage_rates": [
+            8301670000.0,
+            9949494519.566036,
+            9845945433.846272
+          ],
+          "confidence": "unranked mechanism estimate; full family soundness not proved"
+        },
+        {
+          "cfg": {
+            "R": 2,
+            "b1": 0,
+            "b2": 0,
+            "chain1": 4,
+            "chain2": 5,
+            "chain_pin": 2,
+            "destructive_chain": true,
+            "enc_honest": 3,
+            "force_comp": false,
+            "hash": "sha256",
+            "k": 96,
+            "k1": 96,
+            "k2": 96,
+            "n": 128,
+            "pool_deep": true,
+            "sign_j": false,
+            "sign_lvl": false,
+            "t1": 7,
+            "t2": 7
+          },
+          "hours": 4.25913962048471,
+          "security": {
+            "S": [
+              2352,
+              2940
+            ],
+            "E": [
+              4.607725580606413,
+              5.759656975758016
+            ],
+            "p": [
+              0.9900255213237685,
+              0.9968478073084781
+            ],
+            "honest_shots_log2": 47.0187018872417,
+            "preimage_bits": 113.55630491628236,
+            "collision_bits": 82.16240681739973,
+            "collision_birthday": 82.16240681739973,
+            "collision_fixed": 97.52817397261462,
+            "quantum_query_bits": 50.193189957420024
+          },
+          "ops": 200,
+          "script_bytes": 9653,
+          "test_bytes": 9884,
+          "max_stack": 918,
+          "substitutions": 11,
+          "stage_rates": [
+            8301670000.0,
+            9952137597.872032,
+            9848015998.509954
+          ],
+          "confidence": "unranked mechanism estimate; full family soundness not proved"
+        },
+        {
+          "cfg": {
+            "R": 2,
+            "b1": 0,
+            "b2": 0,
+            "chain1": 4,
+            "chain2": 5,
+            "chain_pin": 2,
+            "destructive_chain": true,
+            "enc_honest": 3,
+            "force_comp": false,
+            "hash": "sha256",
+            "k": 96,
+            "k1": 96,
+            "k2": 96,
+            "n": 127,
+            "pool_deep": true,
+            "sign_j": false,
+            "sign_lvl": false,
+            "t1": 7,
+            "t2": 7
+          },
+          "hours": 4.266934490196301,
+          "security": {
+            "S": [
+              2352,
+              2940
+            ],
+            "E": [
+              4.3557405879169995,
+              5.44467573489625
+            ],
+            "p": [
+              0.9871670678504221,
+              0.9956807596404985
+            ],
+            "honest_shots_log2": 47.02123499560957,
+            "preimage_bits": 113.55630491628236,
+            "collision_bits": 82.0984727880676,
+            "collision_birthday": 82.0984727880676,
+            "collision_fixed": 97.52817397261462,
+            "quantum_query_bits": 50.193189957420024
+          },
+          "ops": 200,
+          "script_bytes": 9589,
+          "test_bytes": 9820,
+          "max_stack": 912,
+          "substitutions": 11,
+          "stage_rates": [
+            8301670000.0,
+            9952137597.872032,
+            9850087434.220472
+          ],
+          "confidence": "unranked mechanism estimate; full family soundness not proved"
+        },
+        {
+          "cfg": {
+            "R": 2,
+            "b1": 0,
+            "b2": 0,
+            "chain1": 4,
+            "chain2": 4,
+            "chain_pin": 2,
+            "destructive_chain": true,
+            "enc_honest": 3,
+            "force_comp": false,
+            "hash": "sha256",
+            "k": 96,
+            "k1": 96,
+            "k2": 96,
+            "n": 130,
+            "pool_deep": true,
+            "sign_j": false,
+            "sign_lvl": false,
+            "t1": 7,
+            "t2": 7
+          },
+          "hours": 4.269733764885331,
+          "security": {
+            "S": [
+              2352,
+              2352
+            ],
+            "E": [
+              5.149377448138714,
+              5.149377448138714
+            ],
+            "p": [
+              0.9941969837188775,
+              0.9941969837188775
+            ],
+            "honest_shots_log2": 47.019234391591894,
+            "preimage_bits": 113.87823301116971,
+            "collision_bits": 82.34708973878179,
+            "collision_birthday": 82.34708973878179,
+            "collision_fixed": 97.76513956678082,
+            "quantum_query_bits": 50.3541540048637
+          },
+          "ops": 198,
+          "script_bytes": 9779,
+          "test_bytes": 9989,
+          "max_stack": 930,
+          "substitutions": 10,
+          "stage_rates": [
+            8301670000.0,
+            9949494519.566036,
+            9780654676.262344
+          ],
+          "confidence": "unranked mechanism estimate; full family soundness not proved"
+        },
+        {
+          "cfg": {
+            "R": 2,
+            "b1": 0,
+            "b2": 0,
+            "chain1": 4,
+            "chain2": 4,
+            "chain_pin": 2,
+            "destructive_chain": true,
+            "enc_honest": 3,
+            "force_comp": false,
+            "hash": "sha256",
+            "k": 96,
+            "k1": 96,
+            "k2": 96,
+            "n": 129,
+            "pool_deep": true,
+            "sign_j": false,
+            "sign_lvl": false,
+            "t1": 7,
+            "t2": 7
+          },
+          "hours": 4.277848500362147,
+          "security": {
+            "S": [
+              2352,
+              2352
+            ],
+            "E": [
+              4.872103277854322,
+              4.872103277854322
+            ],
+            "p": [
+              0.9923427569706446,
+              0.9923427569706446
+            ],
+            "honest_shots_log2": 47.02193972706003,
+            "preimage_bits": 113.87823301116971,
+            "collision_bits": 82.2852366633673,
+            "collision_birthday": 82.2852366633673,
+            "collision_fixed": 97.76513956678082,
+            "quantum_query_bits": 50.3541540048637
+          },
+          "ops": 198,
+          "script_bytes": 9715,
+          "test_bytes": 9925,
+          "max_stack": 924,
+          "substitutions": 10,
+          "stage_rates": [
+            8301670000.0,
+            9949494519.566036,
+            9783208799.740688
+          ],
+          "confidence": "unranked mechanism estimate; full family soundness not proved"
+        }
+      ]
+    },
+    "E": {
+      "target": {
+        "preimage_bits": 116.35276519723666,
+        "quantum_query_bits": 52.09142009789718,
+        "collision_bits": 82.71479374745886
+      },
+      "unique_feasible": 3465,
+      "rebuilt": 500,
+      "candidates": [
+        {
+          "cfg": {
+            "R": 2,
+            "b1": 0,
+            "b2": 0,
+            "chain1": 4,
+            "chain2": 5,
+            "chain_pin": 2,
+            "destructive_chain": true,
+            "enc_honest": 3,
+            "force_comp": false,
+            "hash": "sha1",
+            "k": 64,
+            "k1": 64,
+            "k2": 64,
+            "n": 135,
+            "pool_deep": true,
+            "sign_j": false,
+            "sign_lvl": false,
+            "t1": 7,
+            "t2": 7
+          },
+          "hours": 4.759078543081689,
+          "security": {
+            "S": [
+              1584,
+              1980
+            ],
+            "E": [
+              2.250063784042251,
+              2.812579730052814
+            ],
+            "p": [
+              0.8946074980123295,
+              0.9399501200756599
+            ],
+            "honest_shots_log2": 48.1272064861739,
+            "preimage_bits": 117.69552265187747,
+            "collision_bits": 84.03372640873195,
+            "collision_birthday": 84.03372640873195,
+            "collision_fixed": 100.88246946481775,
+            "quantum_query_bits": 52.55528007557815
+          },
+          "ops": 200,
+          "script_bytes": 9749,
+          "test_bytes": 9980,
+          "max_stack": 928,
+          "substitutions": 11,
+          "stage_rates": [
+            15577150000.0,
+            19980389103.701035,
+            19339856229.54843
+          ],
+          "confidence": "unranked mechanism estimate; full family soundness not proved"
+        },
+        {
+          "cfg": {
+            "R": 2,
+            "b1": 0,
+            "b2": 0,
+            "chain1": 4,
+            "chain2": 5,
+            "chain_pin": 2,
+            "destructive_chain": true,
+            "enc_honest": 3,
+            "force_comp": false,
+            "hash": "sha1",
+            "k": 64,
+            "k1": 64,
+            "k2": 64,
+            "n": 134,
+            "pool_deep": true,
+            "sign_j": false,
+            "sign_lvl": false,
+            "t1": 7,
+            "t2": 7
+          },
+          "hours": 4.821524771335807,
+          "security": {
+            "S": [
+              1584,
+              1980
+            ],
+            "E": [
+              2.133393810054875,
+              2.666742262568594
+            ],
+            "p": [
+              0.8815653337431163,
+              0.9305218012428278
+            ],
+            "honest_shots_log2": 48.145100926738344,
+            "preimage_bits": 117.69552265187747,
+            "collision_bits": 83.9919398288836,
+            "collision_birthday": 83.9919398288836,
+            "collision_fixed": 100.88246946481775,
+            "quantum_query_bits": 52.55528007557815
+          },
+          "ops": 200,
+          "script_bytes": 9685,
+          "test_bytes": 9916,
+          "max_stack": 922,
+          "substitutions": 11,
+          "stage_rates": [
+            15577150000.0,
+            19996386133.584133,
+            19351844305.605095
+          ],
+          "confidence": "unranked mechanism estimate; full family soundness not proved"
+        },
+        {
+          "cfg": {
+            "R": 2,
+            "b1": 0,
+            "b2": 0,
+            "chain1": 4,
+            "chain2": 5,
+            "chain_pin": 2,
+            "destructive_chain": true,
+            "enc_honest": 3,
+            "force_comp": false,
+            "hash": "sha256",
+            "k": 32,
+            "k1": 32,
+            "k2": 32,
+            "n": 140,
+            "pool_deep": true,
+            "sign_j": false,
+            "sign_lvl": false,
+            "t1": 7,
+            "t2": 7
+          },
+          "hours": 4.839403825297742,
+          "security": {
+            "S": [
+              816,
+              1020
+            ],
+            "E": [
+              2.9181286882126614,
+              3.6476608602658267
+            ],
+            "p": [
+              0.9459652914632287,
+              0.9739480031775061
+            ],
+            "honest_shots_log2": 47.063769385421764,
+            "preimage_bits": 116.6107989220121,
+            "collision_bits": 83.26396778393531,
+            "collision_birthday": 83.26396778393531,
+            "collision_fixed": 99.81904447691193,
+            "quantum_query_bits": 52.512918210645466
+          },
+          "ops": 200,
+          "script_bytes": 9717,
+          "test_bytes": 9948,
+          "max_stack": 926,
+          "substitutions": 11,
+          "stage_rates": [
+            7746965000.0,
+            9007280519.999887,
+            8733876826.96405
+          ],
+          "confidence": "unranked mechanism estimate; full family soundness not proved"
+        },
+        {
+          "cfg": {
+            "R": 2,
+            "b1": 0,
+            "b2": 0,
+            "chain1": 5,
+            "chain2": 4,
+            "chain_pin": 2,
+            "destructive_chain": true,
+            "enc_honest": 3,
+            "force_comp": false,
+            "hash": "sha1",
+            "k": 64,
+            "k1": 64,
+            "k2": 64,
+            "n": 135,
+            "pool_deep": true,
+            "sign_j": false,
+            "sign_lvl": false,
+            "t1": 7,
+            "t2": 7
+          },
+          "hours": 4.84249479501091,
+          "security": {
+            "S": [
+              1980,
+              1584
+            ],
+            "E": [
+              2.812579730052814,
+              2.250063784042251
+            ],
+            "p": [
+              0.9399501200756599,
+              0.8946074980123295
+            ],
+            "honest_shots_log2": 48.15092408237762,
+            "preimage_bits": 117.69552265187747,
+            "collision_bits": 84.11605655106337,
+            "collision_birthday": 84.11605655106337,
+            "collision_fixed": 100.88246946481775,
+            "quantum_query_bits": 52.55528007557815
+          },
+          "ops": 200,
+          "script_bytes": 9749,
+          "test_bytes": 9980,
+          "max_stack": 928,
+          "substitutions": 11,
+          "stage_rates": [
+            15577150000.0,
+            20177318762.004864,
+            18963927605.27893
+          ],
+          "confidence": "unranked mechanism estimate; full family soundness not proved"
+        },
+        {
+          "cfg": {
+            "R": 2,
+            "b1": 0,
+            "b2": 0,
+            "chain1": 4,
+            "chain2": 5,
+            "chain_pin": 2,
+            "destructive_chain": true,
+            "enc_honest": 3,
+            "force_comp": false,
+            "hash": "sha256",
+            "k": 32,
+            "k1": 32,
+            "k2": 32,
+            "n": 139,
+            "pool_deep": true,
+            "sign_j": false,
+            "sign_lvl": false,
+            "t1": 7,
+            "t2": 7
+          },
+          "hours": 4.873257989177176,
+          "security": {
+            "S": [
+              816,
+              1020
+            ],
+            "E": [
+              2.7722222538020285,
+              3.4652778172525354
+            ],
+            "p": [
+              0.9374770915252804,
+              0.9687356815473626
+            ],
+            "honest_shots_log2": 47.0735843965212,
+            "preimage_bits": 116.6107989220121,
+            "collision_bits": 83.21565556476915,
+            "collision_birthday": 83.21565556476915,
+            "collision_fixed": 99.81904447691193,
+            "quantum_query_bits": 52.512918210645466
+          },
+          "ops": 200,
+          "script_bytes": 9653,
+          "test_bytes": 9884,
+          "max_stack": 920,
+          "substitutions": 11,
+          "stage_rates": [
+            7746965000.0,
+            9007280519.999887,
+            8738766288.907589
+          ],
+          "confidence": "unranked mechanism estimate; full family soundness not proved"
+        }
+      ]
+    }
+  }
+}

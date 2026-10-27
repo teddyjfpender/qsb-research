@@ -1,0 +1,159 @@
+{
+ "judge": "qsb-judge-2",
+ "seed": 333356741,
+ "mode": "deep",
+ "ranked": true,
+ "gates": {
+  "integrity": {
+   "ok": true,
+   "changed": []
+  },
+  "schema": {
+   "ok": true
+  },
+  "build": {
+   "ok": true
+  },
+  "static": {
+   "ok": true,
+   "ops": 201,
+   "bytes": 9826,
+   "test_bytes": 9973,
+   "max_stack": 675,
+   "puzzle_substitutions": 7,
+   "design_check_findings": 0
+  },
+  "security": {
+   "ok": true,
+   "P": 45.367,
+   "preimage_bits": 116.84,
+   "quantum_bits": 52.13,
+   "collision_bits": 83.1,
+   "E": [
+    1.52,
+    6.079
+   ],
+   "S": [
+    396,
+    1584
+   ]
+  },
+  "audit": {
+   "ok": true,
+   "seeds": 3,
+   "runs": 84354,
+   "stages": [
+    {
+     "stage": 0,
+     "z_views": 64,
+     "levels": 2,
+     "encodings": 3,
+     "measured": 768,
+     "claimed": 768,
+     "ok": true
+    },
+    {
+     "stage": 1,
+     "z_views": 65,
+     "levels": 1,
+     "encodings": 3,
+     "measured": 390,
+     "claimed": 396,
+     "ok": true
+    },
+    {
+     "stage": 2,
+     "z_views": 65,
+     "levels": 4,
+     "encodings": 3,
+     "measured": 1560,
+     "claimed": 1584,
+     "ok": true
+    }
+   ],
+   "honest_space": {
+    "ok": true,
+    "samples": 1000
+   }
+  },
+  "consensus": {
+   "ok": true,
+   "vectors": 259,
+   "core": "unexpected results: 0",
+   "lean_replay": "replay /var/folders/b6/t439mlp94rj6rzwbkbyrl5qc0000gn/T/tmpuhxd4itl/judge_vectors.txt: 259 vectors, 0 disagree with Core, 0 outside the model",
+   "lean_builder": "Lean builder rebuilt identical bytes"
+  },
+  "cost": {
+   "ok": true,
+   "gpu_hours_rtx4090": 5.574,
+   "stage_rates": [
+    8.145,
+    5.548,
+    9.614
+   ],
+   "script_bytes": 9826,
+   "scriptsig_bytes": 1007,
+   "total_vbytes": 10893
+  }
+ },
+ "design": {
+  "schema": "qsb-design-v2",
+  "hash": "sha256",
+  "n": 140,
+  "k": 64,
+  "chain_pin": 2,
+  "pool_deep": true,
+  "force_comp": false,
+  "sign_j": false,
+  "sign_lvl": false,
+  "rounds": [
+   {
+    "t": 7,
+    "b": 0,
+    "k": 64,
+    "chain": 1
+   },
+   {
+    "t": 7,
+    "b": 0,
+    "k": 64,
+    "chain": 4
+   }
+  ]
+ },
+ "proof": {
+  "label": "audited",
+  "theorem": null,
+  "note": "no Lean soundness theorem covers this family yet (M4/M5)"
+ },
+ "score": {
+  "sats": 58311,
+  "preimage_bits": 116.84,
+  "quantum_bits": 52.13,
+  "collision_bits": 83.1,
+  "bits_confidence": "audited"
+ },
+ "diagnostics": {
+  "headroom": {
+   "ops": 0,
+   "script_bytes": 174,
+   "min_expected_solutions": 1.52
+  },
+  "cost_split": {
+   "fee_sats": 54465,
+   "gpu_sats": 3846,
+   "fee_share": 0.934
+  },
+  "sats_at_other_fee_rates": {
+   "1_sat_per_vB": 14739,
+   "5_sat_per_vB": 58311,
+   "20_sat_per_vB": 221706,
+   "50_sat_per_vB": 548496
+  }
+ },
+ "verdict": "accepted",
+ "seconds": 289.6,
+ "manifest_digest": "5b25b5dd95302427",
+ "submission": "gpu_e_0",
+ "design_sha256": "da637996c7448a84d685a919efc3e2eb0b60f74b0e332d169d7e4597caee8a69"
+}

@@ -1,0 +1,36 @@
+{
+  "config": {
+    "hash": "sha256",
+    "n": 140,
+    "k": 32,
+    "chain_pin": 3,
+    "t1": 6,
+    "b1": 1,
+    "k1": 16,
+    "chain1": 2,
+    "t2": 7,
+    "k2": 32,
+    "chain2": 3,
+    "pool_deep": true
+  },
+  "cases": [
+    {
+      "test_mode": false,
+      "signed_bonus_partitions": 7,
+      "distinct_witnesses": 7,
+      "distinct_puzzle_inputs": 1
+    },
+    {
+      "test_mode": true,
+      "signed_bonus_partitions": 7,
+      "distinct_witnesses": 7,
+      "distinct_puzzle_inputs": 1
+    }
+  ],
+  "core": "PASS bonus_partition_0                                            consensus=VALID \nPASS bonus_partition_1                                            consensus=VALID \nPASS bonus_partition_2                                            consensus=VALID \nPASS bonus_partition_3                                            consensus=VALID \nPASS bonus_partition_4                                            consensus=VALID \nPASS bonus_partition_5                                            consensus=VALID \nPASS bonus_partition_6                                            consensus=VALID \nunexpected results: 0\n",
+  "reported_E1": 5.319435907919184,
+  "distinct_input_E1": 0.7599194154170262,
+  "reported_success_probability1": 0.9951044855325475,
+  "distinct_input_poisson_probability1": 0.532295884767575,
+  "vectors_sha256": "ca7fda5d5df2121239e3090d52719801a2661f07b0af95ea932da22013ff9649"
+}

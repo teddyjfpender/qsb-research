@@ -1,0 +1,58 @@
+{
+ "judge": "qsb-judge-2",
+ "seed": 11012899,
+ "mode": "standard",
+ "ranked": true,
+ "gates": {
+  "integrity": {
+   "ok": true,
+   "changed": []
+  },
+  "schema": {
+   "ok": true
+  },
+  "build": {
+   "ok": true
+  },
+  "static": {
+   "ok": false,
+   "error": "test-mode: script is 10035 bytes (> 10,000)",
+   "ops": 201,
+   "bytes": 9888,
+   "test_bytes": 10035,
+   "max_stack": 679,
+   "puzzle_substitutions": 7,
+   "design_check_findings": 0
+  }
+ },
+ "design": {
+  "schema": "qsb-design-v2",
+  "hash": "sha256",
+  "n": 141,
+  "k": 64,
+  "chain_pin": 2,
+  "pool_deep": true,
+  "force_comp": false,
+  "sign_j": false,
+  "sign_lvl": false,
+  "rounds": [
+   {
+    "t": 7,
+    "b": 0,
+    "k": 64,
+    "chain": 1
+   },
+   {
+    "t": 7,
+    "b": 0,
+    "k": 64,
+    "chain": 4
+   }
+  ]
+ },
+ "verdict": "rejected",
+ "rejected_at": "static",
+ "manifest_digest": "5b25b5dd95302427",
+ "submission": "gpu_e_0",
+ "design_sha256": "5bc58213beda68bb3414e13ac833c9cf8cc4ddf42403a8f5a99aed422cfc7840"
+}

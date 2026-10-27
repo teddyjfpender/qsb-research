@@ -1,0 +1,25 @@
+{
+  "schema": "qsb-design-v2",
+  "hash": "sha256",
+  "n": 132,
+  "k": 96,
+  "chain_pin": 1,
+  "pool_deep": true,
+  "force_comp": false,
+  "sign_j": false,
+  "sign_lvl": false,
+  "rounds": [
+    {
+      "t": 7,
+      "b": 0,
+      "k": 96,
+      "chain": 2
+    },
+    {
+      "t": 7,
+      "b": 0,
+      "k": 96,
+      "chain": 3
+    }
+  ]
+}

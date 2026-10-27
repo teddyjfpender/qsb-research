@@ -1,0 +1,113 @@
+{
+  "core_vectors": 1032,
+  "core_summary": "unexpected results: 0",
+  "lean_summary": "1032 vectors, 0 disagree with Core, 0 outside the model",
+  "tiers": [
+    {
+      "cfg": {
+        "hash": "sha256",
+        "n": 134,
+        "k": 96,
+        "t1": 7,
+        "t2": 7,
+        "k1": 96,
+        "k2": 96,
+        "chain_pin": 1,
+        "chain1": 3,
+        "chain2": 3,
+        "pool_deep": true,
+        "force_comp": false,
+        "sign_j": false,
+        "sign_lvl": false
+      },
+      "ops": 201,
+      "bytes": 9806,
+      "test_bytes": 9953,
+      "static_errors": [],
+      "twin_error": null,
+      "substitutions": 7,
+      "security": {
+        "S": [
+          1728,
+          1728
+        ],
+        "E": [
+          4.998443457726953,
+          4.998443457726953
+        ],
+        "p": [
+          0.9932515569349109,
+          0.9932515569349109
+        ],
+        "honest_shots_log2": 46.96173789258778,
+        "preimage_bits": 114.59117818751751,
+        "collision_bits": 82.61100176224812,
+        "collision_birthday": 82.61100176224812,
+        "collision_fixed": 98.2851297399585,
+        "quantum_query_bits": 51.2106265930376
+      },
+      "estimated_gpu_hours": 5.2825904015359155,
+      "rates": [
+        6081330000.0,
+        8023479641.76726,
+        7877267617.6293545
+      ],
+      "confidence": "proposal; not ranked; no new GPU measurement",
+      "name": "D",
+      "design_check": []
+    },
+    {
+      "cfg": {
+        "hash": "sha256",
+        "n": 139,
+        "k": 64,
+        "t1": 7,
+        "t2": 7,
+        "k1": 48,
+        "k2": 64,
+        "chain_pin": 1,
+        "chain1": 3,
+        "chain2": 3,
+        "pool_deep": true,
+        "force_comp": false,
+        "sign_j": false,
+        "sign_lvl": false
+      },
+      "ops": 201,
+      "bytes": 9764,
+      "test_bytes": 9911,
+      "static_errors": [],
+      "twin_error": null,
+      "substitutions": 7,
+      "security": {
+        "S": [
+          864,
+          1152
+        ],
+        "E": [
+          3.248655500907787,
+          4.331540667877049
+        ],
+        "p": [
+          0.9611736252196978,
+          0.9868527237077563
+        ],
+        "honest_shots_log2": 46.984084318601774,
+        "preimage_bits": 116.17614068823868,
+        "collision_bits": 83.05957531775944,
+        "collision_birthday": 83.05957531775944,
+        "collision_fixed": 99.4812884513479,
+        "quantum_query_bits": 52.29558909375876
+      },
+      "estimated_gpu_hours": 5.688887810416754,
+      "rates": [
+        5841645000.0,
+        7281564804.495273,
+        7592554673.631457
+      ],
+      "confidence": "proposal; not ranked; no new GPU measurement",
+      "name": "E",
+      "design_check": []
+    }
+  ]
+}

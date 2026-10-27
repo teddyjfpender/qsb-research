@@ -1,0 +1,2034 @@
+{
+  "seed": 20261027,
+  "steps": 500000,
+  "tiers": {
+    "D": {
+      "baseline": {
+        "cfg": {
+          "hash": "sha256",
+          "n": 140,
+          "k": 32,
+          "chain_pin": 3,
+          "t1": 6,
+          "b1": 1,
+          "k1": 16,
+          "chain1": 2,
+          "t2": 7,
+          "b2": 0,
+          "k2": 32,
+          "chain2": 3,
+          "R": 2,
+          "pool_deep": true,
+          "force_comp": false,
+          "sign_j": false,
+          "sign_lvl": false,
+          "enc_honest": 3
+        },
+        "design": {
+          "schema": "qsb-design-v2",
+          "hash": "sha256",
+          "n": 140,
+          "k": 32,
+          "chain_pin": 3,
+          "pool_deep": true,
+          "force_comp": false,
+          "sign_j": false,
+          "sign_lvl": false,
+          "rounds": [
+            {
+              "t": 6,
+              "b": 1,
+              "k": 16,
+              "chain": 2
+            },
+            {
+              "t": 7,
+              "b": 0,
+              "k": 32,
+              "chain": 3
+            }
+          ]
+        },
+        "hours": 5.845835753807874,
+        "security": {
+          "S": [
+            32832,
+            630
+          ],
+          "E": [
+            5.319435907919184,
+            2.279758246251079
+          ],
+          "p": [
+            0.9951044855325475,
+            0.8976910627047989
+          ],
+          "honest_shots_log2": 47.06004453077329,
+          "preimage_bits": 111.79893015785012,
+          "collision_bits": 78.42132084239807,
+          "collision_birthday": 78.42132084239807,
+          "collision_fixed": 97.13055598739027,
+          "quantum_query_bits": 49.81450257820391
+        },
+        "ops": 201,
+        "script_bytes": 9472,
+        "rates": [
+          7746965000.0,
+          6397330231.022851,
+          6888808735.695487
+        ]
+      },
+      "unique_feasible": 4250,
+      "rejected": {
+        "limits_or_unmeasured": 335,
+        "security": 242
+      },
+      "candidates": [
+        {
+          "cfg": {
+            "R": 2,
+            "b1": 0,
+            "b2": 0,
+            "chain1": 2,
+            "chain2": 3,
+            "chain_pin": 1,
+            "enc_honest": 3,
+            "force_comp": false,
+            "hash": "sha256",
+            "k": 96,
+            "k1": 96,
+            "k2": 96,
+            "n": 135,
+            "pool_deep": true,
+            "sign_j": false,
+            "sign_lvl": false,
+            "t1": 7,
+            "t2": 7
+          },
+          "design": {
+            "schema": "qsb-design-v2",
+            "hash": "sha256",
+            "n": 135,
+            "k": 96,
+            "chain_pin": 1,
+            "pool_deep": true,
+            "force_comp": false,
+            "sign_j": false,
+            "sign_lvl": false,
+            "rounds": [
+              {
+                "t": 7,
+                "b": 0,
+                "k": 96,
+                "chain": 2
+              },
+              {
+                "t": 7,
+                "b": 0,
+                "k": 96,
+                "chain": 3
+              }
+            ]
+          },
+          "hours": 5.329748480913937,
+          "security": {
+            "S": [
+              1152,
+              1728
+            ],
+            "E": [
+              3.5145305562142637,
+              5.271795834321396
+            ],
+            "p": [
+              0.9702382288462806,
+              0.9948656182102095
+            ],
+            "honest_shots_log2": 46.971603638170244,
+            "preimage_bits": 115.17614068823868,
+            "collision_bits": 82.69196951222065,
+            "collision_birthday": 82.69196951222065,
+            "collision_fixed": 98.73857503776277,
+            "quantum_query_bits": 51.50310784339818
+          },
+          "ops": 200,
+          "script_bytes": 9867,
+          "rates": [
+            6081330000.0,
+            8006332607.17199,
+            7877267617.6293545
+          ],
+          "screen": {
+            "judge": "qsb-judge-2",
+            "seed": 20261027,
+            "mode": "screen",
+            "ranked": false,
+            "gates": {
+              "integrity": {
+                "ok": true,
+                "changed": []
+              },
+              "schema": {
+                "ok": true
+              },
+              "build": {
+                "ok": true
+              },
+              "static": {
+                "ok": true,
+                "ops": 200,
+                "bytes": 9867,
+                "test_bytes": 9993,
+                "max_stack": 687,
+                "puzzle_substitutions": 6,
+                "design_check_findings": 0
+              },
+              "security": {
+                "ok": true,
+                "P": 45.367,
+                "preimage_bits": 115.18,
+                "quantum_bits": 51.5,
+                "collision_bits": 82.69,
+                "E": [
+                  3.515,
+                  5.272
+                ],
+                "S": [
+                  1152,
+                  1728
+                ]
+              },
+              "cost": {
+                "ok": true,
+                "gpu_hours_rtx4090": 5.33,
+                "stage_rates": [
+                  6.081,
+                  8.006,
+                  7.877
+                ],
+                "script_bytes": 9867,
+                "scriptsig_bytes": 1007,
+                "total_vbytes": 10934
+              }
+            },
+            "design": {
+              "schema": "qsb-design-v2",
+              "hash": "sha256",
+              "n": 135,
+              "k": 96,
+              "chain_pin": 1,
+              "pool_deep": true,
+              "force_comp": false,
+              "sign_j": false,
+              "sign_lvl": false,
+              "rounds": [
+                {
+                  "t": 7,
+                  "b": 0,
+                  "k": 96,
+                  "chain": 2
+                },
+                {
+                  "t": 7,
+                  "b": 0,
+                  "k": 96,
+                  "chain": 3
+                }
+              ]
+            },
+            "proof": {
+              "label": "audited",
+              "theorem": null,
+              "note": "no Lean soundness theorem covers this family yet (M4/M5)"
+            },
+            "score": {
+              "sats": 58348,
+              "preimage_bits": 115.18,
+              "quantum_bits": 51.5,
+              "collision_bits": 82.69,
+              "bits_confidence": "audited"
+            },
+            "diagnostics": {
+              "headroom": {
+                "ops": 1,
+                "script_bytes": 133,
+                "min_expected_solutions": 3.51
+              },
+              "cost_split": {
+                "fee_sats": 54670,
+                "gpu_sats": 3678,
+                "fee_share": 0.937
+              },
+              "sats_at_other_fee_rates": {
+                "1_sat_per_vB": 14612,
+                "5_sat_per_vB": 58348,
+                "20_sat_per_vB": 222358,
+                "50_sat_per_vB": 550378
+              }
+            },
+            "verdict": "screened",
+            "seconds": 5.8
+          }
+        },
+        {
+          "cfg": {
+            "R": 2,
+            "b1": 0,
+            "b2": 0,
+            "chain1": 2,
+            "chain2": 3,
+            "chain_pin": 1,
+            "enc_honest": 3,
+            "force_comp": false,
+            "hash": "sha256",
+            "k": 96,
+            "k1": 96,
+            "k2": 96,
+            "n": 134,
+            "pool_deep": true,
+            "sign_j": false,
+            "sign_lvl": false,
+            "t1": 7,
+            "t2": 7
+          },
+          "design": {
+            "schema": "qsb-design-v2",
+            "hash": "sha256",
+            "n": 134,
+            "k": 96,
+            "chain_pin": 1,
+            "pool_deep": true,
+            "force_comp": false,
+            "sign_j": false,
+            "sign_lvl": false,
+            "rounds": [
+              {
+                "t": 7,
+                "b": 0,
+                "k": 96,
+                "chain": 2
+              },
+              {
+                "t": 7,
+                "b": 0,
+                "k": 96,
+                "chain": 3
+              }
+            ]
+          },
+          "hours": 5.349078335874782,
+          "security": {
+            "S": [
+              1152,
+              1728
+            ],
+            "E": [
+              3.332295638484635,
+              4.998443457726953
+            ],
+            "p": [
+              0.9642889687199062,
+              0.9932515569349109
+            ],
+            "honest_shots_log2": 46.97620687352578,
+            "preimage_bits": 115.17614068823868,
+            "collision_bits": 82.6340980286214,
+            "collision_birthday": 82.6340980286214,
+            "collision_fixed": 98.73857503776277,
+            "quantum_query_bits": 51.50310784339818
+          },
+          "ops": 200,
+          "script_bytes": 9805,
+          "rates": [
+            6081330000.0,
+            8006332607.17199,
+            7877267617.6293545
+          ],
+          "screen": {
+            "judge": "qsb-judge-2",
+            "seed": 20261027,
+            "mode": "screen",
+            "ranked": false,
+            "gates": {
+              "integrity": {
+                "ok": true,
+                "changed": []
+              },
+              "schema": {
+                "ok": true
+              },
+              "build": {
+                "ok": true
+              },
+              "static": {
+                "ok": true,
+                "ops": 200,
+                "bytes": 9805,
+                "test_bytes": 9931,
+                "max_stack": 683,
+                "puzzle_substitutions": 6,
+                "design_check_findings": 0
+              },
+              "security": {
+                "ok": true,
+                "P": 45.367,
+                "preimage_bits": 115.18,
+                "quantum_bits": 51.5,
+                "collision_bits": 82.63,
+                "E": [
+                  3.332,
+                  4.998
+                ],
+                "S": [
+                  1152,
+                  1728
+                ]
+              },
+              "cost": {
+                "ok": true,
+                "gpu_hours_rtx4090": 5.349,
+                "stage_rates": [
+                  6.081,
+                  8.006,
+                  7.877
+                ],
+                "script_bytes": 9805,
+                "scriptsig_bytes": 1007,
+                "total_vbytes": 10872
+              }
+            },
+            "design": {
+              "schema": "qsb-design-v2",
+              "hash": "sha256",
+              "n": 134,
+              "k": 96,
+              "chain_pin": 1,
+              "pool_deep": true,
+              "force_comp": false,
+              "sign_j": false,
+              "sign_lvl": false,
+              "rounds": [
+                {
+                  "t": 7,
+                  "b": 0,
+                  "k": 96,
+                  "chain": 2
+                },
+                {
+                  "t": 7,
+                  "b": 0,
+                  "k": 96,
+                  "chain": 3
+                }
+              ]
+            },
+            "proof": {
+              "label": "audited",
+              "theorem": null,
+              "note": "no Lean soundness theorem covers this family yet (M4/M5)"
+            },
+            "score": {
+              "sats": 58051,
+              "preimage_bits": 115.18,
+              "quantum_bits": 51.5,
+              "collision_bits": 82.63,
+              "bits_confidence": "audited"
+            },
+            "diagnostics": {
+              "headroom": {
+                "ops": 1,
+                "script_bytes": 195,
+                "min_expected_solutions": 3.33
+              },
+              "cost_split": {
+                "fee_sats": 54360,
+                "gpu_sats": 3691,
+                "fee_share": 0.936
+              },
+              "sats_at_other_fee_rates": {
+                "1_sat_per_vB": 14563,
+                "5_sat_per_vB": 58051,
+                "20_sat_per_vB": 221131,
+                "50_sat_per_vB": 547291
+              }
+            },
+            "verdict": "screened",
+            "seconds": 5.9
+          }
+        },
+        {
+          "cfg": {
+            "R": 2,
+            "b1": 0,
+            "b2": 0,
+            "chain1": 2,
+            "chain2": 3,
+            "chain_pin": 1,
+            "enc_honest": 3,
+            "force_comp": false,
+            "hash": "sha256",
+            "k": 96,
+            "k1": 96,
+            "k2": 96,
+            "n": 133,
+            "pool_deep": true,
+            "sign_j": false,
+            "sign_lvl": false,
+            "t1": 7,
+            "t2": 7
+          },
+          "design": {
+            "schema": "qsb-design-v2",
+            "hash": "sha256",
+            "n": 133,
+            "k": 96,
+            "chain_pin": 1,
+            "pool_deep": true,
+            "force_comp": false,
+            "sign_j": false,
+            "sign_lvl": false,
+            "rounds": [
+              {
+                "t": 7,
+                "b": 0,
+                "k": 96,
+                "chain": 2
+              },
+              {
+                "t": 7,
+                "b": 0,
+                "k": 96,
+                "chain": 3
+              }
+            ]
+          },
+          "hours": 5.371622788836277,
+          "security": {
+            "S": [
+              1152,
+              1728
+            ],
+            "E": [
+              3.1582204931906617,
+              4.7373307397859925
+            ],
+            "p": [
+              0.9574986948108621,
+              0.991237996935013
+            ],
+            "honest_shots_log2": 46.981674983224515,
+            "preimage_bits": 115.17614068823868,
+            "collision_bits": 82.5769615658077,
+            "collision_birthday": 82.5769615658077,
+            "collision_fixed": 98.73857503776277,
+            "quantum_query_bits": 51.50310784339818
+          },
+          "ops": 200,
+          "script_bytes": 9743,
+          "rates": [
+            6081330000.0,
+            8006332607.17199,
+            7879476661.553267
+          ],
+          "screen": {
+            "judge": "qsb-judge-2",
+            "seed": 20261027,
+            "mode": "screen",
+            "ranked": false,
+            "gates": {
+              "integrity": {
+                "ok": true,
+                "changed": []
+              },
+              "schema": {
+                "ok": true
+              },
+              "build": {
+                "ok": true
+              },
+              "static": {
+                "ok": true,
+                "ops": 200,
+                "bytes": 9743,
+                "test_bytes": 9869,
+                "max_stack": 679,
+                "puzzle_substitutions": 6,
+                "design_check_findings": 0
+              },
+              "security": {
+                "ok": true,
+                "P": 45.367,
+                "preimage_bits": 115.18,
+                "quantum_bits": 51.5,
+                "collision_bits": 82.58,
+                "E": [
+                  3.158,
+                  4.737
+                ],
+                "S": [
+                  1152,
+                  1728
+                ]
+              },
+              "cost": {
+                "ok": true,
+                "gpu_hours_rtx4090": 5.372,
+                "stage_rates": [
+                  6.081,
+                  8.006,
+                  7.879
+                ],
+                "script_bytes": 9743,
+                "scriptsig_bytes": 1007,
+                "total_vbytes": 10810
+              }
+            },
+            "design": {
+              "schema": "qsb-design-v2",
+              "hash": "sha256",
+              "n": 133,
+              "k": 96,
+              "chain_pin": 1,
+              "pool_deep": true,
+              "force_comp": false,
+              "sign_j": false,
+              "sign_lvl": false,
+              "rounds": [
+                {
+                  "t": 7,
+                  "b": 0,
+                  "k": 96,
+                  "chain": 2
+                },
+                {
+                  "t": 7,
+                  "b": 0,
+                  "k": 96,
+                  "chain": 3
+                }
+              ]
+            },
+            "proof": {
+              "label": "audited",
+              "theorem": null,
+              "note": "no Lean soundness theorem covers this family yet (M4/M5)"
+            },
+            "score": {
+              "sats": 57756,
+              "preimage_bits": 115.18,
+              "quantum_bits": 51.5,
+              "collision_bits": 82.58,
+              "bits_confidence": "audited"
+            },
+            "diagnostics": {
+              "headroom": {
+                "ops": 1,
+                "script_bytes": 257,
+                "min_expected_solutions": 3.16
+              },
+              "cost_split": {
+                "fee_sats": 54050,
+                "gpu_sats": 3707,
+                "fee_share": 0.936
+              },
+              "sats_at_other_fee_rates": {
+                "1_sat_per_vB": 14517,
+                "5_sat_per_vB": 57757,
+                "20_sat_per_vB": 219907,
+                "50_sat_per_vB": 544207
+              }
+            },
+            "verdict": "screened",
+            "seconds": 5.8
+          }
+        },
+        {
+          "cfg": {
+            "R": 2,
+            "b1": 0,
+            "b2": 0,
+            "chain1": 3,
+            "chain2": 2,
+            "chain_pin": 1,
+            "enc_honest": 3,
+            "force_comp": false,
+            "hash": "sha256",
+            "k": 96,
+            "k1": 96,
+            "k2": 96,
+            "n": 135,
+            "pool_deep": true,
+            "sign_j": false,
+            "sign_lvl": false,
+            "t1": 7,
+            "t2": 7
+          },
+          "design": {
+            "schema": "qsb-design-v2",
+            "hash": "sha256",
+            "n": 135,
+            "k": 96,
+            "chain_pin": 1,
+            "pool_deep": true,
+            "force_comp": false,
+            "sign_j": false,
+            "sign_lvl": false,
+            "rounds": [
+              {
+                "t": 7,
+                "b": 0,
+                "k": 96,
+                "chain": 3
+              },
+              {
+                "t": 7,
+                "b": 0,
+                "k": 96,
+                "chain": 2
+              }
+            ]
+          },
+          "hours": 5.3843909010357995,
+          "security": {
+            "S": [
+              1728,
+              1152
+            ],
+            "E": [
+              5.271795834321396,
+              3.5145305562142637
+            ],
+            "p": [
+              0.9948656182102095,
+              0.9702382288462806
+            ],
+            "honest_shots_log2": 46.98365666611072,
+            "preimage_bits": 115.17614068823868,
+            "collision_bits": 82.79799909086569,
+            "collision_birthday": 82.79799909086569,
+            "collision_fixed": 98.73857503776277,
+            "quantum_query_bits": 51.50310784339818
+          },
+          "ops": 200,
+          "script_bytes": 9867,
+          "rates": [
+            6081330000.0,
+            8023479641.76726,
+            7789910272.995811
+          ],
+          "screen": {
+            "judge": "qsb-judge-2",
+            "seed": 20261027,
+            "mode": "screen",
+            "ranked": false,
+            "gates": {
+              "integrity": {
+                "ok": true,
+                "changed": []
+              },
+              "schema": {
+                "ok": true
+              },
+              "build": {
+                "ok": true
+              },
+              "static": {
+                "ok": true,
+                "ops": 200,
+                "bytes": 9867,
+                "test_bytes": 9993,
+                "max_stack": 687,
+                "puzzle_substitutions": 6,
+                "design_check_findings": 0
+              },
+              "security": {
+                "ok": true,
+                "P": 45.367,
+                "preimage_bits": 115.18,
+                "quantum_bits": 51.5,
+                "collision_bits": 82.8,
+                "E": [
+                  5.272,
+                  3.515
+                ],
+                "S": [
+                  1728,
+                  1152
+                ]
+              },
+              "cost": {
+                "ok": true,
+                "gpu_hours_rtx4090": 5.384,
+                "stage_rates": [
+                  6.081,
+                  8.023,
+                  7.79
+                ],
+                "script_bytes": 9867,
+                "scriptsig_bytes": 1007,
+                "total_vbytes": 10934
+              }
+            },
+            "design": {
+              "schema": "qsb-design-v2",
+              "hash": "sha256",
+              "n": 135,
+              "k": 96,
+              "chain_pin": 1,
+              "pool_deep": true,
+              "force_comp": false,
+              "sign_j": false,
+              "sign_lvl": false,
+              "rounds": [
+                {
+                  "t": 7,
+                  "b": 0,
+                  "k": 96,
+                  "chain": 3
+                },
+                {
+                  "t": 7,
+                  "b": 0,
+                  "k": 96,
+                  "chain": 2
+                }
+              ]
+            },
+            "proof": {
+              "label": "audited",
+              "theorem": null,
+              "note": "no Lean soundness theorem covers this family yet (M4/M5)"
+            },
+            "score": {
+              "sats": 58385,
+              "preimage_bits": 115.18,
+              "quantum_bits": 51.5,
+              "collision_bits": 82.8,
+              "bits_confidence": "audited"
+            },
+            "diagnostics": {
+              "headroom": {
+                "ops": 1,
+                "script_bytes": 133,
+                "min_expected_solutions": 3.51
+              },
+              "cost_split": {
+                "fee_sats": 54670,
+                "gpu_sats": 3715,
+                "fee_share": 0.936
+              },
+              "sats_at_other_fee_rates": {
+                "1_sat_per_vB": 14649,
+                "5_sat_per_vB": 58385,
+                "20_sat_per_vB": 222395,
+                "50_sat_per_vB": 550415
+              }
+            },
+            "verdict": "screened",
+            "seconds": 5.8
+          }
+        },
+        {
+          "cfg": {
+            "R": 2,
+            "b1": 0,
+            "b2": 0,
+            "chain1": 2,
+            "chain2": 3,
+            "chain_pin": 1,
+            "enc_honest": 3,
+            "force_comp": false,
+            "hash": "sha256",
+            "k": 96,
+            "k1": 96,
+            "k2": 96,
+            "n": 132,
+            "pool_deep": true,
+            "sign_j": false,
+            "sign_lvl": false,
+            "t1": 7,
+            "t2": 7
+          },
+          "design": {
+            "schema": "qsb-design-v2",
+            "hash": "sha256",
+            "n": 132,
+            "k": 96,
+            "chain_pin": 1,
+            "pool_deep": true,
+            "force_comp": false,
+            "sign_j": false,
+            "sign_lvl": false,
+            "rounds": [
+              {
+                "t": 7,
+                "b": 0,
+                "k": 96,
+                "chain": 2
+              },
+              {
+                "t": 7,
+                "b": 0,
+                "k": 96,
+                "chain": 3
+              }
+            ]
+          },
+          "hours": 5.3976738839207945,
+          "security": {
+            "S": [
+              1152,
+              1728
+            ],
+            "E": [
+              2.9919983619701007,
+              4.487997542955151
+            ],
+            "p": [
+              0.9498129554341861,
+              0.9887568648216823
+            ],
+            "honest_shots_log2": 46.98812510076552,
+            "preimage_bits": 115.17614068823868,
+            "collision_bits": 82.52065122304091,
+            "collision_birthday": 82.52065122304091,
+            "collision_fixed": 98.73857503776277,
+            "quantum_query_bits": 51.50310784339818
+          },
+          "ops": 200,
+          "script_bytes": 9679,
+          "rates": [
+            6081330000.0,
+            8009756148.376256,
+            7881686944.801309
+          ],
+          "screen": {
+            "judge": "qsb-judge-2",
+            "seed": 20261027,
+            "mode": "screen",
+            "ranked": false,
+            "gates": {
+              "integrity": {
+                "ok": true,
+                "changed": []
+              },
+              "schema": {
+                "ok": true
+              },
+              "build": {
+                "ok": true
+              },
+              "static": {
+                "ok": true,
+                "ops": 200,
+                "bytes": 9679,
+                "test_bytes": 9805,
+                "max_stack": 675,
+                "puzzle_substitutions": 6,
+                "design_check_findings": 0
+              },
+              "security": {
+                "ok": true,
+                "P": 45.367,
+                "preimage_bits": 115.18,
+                "quantum_bits": 51.5,
+                "collision_bits": 82.52,
+                "E": [
+                  2.992,
+                  4.488
+                ],
+                "S": [
+                  1152,
+                  1728
+                ]
+              },
+              "cost": {
+                "ok": true,
+                "gpu_hours_rtx4090": 5.398,
+                "stage_rates": [
+                  6.081,
+                  8.01,
+                  7.882
+                ],
+                "script_bytes": 9679,
+                "scriptsig_bytes": 1007,
+                "total_vbytes": 10746
+              }
+            },
+            "design": {
+              "schema": "qsb-design-v2",
+              "hash": "sha256",
+              "n": 132,
+              "k": 96,
+              "chain_pin": 1,
+              "pool_deep": true,
+              "force_comp": false,
+              "sign_j": false,
+              "sign_lvl": false,
+              "rounds": [
+                {
+                  "t": 7,
+                  "b": 0,
+                  "k": 96,
+                  "chain": 2
+                },
+                {
+                  "t": 7,
+                  "b": 0,
+                  "k": 96,
+                  "chain": 3
+                }
+              ]
+            },
+            "proof": {
+              "label": "audited",
+              "theorem": null,
+              "note": "no Lean soundness theorem covers this family yet (M4/M5)"
+            },
+            "score": {
+              "sats": 57454,
+              "preimage_bits": 115.18,
+              "quantum_bits": 51.5,
+              "collision_bits": 82.52,
+              "bits_confidence": "audited"
+            },
+            "diagnostics": {
+              "headroom": {
+                "ops": 1,
+                "script_bytes": 321,
+                "min_expected_solutions": 2.99
+              },
+              "cost_split": {
+                "fee_sats": 53730,
+                "gpu_sats": 3725,
+                "fee_share": 0.935
+              },
+              "sats_at_other_fee_rates": {
+                "1_sat_per_vB": 14471,
+                "5_sat_per_vB": 57455,
+                "20_sat_per_vB": 218645,
+                "50_sat_per_vB": 541025
+              }
+            },
+            "verdict": "screened",
+            "seconds": 5.7
+          }
+        }
+      ]
+    },
+    "E": {
+      "baseline": {
+        "cfg": {
+          "hash": "sha256",
+          "n": 130,
+          "k": 96,
+          "chain_pin": 1,
+          "t1": 7,
+          "b1": 0,
+          "k1": 48,
+          "chain1": 3,
+          "t2": 7,
+          "b2": 0,
+          "k2": 96,
+          "chain2": 2,
+          "R": 2,
+          "pool_deep": true,
+          "force_comp": false,
+          "sign_j": false,
+          "sign_lvl": false,
+          "enc_honest": 3
+        },
+        "design": {
+          "schema": "qsb-design-v2",
+          "hash": "sha256",
+          "n": 130,
+          "k": 96,
+          "chain_pin": 1,
+          "pool_deep": true,
+          "force_comp": false,
+          "sign_j": false,
+          "sign_lvl": false,
+          "rounds": [
+            {
+              "t": 7,
+              "b": 0,
+              "k": 48,
+              "chain": 3
+            },
+            {
+              "t": 7,
+              "b": 0,
+              "k": 96,
+              "chain": 2
+            }
+          ]
+        },
+        "hours": 6.0407793975573,
+        "security": {
+          "S": [
+            864,
+            1152
+          ],
+          "E": [
+            2.011449280470878,
+            2.6819323739611707
+          ],
+          "p": [
+            0.8662053718528294,
+            0.9315692075721415
+          ],
+          "honest_shots_log2": 47.09500155038769,
+          "preimage_bits": 116.17614068823868,
+          "collision_bits": 82.6272313603792,
+          "collision_birthday": 82.6272313603792,
+          "collision_fixed": 99.4812884513479,
+          "quantum_query_bits": 52.00310784339818
+        },
+        "ops": 200,
+        "script_bytes": 9551,
+        "rates": [
+          6081330000.0,
+          7289120792.071751,
+          7799641127.238989
+        ]
+      },
+      "unique_feasible": 2247,
+      "rejected": {
+        "limits_or_unmeasured": 206,
+        "security": 77
+      },
+      "candidates": [
+        {
+          "cfg": {
+            "R": 2,
+            "b1": 0,
+            "b2": 0,
+            "chain1": 1,
+            "chain2": 4,
+            "chain_pin": 2,
+            "enc_honest": 3,
+            "force_comp": false,
+            "hash": "sha256",
+            "k": 64,
+            "k1": 64,
+            "k2": 64,
+            "n": 140,
+            "pool_deep": true,
+            "sign_j": false,
+            "sign_lvl": false,
+            "t1": 7,
+            "t2": 7
+          },
+          "design": {
+            "schema": "qsb-design-v2",
+            "hash": "sha256",
+            "n": 140,
+            "k": 64,
+            "chain_pin": 2,
+            "pool_deep": true,
+            "force_comp": false,
+            "sign_j": false,
+            "sign_lvl": false,
+            "rounds": [
+              {
+                "t": 7,
+                "b": 0,
+                "k": 64,
+                "chain": 1
+              },
+              {
+                "t": 7,
+                "b": 0,
+                "k": 64,
+                "chain": 4
+              }
+            ]
+          },
+          "hours": 5.573731099420119,
+          "security": {
+            "S": [
+              396,
+              1584
+            ],
+            "E": [
+              1.5198388308340525,
+              6.07935532333621
+            ],
+            "p": [
+              0.7812528605946544,
+              0.9977103477373926
+            ],
+            "honest_shots_log2": 47.082977760464324,
+            "preimage_bits": 116.84223995168523,
+            "collision_bits": 83.10084020339025,
+            "collision_birthday": 83.10084020339025,
+            "collision_fixed": 100.13439011052796,
+            "quantum_query_bits": 52.128638725482034
+          },
+          "ops": 201,
+          "script_bytes": 9826,
+          "rates": [
+            8144635000.0,
+            5547609309.581595,
+            9613857419.513092
+          ],
+          "screen": {
+            "judge": "qsb-judge-2",
+            "seed": 20261027,
+            "mode": "screen",
+            "ranked": false,
+            "gates": {
+              "integrity": {
+                "ok": true,
+                "changed": []
+              },
+              "schema": {
+                "ok": true
+              },
+              "build": {
+                "ok": true
+              },
+              "static": {
+                "ok": true,
+                "ops": 201,
+                "bytes": 9826,
+                "test_bytes": 9973,
+                "max_stack": 675,
+                "puzzle_substitutions": 7,
+                "design_check_findings": 0
+              },
+              "security": {
+                "ok": true,
+                "P": 45.367,
+                "preimage_bits": 116.84,
+                "quantum_bits": 52.13,
+                "collision_bits": 83.1,
+                "E": [
+                  1.52,
+                  6.079
+                ],
+                "S": [
+                  396,
+                  1584
+                ]
+              },
+              "cost": {
+                "ok": true,
+                "gpu_hours_rtx4090": 5.574,
+                "stage_rates": [
+                  8.145,
+                  5.548,
+                  9.614
+                ],
+                "script_bytes": 9826,
+                "scriptsig_bytes": 1007,
+                "total_vbytes": 10893
+              }
+            },
+            "design": {
+              "schema": "qsb-design-v2",
+              "hash": "sha256",
+              "n": 140,
+              "k": 64,
+              "chain_pin": 2,
+              "pool_deep": true,
+              "force_comp": false,
+              "sign_j": false,
+              "sign_lvl": false,
+              "rounds": [
+                {
+                  "t": 7,
+                  "b": 0,
+                  "k": 64,
+                  "chain": 1
+                },
+                {
+                  "t": 7,
+                  "b": 0,
+                  "k": 64,
+                  "chain": 4
+                }
+              ]
+            },
+            "proof": {
+              "label": "audited",
+              "theorem": null,
+              "note": "no Lean soundness theorem covers this family yet (M4/M5)"
+            },
+            "score": {
+              "sats": 58311,
+              "preimage_bits": 116.84,
+              "quantum_bits": 52.13,
+              "collision_bits": 83.1,
+              "bits_confidence": "audited"
+            },
+            "diagnostics": {
+              "headroom": {
+                "ops": 0,
+                "script_bytes": 174,
+                "min_expected_solutions": 1.52
+              },
+              "cost_split": {
+                "fee_sats": 54465,
+                "gpu_sats": 3846,
+                "fee_share": 0.934
+              },
+              "sats_at_other_fee_rates": {
+                "1_sat_per_vB": 14739,
+                "5_sat_per_vB": 58311,
+                "20_sat_per_vB": 221706,
+                "50_sat_per_vB": 548496
+              }
+            },
+            "verdict": "screened",
+            "seconds": 6.3
+          }
+        },
+        {
+          "cfg": {
+            "R": 2,
+            "b1": 0,
+            "b2": 0,
+            "chain1": 2,
+            "chain2": 3,
+            "chain_pin": 1,
+            "enc_honest": 3,
+            "force_comp": false,
+            "hash": "sha256",
+            "k": 64,
+            "k1": 64,
+            "k2": 64,
+            "n": 140,
+            "pool_deep": true,
+            "sign_j": false,
+            "sign_lvl": false,
+            "t1": 7,
+            "t2": 7
+          },
+          "design": {
+            "schema": "qsb-design-v2",
+            "hash": "sha256",
+            "n": 140,
+            "k": 64,
+            "chain_pin": 1,
+            "pool_deep": true,
+            "force_comp": false,
+            "sign_j": false,
+            "sign_lvl": false,
+            "rounds": [
+              {
+                "t": 7,
+                "b": 0,
+                "k": 64,
+                "chain": 2
+              },
+              {
+                "t": 7,
+                "b": 0,
+                "k": 64,
+                "chain": 3
+              }
+            ]
+          },
+          "hours": 5.58837729768806,
+          "security": {
+            "S": [
+              768,
+              1152
+            ],
+            "E": [
+              3.039677661668105,
+              4.559516492502158
+            ],
+            "p": [
+              0.9521496890019783,
+              0.9895328813495267
+            ],
+            "honest_shots_log2": 46.98613551354785,
+            "preimage_bits": 116.346065689681,
+            "collision_bits": 83.12194366298125,
+            "collision_birthday": 83.12194366298125,
+            "collision_fixed": 99.61601878884453,
+            "quantum_query_bits": 52.38055159447992
+          },
+          "ops": 200,
+          "script_bytes": 9825,
+          "rates": [
+            5841645000.0,
+            7778575973.1973715,
+            7589478417.481727
+          ],
+          "screen": {
+            "judge": "qsb-judge-2",
+            "seed": 20261027,
+            "mode": "screen",
+            "ranked": false,
+            "gates": {
+              "integrity": {
+                "ok": true,
+                "changed": []
+              },
+              "schema": {
+                "ok": true
+              },
+              "build": {
+                "ok": true
+              },
+              "static": {
+                "ok": true,
+                "ops": 200,
+                "bytes": 9825,
+                "test_bytes": 9951,
+                "max_stack": 675,
+                "puzzle_substitutions": 6,
+                "design_check_findings": 0
+              },
+              "security": {
+                "ok": true,
+                "P": 45.367,
+                "preimage_bits": 116.35,
+                "quantum_bits": 52.38,
+                "collision_bits": 83.12,
+                "E": [
+                  3.04,
+                  4.56
+                ],
+                "S": [
+                  768,
+                  1152
+                ]
+              },
+              "cost": {
+                "ok": true,
+                "gpu_hours_rtx4090": 5.588,
+                "stage_rates": [
+                  5.842,
+                  7.779,
+                  7.589
+                ],
+                "script_bytes": 9825,
+                "scriptsig_bytes": 1007,
+                "total_vbytes": 10892
+              }
+            },
+            "design": {
+              "schema": "qsb-design-v2",
+              "hash": "sha256",
+              "n": 140,
+              "k": 64,
+              "chain_pin": 1,
+              "pool_deep": true,
+              "force_comp": false,
+              "sign_j": false,
+              "sign_lvl": false,
+              "rounds": [
+                {
+                  "t": 7,
+                  "b": 0,
+                  "k": 64,
+                  "chain": 2
+                },
+                {
+                  "t": 7,
+                  "b": 0,
+                  "k": 64,
+                  "chain": 3
+                }
+              ]
+            },
+            "proof": {
+              "label": "audited",
+              "theorem": null,
+              "note": "no Lean soundness theorem covers this family yet (M4/M5)"
+            },
+            "score": {
+              "sats": 58316,
+              "preimage_bits": 116.35,
+              "quantum_bits": 52.38,
+              "collision_bits": 83.12,
+              "bits_confidence": "audited"
+            },
+            "diagnostics": {
+              "headroom": {
+                "ops": 1,
+                "script_bytes": 175,
+                "min_expected_solutions": 3.04
+              },
+              "cost_split": {
+                "fee_sats": 54460,
+                "gpu_sats": 3856,
+                "fee_share": 0.934
+              },
+              "sats_at_other_fee_rates": {
+                "1_sat_per_vB": 14748,
+                "5_sat_per_vB": 58316,
+                "20_sat_per_vB": 221696,
+                "50_sat_per_vB": 548456
+              }
+            },
+            "verdict": "screened",
+            "seconds": 6.4
+          }
+        },
+        {
+          "cfg": {
+            "R": 2,
+            "b1": 0,
+            "b2": 0,
+            "chain1": 2,
+            "chain2": 3,
+            "chain_pin": 1,
+            "enc_honest": 3,
+            "force_comp": false,
+            "hash": "sha256",
+            "k": 64,
+            "k1": 64,
+            "k2": 64,
+            "n": 139,
+            "pool_deep": true,
+            "sign_j": false,
+            "sign_lvl": false,
+            "t1": 7,
+            "t2": 7
+          },
+          "design": {
+            "schema": "qsb-design-v2",
+            "hash": "sha256",
+            "n": 139,
+            "k": 64,
+            "chain_pin": 1,
+            "pool_deep": true,
+            "force_comp": false,
+            "sign_j": false,
+            "sign_lvl": false,
+            "rounds": [
+              {
+                "t": 7,
+                "b": 0,
+                "k": 64,
+                "chain": 2
+              },
+              {
+                "t": 7,
+                "b": 0,
+                "k": 64,
+                "chain": 3
+              }
+            ]
+          },
+          "hours": 5.617470811100426,
+          "security": {
+            "S": [
+              768,
+              1152
+            ],
+            "E": [
+              2.8876937785846994,
+              4.331540667877049
+            ],
+            "p": [
+              0.944295468427717,
+              0.9868527237077563
+            ],
+            "honest_shots_log2": 46.99291941689168,
+            "preimage_bits": 116.346065689681,
+            "collision_bits": 83.06938542248656,
+            "collision_birthday": 83.06938542248656,
+            "collision_fixed": 99.61601878884453,
+            "quantum_query_bits": 52.38055159447992
+          },
+          "ops": 200,
+          "script_bytes": 9763,
+          "rates": [
+            5841645000.0,
+            7778575973.1973715,
+            7592554673.631457
+          ],
+          "screen": {
+            "judge": "qsb-judge-2",
+            "seed": 20261027,
+            "mode": "screen",
+            "ranked": false,
+            "gates": {
+              "integrity": {
+                "ok": true,
+                "changed": []
+              },
+              "schema": {
+                "ok": true
+              },
+              "build": {
+                "ok": true
+              },
+              "static": {
+                "ok": true,
+                "ops": 200,
+                "bytes": 9763,
+                "test_bytes": 9889,
+                "max_stack": 671,
+                "puzzle_substitutions": 6,
+                "design_check_findings": 0
+              },
+              "security": {
+                "ok": true,
+                "P": 45.367,
+                "preimage_bits": 116.35,
+                "quantum_bits": 52.38,
+                "collision_bits": 83.07,
+                "E": [
+                  2.888,
+                  4.332
+                ],
+                "S": [
+                  768,
+                  1152
+                ]
+              },
+              "cost": {
+                "ok": true,
+                "gpu_hours_rtx4090": 5.617,
+                "stage_rates": [
+                  5.842,
+                  7.779,
+                  7.593
+                ],
+                "script_bytes": 9763,
+                "scriptsig_bytes": 1007,
+                "total_vbytes": 10830
+              }
+            },
+            "design": {
+              "schema": "qsb-design-v2",
+              "hash": "sha256",
+              "n": 139,
+              "k": 64,
+              "chain_pin": 1,
+              "pool_deep": true,
+              "force_comp": false,
+              "sign_j": false,
+              "sign_lvl": false,
+              "rounds": [
+                {
+                  "t": 7,
+                  "b": 0,
+                  "k": 64,
+                  "chain": 2
+                },
+                {
+                  "t": 7,
+                  "b": 0,
+                  "k": 64,
+                  "chain": 3
+                }
+              ]
+            },
+            "proof": {
+              "label": "audited",
+              "theorem": null,
+              "note": "no Lean soundness theorem covers this family yet (M4/M5)"
+            },
+            "score": {
+              "sats": 58026,
+              "preimage_bits": 116.35,
+              "quantum_bits": 52.38,
+              "collision_bits": 83.07,
+              "bits_confidence": "audited"
+            },
+            "diagnostics": {
+              "headroom": {
+                "ops": 1,
+                "script_bytes": 237,
+                "min_expected_solutions": 2.89
+              },
+              "cost_split": {
+                "fee_sats": 54150,
+                "gpu_sats": 3876,
+                "fee_share": 0.933
+              },
+              "sats_at_other_fee_rates": {
+                "1_sat_per_vB": 14706,
+                "5_sat_per_vB": 58026,
+                "20_sat_per_vB": 220476,
+                "50_sat_per_vB": 545376
+              }
+            },
+            "verdict": "screened",
+            "seconds": 6.2
+          }
+        },
+        {
+          "cfg": {
+            "R": 2,
+            "b1": 0,
+            "b2": 0,
+            "chain1": 2,
+            "chain2": 2,
+            "chain_pin": 1,
+            "enc_honest": 3,
+            "force_comp": false,
+            "hash": "sha256",
+            "k": 96,
+            "k1": 64,
+            "k2": 96,
+            "n": 135,
+            "pool_deep": true,
+            "sign_j": false,
+            "sign_lvl": false,
+            "t1": 7,
+            "t2": 7
+          },
+          "design": {
+            "schema": "qsb-design-v2",
+            "hash": "sha256",
+            "n": 135,
+            "k": 96,
+            "chain_pin": 1,
+            "pool_deep": true,
+            "force_comp": false,
+            "sign_j": false,
+            "sign_lvl": false,
+            "rounds": [
+              {
+                "t": 7,
+                "b": 0,
+                "k": 64,
+                "chain": 2
+              },
+              {
+                "t": 7,
+                "b": 0,
+                "k": 96,
+                "chain": 2
+              }
+            ]
+          },
+          "hours": 5.650254017454463,
+          "security": {
+            "S": [
+              768,
+              1152
+            ],
+            "E": [
+              2.3430203708095094,
+              3.5145305562142637
+            ],
+            "p": [
+              0.9039628680170237,
+              0.9702382288462806
+            ],
+            "honest_shots_log2": 47.031853310926216,
+            "preimage_bits": 116.346065689681,
+            "collision_bits": 82.86894322658718,
+            "collision_birthday": 82.86894322658718,
+            "collision_fixed": 99.61601878884453,
+            "quantum_query_bits": 52.088070344119345
+          },
+          "ops": 197,
+          "script_bytes": 9864,
+          "rates": [
+            6081330000.0,
+            7783424219.723965,
+            7789910272.995811
+          ],
+          "screen": {
+            "judge": "qsb-judge-2",
+            "seed": 20261027,
+            "mode": "screen",
+            "ranked": false,
+            "gates": {
+              "integrity": {
+                "ok": true,
+                "changed": []
+              },
+              "schema": {
+                "ok": true
+              },
+              "build": {
+                "ok": true
+              },
+              "static": {
+                "ok": true,
+                "ops": 197,
+                "bytes": 9864,
+                "test_bytes": 9969,
+                "max_stack": 687,
+                "puzzle_substitutions": 5,
+                "design_check_findings": 0
+              },
+              "security": {
+                "ok": true,
+                "P": 45.367,
+                "preimage_bits": 116.35,
+                "quantum_bits": 52.09,
+                "collision_bits": 82.87,
+                "E": [
+                  2.343,
+                  3.515
+                ],
+                "S": [
+                  768,
+                  1152
+                ]
+              },
+              "cost": {
+                "ok": true,
+                "gpu_hours_rtx4090": 5.65,
+                "stage_rates": [
+                  6.081,
+                  7.783,
+                  7.79
+                ],
+                "script_bytes": 9864,
+                "scriptsig_bytes": 1007,
+                "total_vbytes": 10931
+              }
+            },
+            "design": {
+              "schema": "qsb-design-v2",
+              "hash": "sha256",
+              "n": 135,
+              "k": 96,
+              "chain_pin": 1,
+              "pool_deep": true,
+              "force_comp": false,
+              "sign_j": false,
+              "sign_lvl": false,
+              "rounds": [
+                {
+                  "t": 7,
+                  "b": 0,
+                  "k": 64,
+                  "chain": 2
+                },
+                {
+                  "t": 7,
+                  "b": 0,
+                  "k": 96,
+                  "chain": 2
+                }
+              ]
+            },
+            "proof": {
+              "label": "audited",
+              "theorem": null,
+              "note": "no Lean soundness theorem covers this family yet (M4/M5)"
+            },
+            "score": {
+              "sats": 58554,
+              "preimage_bits": 116.35,
+              "quantum_bits": 52.09,
+              "collision_bits": 82.87,
+              "bits_confidence": "audited"
+            },
+            "diagnostics": {
+              "headroom": {
+                "ops": 4,
+                "script_bytes": 136,
+                "min_expected_solutions": 2.34
+              },
+              "cost_split": {
+                "fee_sats": 54655,
+                "gpu_sats": 3899,
+                "fee_share": 0.933
+              },
+              "sats_at_other_fee_rates": {
+                "1_sat_per_vB": 14830,
+                "5_sat_per_vB": 58554,
+                "20_sat_per_vB": 222518,
+                "50_sat_per_vB": 550448
+              }
+            },
+            "verdict": "screened",
+            "seconds": 6.2
+          }
+        },
+        {
+          "cfg": {
+            "R": 2,
+            "b1": 0,
+            "b2": 0,
+            "chain1": 2,
+            "chain2": 3,
+            "chain_pin": 1,
+            "enc_honest": 3,
+            "force_comp": false,
+            "hash": "sha256",
+            "k": 64,
+            "k1": 64,
+            "k2": 64,
+            "n": 138,
+            "pool_deep": true,
+            "sign_j": false,
+            "sign_lvl": false,
+            "t1": 7,
+            "t2": 7
+          },
+          "design": {
+            "schema": "qsb-design-v2",
+            "hash": "sha256",
+            "n": 138,
+            "k": 64,
+            "chain_pin": 1,
+            "pool_deep": true,
+            "force_comp": false,
+            "sign_j": false,
+            "sign_lvl": false,
+            "rounds": [
+              {
+                "t": 7,
+                "b": 0,
+                "k": 64,
+                "chain": 2
+              },
+              {
+                "t": 7,
+                "b": 0,
+                "k": 64,
+                "chain": 3
+              }
+            ]
+          },
+          "hours": 5.650314241353799,
+          "security": {
+            "S": [
+              768,
+              1152
+            ],
+            "E": [
+              2.7422703508861894,
+              4.113405526329284
+            ],
+            "p": [
+              0.9355760841632844,
+              0.983648007544295
+            ],
+            "honest_shots_log2": 47.00076549779169,
+            "preimage_bits": 116.346065689681,
+            "collision_bits": 83.01771067092659,
+            "collision_birthday": 83.01771067092659,
+            "collision_fixed": 99.61601878884453,
+            "quantum_query_bits": 52.38055159447992
+          },
+          "ops": 200,
+          "script_bytes": 9701,
+          "rates": [
+            5841645000.0,
+            7783424219.723965,
+            7595633424.600654
+          ],
+          "screen": {
+            "judge": "qsb-judge-2",
+            "seed": 20261027,
+            "mode": "screen",
+            "ranked": false,
+            "gates": {
+              "integrity": {
+                "ok": true,
+                "changed": []
+              },
+              "schema": {
+                "ok": true
+              },
+              "build": {
+                "ok": true
+              },
+              "static": {
+                "ok": true,
+                "ops": 200,
+                "bytes": 9701,
+                "test_bytes": 9827,
+                "max_stack": 667,
+                "puzzle_substitutions": 6,
+                "design_check_findings": 0
+              },
+              "security": {
+                "ok": true,
+                "P": 45.367,
+                "preimage_bits": 116.35,
+                "quantum_bits": 52.38,
+                "collision_bits": 83.02,
+                "E": [
+                  2.742,
+                  4.113
+                ],
+                "S": [
+                  768,
+                  1152
+                ]
+              },
+              "cost": {
+                "ok": true,
+                "gpu_hours_rtx4090": 5.65,
+                "stage_rates": [
+                  5.842,
+                  7.783,
+                  7.596
+                ],
+                "script_bytes": 9701,
+                "scriptsig_bytes": 1007,
+                "total_vbytes": 10768
+              }
+            },
+            "design": {
+              "schema": "qsb-design-v2",
+              "hash": "sha256",
+              "n": 138,
+              "k": 64,
+              "chain_pin": 1,
+              "pool_deep": true,
+              "force_comp": false,
+              "sign_j": false,
+              "sign_lvl": false,
+              "rounds": [
+                {
+                  "t": 7,
+                  "b": 0,
+                  "k": 64,
+                  "chain": 2
+                },
+                {
+                  "t": 7,
+                  "b": 0,
+                  "k": 64,
+                  "chain": 3
+                }
+              ]
+            },
+            "proof": {
+              "label": "audited",
+              "theorem": null,
+              "note": "no Lean soundness theorem covers this family yet (M4/M5)"
+            },
+            "score": {
+              "sats": 57739,
+              "preimage_bits": 116.35,
+              "quantum_bits": 52.38,
+              "collision_bits": 83.02,
+              "bits_confidence": "audited"
+            },
+            "diagnostics": {
+              "headroom": {
+                "ops": 1,
+                "script_bytes": 299,
+                "min_expected_solutions": 2.74
+              },
+              "cost_split": {
+                "fee_sats": 53840,
+                "gpu_sats": 3899,
+                "fee_share": 0.932
+              },
+              "sats_at_other_fee_rates": {
+                "1_sat_per_vB": 14666,
+                "5_sat_per_vB": 57738,
+                "20_sat_per_vB": 219258,
+                "50_sat_per_vB": 542298
+              }
+            },
+            "verdict": "screened",
+            "seconds": 6.2
+          }
+        }
+      ]
+    }
+  }
+}
